@@ -22,11 +22,13 @@ program francellaPizzeria{
     game.addVisual(francella)
 
 
-// MOVIMIENTO
+// MOVIMIENTO Y ACCIONES
     keyboard.right().onPressDo({francella.mover(derecha)})
     keyboard.left().onPressDo({francella.mover(izquierda)})
     keyboard.up().onPressDo({francella.mover(arriba)})
     keyboard.down().onPressDo({francella.mover(abajo)})
+
+    keyboard.t().onPressDo({francella.agarrarIngrediente()})
 
     game.start()
 }
