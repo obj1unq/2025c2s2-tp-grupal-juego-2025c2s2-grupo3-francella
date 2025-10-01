@@ -2,7 +2,7 @@ import game.*
 import francella.*
 import direcciones.*
 import ingredientes.*
-
+import clientes.*
 
 program francellaPizzeria{
     
@@ -20,6 +20,7 @@ program francellaPizzeria{
     game.addVisual(tomate)
 
     game.addVisual(francella)
+    game.addVisual(cliente1)
 
 
 // MOVIMIENTO Y ACCIONES
