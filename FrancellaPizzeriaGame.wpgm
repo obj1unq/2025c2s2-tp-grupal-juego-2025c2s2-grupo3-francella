@@ -1,7 +1,7 @@
 import game.*
 import francella.*
 import direcciones.*
-
+import clientes.*
 
 program francellaPizzeria{
     
@@ -14,6 +14,7 @@ program francellaPizzeria{
 
 // PERSONAJES
     game.addVisual(francella)
+    game.addVisual(cliente1)
 
 // MOVIMIENTO
     keyboard.right().onPressDo({francella.mover(derecha)})
