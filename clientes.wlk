@@ -1,7 +1,7 @@
 import tiposPizzas.*
 
 
-object cliente1 {
+/*object cliente1 {
     //POSICION ALEATORIA
  //   var property position = game.at(0.randomUpTo(game.width() - 1),0.randomUpTo(game.height() - 1))
     var property position = game.at(16,9)
@@ -33,4 +33,4 @@ object cliente3 {
     method image() {
         return ""
     }
-}
+}*/
