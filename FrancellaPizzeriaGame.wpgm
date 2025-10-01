@@ -30,6 +30,7 @@ program francellaPizzeria{
     keyboard.down().onPressDo({francella.mover(abajo)})
 
     keyboard.t().onPressDo({francella.agarrarIngrediente()})
+    keyboard.c().onPressDo({francella.cocinarPizza()})
 
     game.start()
 }
