@@ -1,0 +1,25 @@
+import game.*
+import francella.*
+import direcciones.*
+
+
+program francellaPizzeria{
+    
+// SETTINGS DEL TABLERO
+    game.title("La Pizzería de Francella")
+    game.height(20)
+    game.width(20)
+    game.cellSize(50)
+    // game.boardGround(" ")
+
+// PERSONAJES
+    game.addVisual(francella)
+
+// MOVIMIENTO
+    keyboard.right().onPressDo({francella.mover(derecha)})
+    keyboard.left().onPressDo({francella.mover(izquierda)})
+    keyboard.up().onPressDo({francella.mover(arriba)})
+    keyboard.down().onPressDo({francella.mover(abajo)})
+
+    game.start()
+}
