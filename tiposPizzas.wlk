@@ -1,7 +1,7 @@
-import wollok.vm.*
+import wollok.game.*
 import ingredientes.*
 
-object pizzaMuzzarella {
+/*object pizzaMuzzarella {
     const ingredientesNecesarios = #{prepizza, salsa, queso}
 
     method ingredientesNecesarios() {
@@ -23,4 +23,4 @@ object pizzaCebolla {
     method ingredientesNecesarios() {
         return ingredientesNecesarios
     }
-}
+}*/
