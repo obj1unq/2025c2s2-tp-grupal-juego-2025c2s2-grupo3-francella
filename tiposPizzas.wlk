@@ -1,4 +1,6 @@
 import wollok.vm.*
+import ingredientes.*
+
 object pizzaMuzzarella {
     const ingredientesNecesarios = #{prepizza, salsa, queso}
 

@@ -22,7 +22,7 @@ object queso{
         return game.at(x, y)
     }
     method image(){
-        return " "
+        return "queso.jpeg"
     }
 }
 
@@ -35,7 +35,7 @@ object prepizza{
         return game.at(x, y)
     }
     method image(){
-        return " "
+        return "prepizza.jpg"
     }
 }
 
@@ -48,7 +48,32 @@ object tomate{
         return game.at(x, y)
     }
     method image(){
-        return " "
+        return "tomate.jpeg"
     }
 }
 
+object jamon{
+    // POSICIÓN ALEATORIA
+    const x = 0.randomUpTo(game.width()).truncate(0)
+    const y = 0.randomUpTo(game.height()).truncate(0)
+
+    method position(){
+        return game.at(x, y)
+    }
+    method image(){
+        return "jamon.jpg"
+    }
+}
+
+object cebolla{
+    // POSICIÓN ALEATORIA
+    const x = 0.randomUpTo(game.width()).truncate(0)
+    const y = 0.randomUpTo(game.height()).truncate(0)
+
+    method position(){
+        return game.at(x, y)
+    }
+    method image(){
+        return "cebolla.jpg"
+    }
+}

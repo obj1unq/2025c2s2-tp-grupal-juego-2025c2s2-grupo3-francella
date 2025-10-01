@@ -18,6 +18,8 @@ program francellaPizzeria{
     game.addVisual(queso)
     game.addVisual(prepizza)
     game.addVisual(tomate)
+    game.addVisual(jamon)
+    game.addVisual(cebolla)
 
     game.addVisual(francella)
 
