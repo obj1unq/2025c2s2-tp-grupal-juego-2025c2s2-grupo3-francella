@@ -6,44 +6,70 @@ class Ingrediente {
     var property position = game.at( 
 					(0 .. game.width() - 1 ).anyOne(),
 					(0..  game.height() - 1).anyOne()
-		) 
+		)
     method image()
+
+
 }
 
 class Salsa inherits Ingrediente {
+    const nombre = "salsa"
     override method image() {
         return "salsa.png"
+    }
+    method nombre() {
+        return nombre
     }
 }
 
 class Queso inherits Ingrediente {
+    const nombre = "queso"
     override method image() {
         return "queso.jpeg"
+    }
+    method nombre() {
+        return nombre
     }
 }
 
 class Prepizza inherits Ingrediente {
+    const nombre = "prepizza"
     override method image() {
         return "prepizza.jpg"
+    }
+    method nombre() {
+        return nombre
     }
 }
 
 class Tomate inherits Ingrediente {
+    const nombre = "tomate"
     override method image() {
         return "tomate.jpeg"
+    }
+    method nombre() {
+        return nombre
     }
 }
 
 class Jamon inherits Ingrediente {
+    const nombre = "jamon"
     override method image() {
         return "jamon.jpg"
+    }
+    method nombre() {
+        return nombre
     }
 }
 
 
 class Cebolla inherits Ingrediente {
+    const nombre = "cebolla"
     override method image() {
         return "cebolla.jpg"
+    }
+    method nombre() {
+        return nombre
     }
 }
 
