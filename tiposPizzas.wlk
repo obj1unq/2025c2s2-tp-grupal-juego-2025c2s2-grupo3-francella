@@ -1,8 +1,19 @@
 import wollok.game.*
 import ingredientes.*
 
-/*object pizzaMuzzarella {
-    const ingredientesNecesarios = #{prepizza, salsa, queso}
+
+//El objeto tipos de pizzas será usado para que los clientes sepan cuales tipos de pizzas existen y elegir uno de ellos
+object tiposDePizzas {
+    const disponibles = #{pizzaMuzzarella, pizzaNapolitana, pizzaCebolla }
+
+    method disponibles() {
+        return disponibles
+    }
+}
+
+//Cada pizza es un objeto, el cual los clientes iran chequeando con la pizza cocinada que Franchella haya hecho para comprobar si es efectivamente lo pedido. Al ser cada ingrediente una instancia de una clase y no un objeto bien definido se trabajará con la clase de los ingredientes usados
+object pizzaMuzzarella {
+    const ingredientesNecesarios = #{Prepizza , Salsa, Queso}
 
     method ingredientesNecesarios() {
         return ingredientesNecesarios
@@ -10,7 +21,7 @@ import ingredientes.*
 }
 
 object pizzaNapolitana {
-    const ingredientesNecesarios = pizzaMuzzarella.ingredientesNecesarios() + #{tomate, jamon}
+    const ingredientesNecesarios = pizzaMuzzarella.ingredientesNecesarios() + #{Tomate, Jamon}
 
     method ingredientesNecesarios() {
         return ingredientesNecesarios
@@ -18,9 +29,9 @@ object pizzaNapolitana {
 }
 
 object pizzaCebolla {
-    const ingredientesNecesarios = pizzaMuzzarella.ingredientesNecesarios() + #{cebolla}
+    const ingredientesNecesarios = pizzaMuzzarella.ingredientesNecesarios() + #{Cebolla}
 
     method ingredientesNecesarios() {
         return ingredientesNecesarios
     }
-}*/
+}
