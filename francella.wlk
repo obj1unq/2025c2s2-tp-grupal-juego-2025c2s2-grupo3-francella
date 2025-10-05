@@ -1,5 +1,6 @@
 import game.*
 import direcciones.*
+import pizzeria.*
 
 
 object francella{
@@ -30,6 +31,22 @@ object francella{
       game.removeVisual(game.uniqueCollider(self))  // Elimino la imagen del objeto que "agarré"
     }
 
+    //ARMAR PIZZA
+    method validarArmarPizza() {
+      if (not self.estoyFrenteALaMesada()) {
+        self.error("La mesada esta lejos")
+      }
+    }
+    method estoyFrenteALaMesada() {
+      return position == mesada.position().down(1)
+    }
+    method armarPizza() {
+      self.validarArmarPizza()    // Verifica que estoy frente a la mesada (una celda abajo)
+      mesada.armarPizza()         // Arma la pizza en la mesada (envia el mensaje a mesada)
+      inventario.clear()          // Saca los ingredientes del inventario, ya que la pizza se armó con ellos
+      inventario.add({pizza})     // Agrega al inventario la pizza cruda que se armó con los ingredientes recolectados
+    }
+
     //COCINAR PIZZA
     method validarCocinarPizza() {
       if (not self.estoyFrenteAlHorno()) {
@@ -40,11 +57,9 @@ object francella{
       return position == horno.position().down(1)
     }
     method cocinarPizza() {
-      game.schedule(5000, {horno.laPizzaSeEstaCocinando()})
-      game.say(self, "Qué pinta eeh")
-      // falta agregar qué hago con la pizza ya cocinada
-      // agregar tambien la mesada para "armarPizza" con los ingredientes que recolecté.
-      // posibles objetos: pizza cruda? pizza cocinada?? pensar
+      horno.laPizzaSeEstaCocinando(5000)  // Envia el mensaje al horno con el parametro del tiempo en milisegundos
+      horno.laPizzaSeCocino()             // La pizza terminó de cocinarse
+      game.say(self, "Qué pinta eeh")     // Pepe contempla la pizza sacada del horno.
     }
 }
 
