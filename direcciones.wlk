@@ -3,7 +3,7 @@ import francella.*
 
 object izquierda{
     method siguiente(position){
-        return if (position.x() - 1 >= 0){
+        return if (position.x() - 1 >= 10){
             position.left(1)
         }
         else {
