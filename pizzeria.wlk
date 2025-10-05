@@ -2,14 +2,14 @@ import francella.*
 import game.*
 
 object horno {
-  const property position = game.at(x, y)
+  const property position = game.at(x, y)             // AGREGAR POSICION
   var estaPrendido = false
 
   method image() {
     if (estaPrendido) {
-        return "hornoEncendido.png"
+        return "hornoEncendido.png"                   // AGREGAR IMAGEN
     }
-    else return "hornoApagado.png"
+    else return "hornoApagado.png"                    // AGREGAR IMAGEN
   }
   method laPizzaSeEstaCocinando(tiempo) {
     game.schedule(tiempo, {estaPrendido = true})
@@ -21,10 +21,10 @@ object horno {
 }
 
 object mesada {
-    const property position = game.at(x, y)
+    const property position = game.at(x, y)     // AGREGAR POSICION
 
     method image() {
-        return "mesada.png"
+        return "mesada.png"                     // AGREGAR IMAGEN
     }
     method armarPizza() {
         pizza.ingredientes().add({francella.inventario()})

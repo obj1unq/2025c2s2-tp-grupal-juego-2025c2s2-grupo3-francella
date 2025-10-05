@@ -40,6 +40,8 @@ program francellaPizzeria{
 
     keyboard.t().onPressDo({francella.agarrarIngrediente()})
     keyboard.c().onPressDo({francella.cocinarPizza()})
+    keyboard.f().onPressDo({francella.armarPizza()})
+    keyboard.e().onPressDo({francella.entregarPizza()})
 
     game.start()
 }
