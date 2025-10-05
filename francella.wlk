@@ -1,6 +1,7 @@
 import game.*
 import direcciones.*
 import pizzeria.*
+import clientes.*
 
 
 object francella{
@@ -61,6 +62,21 @@ object francella{
       horno.laPizzaSeCocino()             // La pizza terminó de cocinarse
       game.say(self, "Qué pinta eeh")     // Pepe contempla la pizza sacada del horno.
     }
+
+    //ENTREGAR PIZZA
+    method validarEntregarPizza() {
+      if (not self.estoyFrenteAlCliente()) {
+        self.error("El cliente está lejos")
+      }
+    }
+    method estoyFrenteAlCliente() {
+      return position == cliente1.position().left(1)    // REVISAR CLIENTE
+    }
+    method entregarPizza() {
+      cliente1.recibirPizza(inventario.first())         // REVISAR CLIENTE
+      inventario.clear()
+    }
+
 }
 
 
