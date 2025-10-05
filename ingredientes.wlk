@@ -4,7 +4,7 @@ import game.*
 class Ingrediente {
     //POSICION ALEATORIA
     var property position = game.at( 
-					(0 .. game.width() - 1 ).anyOne(),
+					(10.. game.width() - 1).anyOne(),
 					(0..  game.height() - 1).anyOne()
 		)
     method image()
