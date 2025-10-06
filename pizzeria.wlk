@@ -21,7 +21,7 @@ object horno {
 }
 
 object mesada {
-    const property position = game.at(14, 14)     // AGREGAR POSICION
+    const property position = game.at(14, 13)     // AGREGAR POSICION
 
     method image() {
         return "mesada.png"                     // AGREGAR IMAGEN
