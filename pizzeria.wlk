@@ -14,6 +14,7 @@ object horno {
   method laPizzaSeEstaCocinando(tiempo) {
     game.schedule(tiempo, {estaPrendido = true})
     estaPrendido = false
+    game.say(self, "Qué pinta eeh")
   }
   method laPizzaSeCocino() {
     pizza.estaCocinada(true)

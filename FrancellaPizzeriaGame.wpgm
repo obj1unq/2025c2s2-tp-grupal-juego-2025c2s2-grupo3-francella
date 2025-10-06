@@ -33,7 +33,7 @@ program francellaPizzeria{
     game.addVisual(mesada)
 
     game.addVisual(francella)
-    //game.addVisual(cliente1)
+    game.addVisual(cliente1)
 
 
 // MOVIMIENTO Y ACCIONES
