@@ -55,7 +55,8 @@ object francella{
       }
     }
     method estoyFrenteAlHorno() {
-      return position == horno.position().down(1)
+      return position.x() == horno.position().x()
+          && position.y() == horno.position().y() - 1
     }
     method cocinarPizza() {
       horno.laPizzaSeEstaCocinando(5000)  // Envia el mensaje al horno con el parametro del tiempo en milisegundos
