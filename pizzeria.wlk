@@ -29,7 +29,7 @@ object mesada {
 }
 
 object pizza {
-  var property ingredientes = #{}
+  var property ingredientes = []
   var property estaCocinada = false
 
   method agregarIngrediente(unIngrediente) {
