@@ -2,7 +2,7 @@ import game.*
 import direcciones.*
 import pizzeria.*
 import clientes.*
-
+import interfaz.*
 
 object francella{
     var property position   = game.center()
@@ -39,7 +39,8 @@ object francella{
       }
     }
     method estoyFrenteALaMesada() {
-      return position == mesada.position().down(1)
+      return position.x() == mesada.position().x()
+          && position.y() == mesada.position().y() - 1
     }
     method armarPizza() {
       self.validarArmarPizza()    // Verifica que estoy frente a la mesada (una celda abajo)
@@ -55,12 +56,12 @@ object francella{
       }
     }
     method estoyFrenteAlHorno() {
-      return position == horno.position().down(1)
+      return position.x() == horno.position().x()
+          && position.y() == horno.position().y() - 1
     }
     method cocinarPizza() {
       horno.laPizzaSeEstaCocinando(5000)  // Envia el mensaje al horno con el parametro del tiempo en milisegundos
       horno.laPizzaSeCocino()             // La pizza terminó de cocinarse
-      game.say(self, "Qué pinta eeh")     // Pepe contempla la pizza sacada del horno.
     }
 
     //ENTREGAR PIZZA
@@ -70,11 +71,19 @@ object francella{
       }
     }
     method estoyFrenteAlCliente() {
-      return position == cliente1.position().left(1)    // REVISAR CLIENTE
+      return position.x() == cliente1.position().x() -1    // REVISAR CLIENTE
+          && position.y() == cliente1.position().y()
     }
     method entregarPizza() {
       cliente1.recibirPizza(inventario.first())         // REVISAR CLIENTE
       inventario.clear()
+    }
+
+    //PERDISTE
+
+    method gameOver() {
+      game.addVisual(youDied)
+      game.stop()
     }
 
 }

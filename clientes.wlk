@@ -1,6 +1,6 @@
+import francella.*
 import tiposPizzas.*
-import interfaz.*
-
+/*
 class Cliente {
     //POSICION ALEATORIA E IMAGEN
     var property position = game.at( 
@@ -9,37 +9,40 @@ class Cliente {
 		) 
     method image()
     //TIPO DE PIZZA DEFINIDO
+}
+*/
+
+object cliente1  {
     const tipoDePizzaPedido = tiposDePizzas.disponibles().anyOne()
+    const property position = game.at(game.width() - 2, 13)
+
     method tipoDePizzaPedido() {
         return tipoDePizzaPedido
     }
-}
-
-object cliente1 inherits Cliente {
-    //POSICION ALEATORIA
-    override method image() {
+    method image() {
         return "cliente1.png"
     }
-    method validarRecibirPizza(unaPizza) {
+    method validarQueEstaCocinada(unaPizza) {
         if (not unaPizza.estaCocinada()) {
             self.error("Esto está crudo papá")
         }
     }
+    method validarEsLoQuePedi(unaPizza) {
+      if (not self.esLoQuePedi(unaPizza)) {
+        game.schedule(3000, {game.say(self, "Flaco esto no es lo que pedí")})
+        francella.gameOver()
+      }
+    }
     method recibirPizza(unaPizza) {
-      self.validarRecibirPizza(unaPizza)
-      if (self.esLoQuePedi(unaPizza)) {
-        game.say(self, "Gracias mostro")
-      }
-      else {
-        game.schedule(5000, {game.say(self, "Flaco esto no es lo que pedí")})
-        game.addVisual(youDied)
-      }
+      self.validarQueEstaCocinada(unaPizza)
+      self.validarEsLoQuePedi(unaPizza)
+      game.say(self, "Gracias mostro")
     }
     method esLoQuePedi(unaPizza) {
         return unaPizza.ingredientes() == tipoDePizzaPedido.ingredientesNecesarios()
     }
 }
-
+/*
 object cliente2 inherits Cliente {
     override method image() {
         return ""
@@ -51,3 +54,4 @@ object cliente3 inherits Cliente {
         return ""
     }
 }
+*/
