@@ -1,5 +1,6 @@
 import francella.*
 import tiposPizzas.*
+import game.*
 /*
 class Cliente {
     //POSICION ALEATORIA E IMAGEN
@@ -14,7 +15,7 @@ class Cliente {
 
 object cliente1  {
     const tipoDePizzaPedido = tiposDePizzas.disponibles().anyOne()
-    const property position = game.at(game.width() - 2, 13)
+    const property position = game.at(29, 13)
 
     method tipoDePizzaPedido() {
         return tipoDePizzaPedido
