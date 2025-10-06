@@ -6,7 +6,7 @@ import interfaz.*
 
 object francella{
     var property position   = game.center()
-    var property inventario = #{}
+    var property inventario = []
 
     method image(){
         return "pepito.png"
@@ -45,6 +45,7 @@ object francella{
     method armarPizza() {
       self.validarArmarPizza()    // Verifica que estoy frente a la mesada (una celda abajo)
       inventario.forEach({cadaIngrediente => pizza.agregarIngrediente(cadaIngrediente)})   // Arma la pizza en la mesada 
+      game.say(self, "*musiquita italiana de fondo*")
       inventario.clear()          // Saca los ingredientes del inventario, ya que la pizza se armó con ellos
       inventario.add(pizza)       // Agrega al inventario la pizza cruda que se armó con los ingredientes recolectados
     }
@@ -72,12 +73,12 @@ object francella{
       }
     }
     method estoyFrenteAlCliente() {
-      return position.x() == cliente1.position().x() -1    // REVISAR CLIENTE
+      return position.x() == cliente1.position().x() -1    
           && position.y() == cliente1.position().y()
     }
     method entregarPizza() {
       self.validarEntregarPizza()
-      cliente1.recibirPizza(inventario.first())         // REVISAR CLIENTE
+      cliente1.recibirPizza(inventario.first())        
       inventario.clear()
     }
 

@@ -47,5 +47,7 @@ program francellaPizzeria{
     keyboard.f().onPressDo({francella.armarPizza()})
     keyboard.e().onPressDo({francella.entregarPizza()})
 
+    game.schedule(4000, {cliente1.hacerPedido()})
+
     game.start()
 }
