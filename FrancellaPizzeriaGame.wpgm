@@ -3,6 +3,7 @@ import francella.*
 import direcciones.*
 import ingredientes.*
 import clientes.*
+import pizzeria.*
 
 program francellaPizzeria{
     
@@ -28,8 +29,11 @@ program francellaPizzeria{
     game.addVisual(jamon1)
     game.addVisual(cebolla1)
 
+    game.addVisual(horno)
+    game.addVisual(mesada)
+
     game.addVisual(francella)
-    //game.addVisual(cliente1)
+    game.addVisual(cliente1)
 
 
 // MOVIMIENTO Y ACCIONES
@@ -42,6 +46,8 @@ program francellaPizzeria{
     keyboard.c().onPressDo({francella.cocinarPizza()})
     keyboard.f().onPressDo({francella.armarPizza()})
     keyboard.e().onPressDo({francella.entregarPizza()})
+
+    game.schedule(4000, {cliente1.hacerPedido()})
 
     game.start()
 }

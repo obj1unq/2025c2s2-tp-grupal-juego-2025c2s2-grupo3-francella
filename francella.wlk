@@ -2,11 +2,11 @@ import game.*
 import direcciones.*
 import pizzeria.*
 import clientes.*
-
+import interfaz.*
 
 object francella{
     var property position   = game.center()
-    var property inventario = #{}
+    var property inventario = []
 
     method image(){
         return "pepito.png"
@@ -39,13 +39,15 @@ object francella{
       }
     }
     method estoyFrenteALaMesada() {
-      return position == mesada.position().down(1)
+      return position.x() == mesada.position().x()
+          && position.y() == mesada.position().y() - 1
     }
     method armarPizza() {
       self.validarArmarPizza()    // Verifica que estoy frente a la mesada (una celda abajo)
-      mesada.armarPizza()         // Arma la pizza en la mesada (envia el mensaje a mesada)
+      inventario.forEach({cadaIngrediente => pizza.agregarIngrediente(cadaIngrediente)})   // Arma la pizza en la mesada 
+      game.say(self, "*musiquita italiana de fondo*")
       inventario.clear()          // Saca los ingredientes del inventario, ya que la pizza se armó con ellos
-      inventario.add({pizza})     // Agrega al inventario la pizza cruda que se armó con los ingredientes recolectados
+      inventario.add(pizza)       // Agrega al inventario la pizza cruda que se armó con los ingredientes recolectados
     }
 
     //COCINAR PIZZA
@@ -55,12 +57,13 @@ object francella{
       }
     }
     method estoyFrenteAlHorno() {
-      return position == horno.position().down(1)
+      return position.x() == horno.position().x()
+          && position.y() == horno.position().y() - 1
     }
     method cocinarPizza() {
+      self.validarCocinarPizza()
       horno.laPizzaSeEstaCocinando(5000)  // Envia el mensaje al horno con el parametro del tiempo en milisegundos
       horno.laPizzaSeCocino()             // La pizza terminó de cocinarse
-      game.say(self, "Qué pinta eeh")     // Pepe contempla la pizza sacada del horno.
     }
 
     //ENTREGAR PIZZA
@@ -70,11 +73,20 @@ object francella{
       }
     }
     method estoyFrenteAlCliente() {
-      return position == cliente1.position().left(1)    // REVISAR CLIENTE
+      return position.x() == cliente1.position().x() -1    
+          && position.y() == cliente1.position().y()
     }
     method entregarPizza() {
-      cliente1.recibirPizza(inventario.first())         // REVISAR CLIENTE
+      self.validarEntregarPizza()
+      cliente1.recibirPizza(inventario.first())        
       inventario.clear()
+    }
+
+    //PERDISTE
+
+    method gameOver() {
+      game.addVisual(youDied)
+      game.stop()
     }
 
 }
