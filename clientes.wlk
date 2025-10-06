@@ -1,6 +1,6 @@
 import francella.*
 import tiposPizzas.*
-
+import game.*
 /*
 class Cliente {
     //POSICION ALEATORIA E IMAGEN
