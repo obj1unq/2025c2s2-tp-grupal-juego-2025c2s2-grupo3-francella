@@ -9,7 +9,7 @@ object francella{
     var property inventario = #{}
 
     method image(){
-        return "pepita.png"
+        return "pepito.png"
     }
 
     // MOVIMIENTOS

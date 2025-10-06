@@ -1,4 +1,5 @@
 import tiposPizzas.*
+import interfaz.*
 
 class Cliente {
     //POSICION ALEATORIA E IMAGEN
@@ -31,7 +32,7 @@ object cliente1 inherits Cliente {
       }
       else {
         game.schedule(5000, {game.say(self, "Flaco esto no es lo que pedí")})
-        //texto que diga PERDISTE en el medio de la pantalla???
+        game.addVisual(youDied)
       }
     }
     method esLoQuePedi(unaPizza) {
