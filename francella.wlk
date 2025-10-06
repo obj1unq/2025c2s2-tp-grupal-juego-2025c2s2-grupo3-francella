@@ -44,9 +44,9 @@ object francella{
     }
     method armarPizza() {
       self.validarArmarPizza()    // Verifica que estoy frente a la mesada (una celda abajo)
-      mesada.armarPizza()         // Arma la pizza en la mesada (envia el mensaje a mesada)
+      inventario.forEach({cadaIngrediente => pizza.agregarIngrediente(cadaIngrediente)})   // Arma la pizza en la mesada 
       inventario.clear()          // Saca los ingredientes del inventario, ya que la pizza se armó con ellos
-      inventario.add({pizza})     // Agrega al inventario la pizza cruda que se armó con los ingredientes recolectados
+      inventario.add(pizza)       // Agrega al inventario la pizza cruda que se armó con los ingredientes recolectados
     }
 
     //COCINAR PIZZA
@@ -60,6 +60,7 @@ object francella{
           && position.y() == horno.position().y() - 1
     }
     method cocinarPizza() {
+      self.validarCocinarPizza()
       horno.laPizzaSeEstaCocinando(5000)  // Envia el mensaje al horno con el parametro del tiempo en milisegundos
       horno.laPizzaSeCocino()             // La pizza terminó de cocinarse
     }
@@ -75,6 +76,7 @@ object francella{
           && position.y() == cliente1.position().y()
     }
     method entregarPizza() {
+      self.validarEntregarPizza()
       cliente1.recibirPizza(inventario.first())         // REVISAR CLIENTE
       inventario.clear()
     }
