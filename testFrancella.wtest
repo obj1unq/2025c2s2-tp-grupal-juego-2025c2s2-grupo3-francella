@@ -1,0 +1,63 @@
+import clientes.*
+import direcciones.*
+import francella.*
+import pizzeria.*
+import interfaz.*
+import tiposPizzas.*
+import ingredientes.*
+
+describe "Test con Francella" {
+    var ingredientePrueba
+    test "Test Movimiento: Francella no puede moverse hacia la tabla" {
+        francella.position(game.at(10,8))
+        francella.mover(izquierda)
+        assert.equals(game.at(10,8), francella.position())
+    }
+    test "Test Agarrar Ingrediente: No hay ingrediente donde está Francella" {
+        assert.throwsException({ francella.agarrarIngrediente() })
+    }
+    test "Test Agarrar Ingrediente: Hay un ingrediente donde está Francella" {
+        ingredientePrueba = new Prepizza(position = game.at(10, 8))
+        francella.position(game.at(10, 8))
+        game.addVisual(francella)
+        game.addVisual(ingredientePrueba)
+        francella.agarrarIngrediente()
+        assert.notThat(francella.inventario().isEmpty())
+        assert.notThat(game.hasVisual(ingredientePrueba))
+    }
+    
+    test "Test Armar Pizza: Francella no está frente a la mesada" {
+        francella.position(game.at(10, 8))
+        assert.throwsException({ francella.armarPizza() })
+
+    }
+
+    test "Test Armar Pizza: Francella está frente a la mesada" {
+        ingredientePrueba = new Prepizza(position = game.at(10, 8))
+        francella.inventario().add(ingredientePrueba)
+        francella.position(game.at(mesada.position().x(), mesada.position().y() - 1))
+        francella.armarPizza()
+        assert.equals([pizza], francella.inventario())
+    }
+
+    test "Test Entregar Pizza: Francella no está frente al cliente" {
+        francella.position(game.at(10, 8))
+        assert.throwsException({ francella.entregarPizza() })
+    }
+
+    test  "Test Entregar Pizza: Francella está frente al cliente pero con una pizza cruda" {
+        
+    }
+    test "Test Entregar Pizza: Francella está frente al cliente (Sin importar si es lo que el cliente pidio o no)" {
+        francella.position(game.at(cliente1.position().x() - 1, cliente1.position().y()))
+        francella.inventario().add(pizza)
+        pizza.estaCocinada(true)
+        assert.notThat(cliente1.esLoQuePedi(pizza))
+        francella.entregarPizza()
+        assert.that(francella.inventario().isEmpty())
+    }
+
+    test "Test Entregar Pizza: Francella está frente al cliente con la pizza pedida por este" {
+
+    }
+}
