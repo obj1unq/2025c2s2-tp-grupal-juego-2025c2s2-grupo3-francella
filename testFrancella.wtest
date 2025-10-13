@@ -68,4 +68,9 @@ describe "Test con Francella" {
         francella.entregarPizza()
         assert.that(francella.inventario().isEmpty())
     }
+
+    test "Test Game Over" {
+        francella.gameOver()
+        assert.that(game.hasVisual(youDied))
+    }
 }
