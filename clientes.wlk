@@ -18,7 +18,7 @@ object cliente1  {
     const property position = game.at(29, 13)
 
     method hacerPedido() {
-      game.say(self, "Quiero ordenar una " + tipoDePizzaPedido.nombreDeLaPizza())
+        game.say(self, "Quiero ordenar una " + tipoDePizzaPedido.nombreDeLaPizza())
     }
     method tipoDePizzaPedido() {
         return tipoDePizzaPedido
@@ -32,20 +32,21 @@ object cliente1  {
         }
     }
     method validarEsLoQuePedi(unaPizza) {
-      if (not self.esLoQuePedi(unaPizza)) {
-        game.schedule(3000, {game.say(self, "Flaco esto no es lo que pedí")})
-        francella.gameOver()
-      }
+        if (not self.esLoQuePedi(unaPizza)) {
+            game.error("Flaco esto no es lo que pedí")
+            //game.schedule(5000, {francella.gameOver()})
     }
+        }
     method recibirPizza(unaPizza) {
-      self.validarQueEstaCocinada(unaPizza)
-      self.validarEsLoQuePedi(unaPizza)
-      game.say(self, "Gracias mostro")
+        self.validarQueEstaCocinada(unaPizza)
+        self.validarEsLoQuePedi(unaPizza)
+        game.say(self, "Gracias mostro")
     }
     method esLoQuePedi(unaPizza) {
-        return unaPizza.ingredientes() == tipoDePizzaPedido.ingredientesNecesarios()
+        return unaPizza.ingredientesUsados() == tipoDePizzaPedido.ingredientesNecesarios()
     }
 }
+
 /*
 object cliente2 inherits Cliente {
     override method image() {
