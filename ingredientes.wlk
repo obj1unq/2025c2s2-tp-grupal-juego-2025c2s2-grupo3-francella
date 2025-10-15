@@ -1,6 +1,16 @@
 import game.*
 
-//Todos los ingredientes pertenecen a una clase a la cual pertenecen dependiendo de que ingrediente sean. Todas las clases heredan de la clase ingrediente la posición aleatoria y el metodo abstracto image el cual cada clase tendrá la suya propia
+//Todos los ingredientes pertenecen a una clase a la cual pertenecen dependiendo de que ingrediente sean. 
+//Todas las clases heredan de la clase ingrediente la posición aleatoria y el metodo abstracto image el cual cada clase tendrá la suya propia
+
+// Los tipos de ingredientes son wko en sí mismos.
+object salsa {}
+object queso {}
+object prepizza{}
+object tomate{}
+object jamon{}
+object cebolla{}
+
 class Ingrediente {
     //POSICION ALEATORIA
     var property position = game.at( 
@@ -8,8 +18,6 @@ class Ingrediente {
 					(0..  game.height() - 1).anyOne()
 		)
     method image()
-
-
 }
 
 class Salsa inherits Ingrediente {
@@ -19,6 +27,9 @@ class Salsa inherits Ingrediente {
     }
     method nombre() {
         return nombre
+    }
+    method tipoIngrediente(){
+        return salsa
     }
 }
 
@@ -30,6 +41,9 @@ class Queso inherits Ingrediente {
     method nombre() {
         return nombre
     }
+    method tipoIngrediente(){
+        return queso
+    }
 }
 
 class Prepizza inherits Ingrediente {
@@ -39,6 +53,9 @@ class Prepizza inherits Ingrediente {
     }
     method nombre() {
         return nombre
+    }
+    method tipoIngrediente(){
+        return prepizza
     }
 }
 
@@ -50,6 +67,9 @@ class Tomate inherits Ingrediente {
     method nombre() {
         return nombre
     }
+    method tipoIngrediente(){
+        return tomate
+    }
 }
 
 class Jamon inherits Ingrediente {
@@ -59,6 +79,9 @@ class Jamon inherits Ingrediente {
     }
     method nombre() {
         return nombre
+    }
+    method tipoIngrediente(){
+        return jamon
     }
 }
 
@@ -70,6 +93,9 @@ class Cebolla inherits Ingrediente {
     }
     method nombre() {
         return nombre
+    }
+    method tipoIngrediente(){
+        return cebolla
     }
 }
 

@@ -44,7 +44,7 @@ object cliente1  {
         game.say(self, "Gracias mostro")
     }
     method esLoQuePedi(unaPizza) {
-        return unaPizza.ingredientesUsados() == tipoDePizzaPedido.ingredientesNecesarios()
+        return unaPizza.ingredientes().map({ingrediente => ingrediente.tipoIngrediente()}) == tipoDePizzaPedido.ingredientesNecesarios()
     }
 }
 
