@@ -33,7 +33,8 @@ object cliente1  {
     }
     method validarEsLoQuePedi(unaPizza) {
         if (not self.esLoQuePedi(unaPizza)) {
-            game.error("Flaco esto no es lo que pedí")
+            self.error("Flaco, esto no es lo que pedí")
+            //game.schedule(4000, {self.error("Flaco, esto no es lo que pedí"); francella.gameOver()})
             //game.schedule(5000, {francella.gameOver()})
     }
         }
