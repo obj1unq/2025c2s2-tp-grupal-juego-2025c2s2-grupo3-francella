@@ -19,7 +19,7 @@ object pizzaMuzzarella {
         return ingredientesNecesarios
     }
     method nombreDeLaPizza() {
-      return "Pizza de Mozzarella"
+        return "Pizza de Mozzarella"
     }
 }
 
@@ -30,7 +30,7 @@ object pizzaNapolitana {
         return ingredientesNecesarios
     }
     method nombreDeLaPizza() {
-      return "Pizza Napolitana"
+        return "Pizza Napolitana"
     }
 }
 
@@ -41,6 +41,6 @@ object pizzaCebolla {
         return ingredientesNecesarios
     }
     method nombreDeLaPizza() {
-      return "Pizza de Cebolla"
+        return "Pizza de Cebolla"
     }
 }
