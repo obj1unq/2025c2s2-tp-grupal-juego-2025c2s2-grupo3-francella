@@ -28,7 +28,7 @@ object francella{
     }                                         // y la compara con la lista vacia, si no son iguales, entonces estoy sobre un ingrediente.
     method agarrarIngrediente() {
       self.validarAgarrarIngrediente()
-      inventario.add(#{game.uniqueCollider(self)})  // Agrega al inventario de Francella el objeto (ingrediente) que esta en su misma posicion.
+      inventario.add(game.uniqueCollider(self))  // Agrega al inventario de Francella el objeto (ingrediente) que esta en su misma posicion.
       game.removeVisual(game.uniqueCollider(self))  // Elimino la imagen del objeto que "agarré"
     }
 

@@ -29,10 +29,16 @@ object mesada {
 }
 
 object pizza {
-  var property ingredientes = []
+  const ingredientes = []
   var property estaCocinada = false
 
+  method ingredientes() {
+    return ingredientes
+  }
   method agregarIngrediente(unIngrediente) {
     ingredientes.add(unIngrediente)
+  }
+  method ingredientesUsados() {
+    return ingredientes.map({ingrediente => ingrediente.nombre()})
   }
 }
