@@ -39,6 +39,6 @@ object pizza {
     ingredientes.add(unIngrediente)
   }
   method ingredientesUsados() {
-    return ingredientes.map({ingrediente => ingrediente.nombre()})
+    return ingredientes.map({ingrediente => ingrediente.tipoIngrediente()})
   }
 }

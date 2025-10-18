@@ -55,8 +55,7 @@ describe "Test con Francella" {
         francella.inventario().add(pizza)
         pizza.estaCocinada(true)
         assert.notThat(cliente1.esLoQuePedi(pizza))
-        francella.entregarPizza()
-        assert.that(francella.inventario().isEmpty())
+        assert.throwsException({francella.entregarPizza()})
     }
 
     test "Test Entregar Pizza: Francella está frente al cliente con la pizza pedida por este" {
