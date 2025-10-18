@@ -1,4 +1,5 @@
 import game.*
+import randomizer.*
 
 //Todos los ingredientes pertenecen a una clase a la cual pertenecen dependiendo de que ingrediente sean. 
 //Todas las clases heredan de la clase ingrediente la posición aleatoria y el metodo abstracto image el cual cada clase tendrá la suya propia
@@ -13,10 +14,10 @@ object cebolla{}
 
 class Ingrediente {
     //POSICION ALEATORIA
-    var property position = game.at( 
-					(10.. game.width() - 1).anyOne(),
-					(0..  game.height() - 1).anyOne()
-		)
+    const position 
+    method position() {
+        return position
+    }
     method image()
 }
 

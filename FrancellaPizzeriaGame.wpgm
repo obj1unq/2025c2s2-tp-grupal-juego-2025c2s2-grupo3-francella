@@ -4,6 +4,8 @@ import direcciones.*
 import ingredientes.*
 import clientes.*
 import pizzeria.*
+import randomizer.*
+
 
 program francellaPizzeria{
     
@@ -15,12 +17,12 @@ program francellaPizzeria{
     game.boardGround("ELFONDO.png")
 
 //AÑADIDAS UNA INSTANCIA DE CADA CLASE DE INGREDIENTE
-    const salsa1 = new Salsa()
-    const queso1 = new Queso()
-    const prepizza1 = new Prepizza()
-    const tomate1 = new Tomate()
-    const jamon1 = new Jamon()
-    const cebolla1 = new Cebolla()
+    const salsa1 = new Salsa(position = randomizer.emptyPosition())
+    const queso1 = new Queso(position = randomizer.emptyPosition())
+    const prepizza1 = new Prepizza(position = randomizer.emptyPosition())
+    const tomate1 = new Tomate(position = randomizer.emptyPosition())
+    const jamon1 = new Jamon(position = randomizer.emptyPosition())
+    const cebolla1 = new Cebolla(position = randomizer.emptyPosition())
 // PERSONAJES Y VISUALES
     game.addVisual(salsa1)
     game.addVisual(queso1)
@@ -28,7 +30,7 @@ program francellaPizzeria{
     game.addVisual(tomate1)
     game.addVisual(jamon1)
     game.addVisual(cebolla1)
-
+    
     game.addVisual(horno)
     game.addVisual(mesada)
 
