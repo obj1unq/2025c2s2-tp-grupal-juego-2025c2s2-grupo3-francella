@@ -5,12 +5,36 @@ import randomizer.*
 //Todas las clases heredan de la clase ingrediente la posición aleatoria y el metodo abstracto image el cual cada clase tendrá la suya propia
 
 // Los tipos de ingredientes son wko en sí mismos.
-object salsa {}
-object queso {}
-object prepizza{}
-object tomate{}
-object jamon{}
-object cebolla{}
+object salsa {
+    method tipoIngrediente() {
+        return self
+    }
+}
+object queso {
+    method tipoIngrediente() {
+        return self
+    }
+}
+object prepizza{
+    method tipoIngrediente() {
+        return self
+    }
+}
+object tomate{
+    method tipoIngrediente() {
+        return self
+    }
+}
+object jamon{
+    method tipoIngrediente() {
+        return self
+    }
+}
+object cebolla{
+    method tipoIngrediente() {
+        return self
+    }
+}
 
 class Ingrediente {
     //POSICION ALEATORIA
