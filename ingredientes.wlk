@@ -43,6 +43,9 @@ class Ingrediente {
         return position
     }
     method image()
+    method atravesable(){
+        return true
+    }
 }
 
 class Salsa inherits Ingrediente {
