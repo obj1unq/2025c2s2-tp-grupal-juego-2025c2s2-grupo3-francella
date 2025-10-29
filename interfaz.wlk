@@ -1,7 +1,8 @@
-object youDied {
-    var property position = game.center() 
+object gameOver {
+    var property position = game.origin() 
 
     method image() {
         return "youDied.png"
     }
+
 }

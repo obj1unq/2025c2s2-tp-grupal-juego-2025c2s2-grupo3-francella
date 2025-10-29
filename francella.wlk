@@ -7,6 +7,7 @@ import interfaz.*
 object francella{
     var property position   = game.center()
     var property inventario = []
+    var clienteActual       = cliente1
 
     method image(){
         return "pepito.png"
@@ -89,20 +90,20 @@ object francella{
       }
     }
     method estoyFrenteAlCliente() {
-      return position.x() == cliente1.position().x() -1    
-          && position.y() == cliente1.position().y()
+      return position.x() == clienteActual.position().x() -1    
+          && position.y() == clienteActual.position().y()
     }
     method entregarPizza() {
       self.validarEntregarPizza()
-      cliente1.recibirPizza(inventario.first())        
+      clienteActual.recibirPizza(inventario.first())        
       inventario.clear()
     }
 
     //PERDISTE
 
     method gameOver() {
-      game.addVisual(youDied)
       game.stop()
+      game.addVisual(gameOver)
     }
 
 }
