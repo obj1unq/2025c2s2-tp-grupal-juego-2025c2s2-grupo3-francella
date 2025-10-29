@@ -39,17 +39,13 @@ object cebolla{
 class Ingrediente {
     //POSICION ALEATORIA
     const position
-    const nombre
     method position() {
         return position
     }
     method image()
-    method nombre() {
-        return nombre
-    }
 }
 
-class Salsa inherits Ingrediente(nombre = "salsa") {
+class Salsa inherits Ingrediente{
     override method image() {
         return "salsa.png"
     }
@@ -58,7 +54,7 @@ class Salsa inherits Ingrediente(nombre = "salsa") {
     }
 }
 
-class Queso inherits Ingrediente(nombre = "queso") {
+class Queso inherits Ingrediente{
     override method image() {
         return "queso.jpeg"
     }
@@ -67,7 +63,7 @@ class Queso inherits Ingrediente(nombre = "queso") {
     }
 }
 
-class Prepizza inherits Ingrediente(nombre = "prepizza") {
+class Prepizza inherits Ingrediente{
     override method image() {
         return "prepizza.jpg"
     }
@@ -76,7 +72,7 @@ class Prepizza inherits Ingrediente(nombre = "prepizza") {
     }
 }
 
-class Tomate inherits Ingrediente(nombre = "tomate"){
+class Tomate inherits Ingrediente{
     override method image() {
         return "tomate.jpeg"
     }
@@ -85,7 +81,7 @@ class Tomate inherits Ingrediente(nombre = "tomate"){
     }
 }
 
-class Jamon inherits Ingrediente(nombre = "jamon"){
+class Jamon inherits Ingrediente{
     override method image() {
         return "jamon.jpg"
     }
@@ -95,7 +91,7 @@ class Jamon inherits Ingrediente(nombre = "jamon"){
 }
 
 
-class Cebolla inherits Ingrediente(nombre = "cebolla"){
+class Cebolla inherits Ingrediente{
     override method image() {
         return "cebolla.jpg"
     }
