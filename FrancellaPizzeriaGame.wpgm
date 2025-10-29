@@ -5,7 +5,7 @@ import ingredientes.*
 import clientes.*
 import pizzeria.*
 import randomizer.*
-
+import interfaz.*
 
 program francellaPizzeria{
     
@@ -36,7 +36,7 @@ program francellaPizzeria{
 
     game.addVisual(francella)
     game.addVisual(cliente1)
-
+    
 
 // MOVIMIENTO Y ACCIONES
     keyboard.right().onPressDo({francella.mover(derecha)})

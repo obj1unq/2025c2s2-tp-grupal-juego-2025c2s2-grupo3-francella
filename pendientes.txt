@@ -1,0 +1,9 @@
+NO ELIMINAR LOS ITEMS DE LA LISTA, DESCRIBIR SU ESTADO A LA DERECHA Y ANOTAR QUIEN LO RESOLVIÓ O LO VA A RESOLVER.
+
+- Francella solo puede agarrar un item a la vez *Por resolver*
+- Mostrar el item de Francella en la interfaz   *Por resolver*
+- Corregir tamaño de celdas                     *Por resolver - Iezzi*
+- Darle facha al fondo                          *Por resolver*
+- Polimorfismo "interactuar"                    *Por resolver - Rodríguez*
+- Timer                                         *Por resolver*
+- Pedido de cliente que permanece en pantalla   *Por resolver*

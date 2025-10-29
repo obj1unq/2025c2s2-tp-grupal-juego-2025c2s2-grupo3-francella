@@ -31,17 +31,13 @@ object cliente1  {
             self.error("Esto está crudo papá")
         }
     }
-    method validarEsLoQuePedi(unaPizza) {
-        if (not self.esLoQuePedi(unaPizza)) {
-            self.error("Flaco, esto no es lo que pedí")
-            //game.schedule(4000, {self.error("Flaco, esto no es lo que pedí"); francella.gameOver()})
-            //game.schedule(5000, {francella.gameOver()})
-    }
-        }
     method recibirPizza(unaPizza) {
         self.validarQueEstaCocinada(unaPizza)
-        self.validarEsLoQuePedi(unaPizza)
-        game.say(self, "Gracias mostro")
+        if (not self.esLoQuePedi(unaPizza)) {
+            game.say(self, "Flaco, esto no es lo que pedí")
+            game.schedule(2000, {francella.gameOver()})
+        }
+        else game.say(self, "Gracias mostro")
     }
     method esLoQuePedi(unaPizza) {
         return unaPizza.ingredientesUsados() == tipoDePizzaPedido.ingredientesNecesarios()
