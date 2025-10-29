@@ -3,44 +3,24 @@ import francella.*
 
 object izquierda{
     method siguiente(position){
-        return if (position.x() - 1 >= 10){
-            position.left(1)
-        }
-        else {
-            position
-        }
+        return game.at(10.max(position.x() - 1), position.y())
     }
 }
 
 object derecha{
     method siguiente(position){
-        return if (position.x() + 1 <= game.width() - 1){
-            position.right(1)
-        }
-        else {
-            position
-        }
+        return game.at((game.width() - 1).min(position.x() + 1), position.y())
     }
 }
 
 object arriba{
     method siguiente(position){
-        return if (position.y() + 1 <= game.height() - 1){
-            position.up(1)
-        }
-        else {
-            position
-        }
+        return game.at(position.x(), (game.height() - 1).min(position.y() + 1))
     }
 }
 
 object abajo{
     method siguiente(position){
-        return if (position.y() - 1 >= 0){
-            position.down(1)
-        }
-        else {
-            position
-        }
+        return game.at(position.x(), 0.max(position.y() - 1))
     }
 }
