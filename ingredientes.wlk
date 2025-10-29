@@ -38,72 +38,56 @@ object cebolla{
 
 class Ingrediente {
     //POSICION ALEATORIA
-    const position 
+    const position
+    const nombre
     method position() {
         return position
     }
     method image()
-}
-
-class Salsa inherits Ingrediente {
-    const nombre = "salsa"
-    override method image() {
-        return "salsa.png"
-    }
     method nombre() {
         return nombre
+    }
+}
+
+class Salsa inherits Ingrediente(nombre = "salsa") {
+    override method image() {
+        return "salsa.png"
     }
     method tipoIngrediente(){
         return salsa
     }
 }
 
-class Queso inherits Ingrediente {
-    const nombre = "queso"
+class Queso inherits Ingrediente(nombre = "queso") {
     override method image() {
         return "queso.jpeg"
-    }
-    method nombre() {
-        return nombre
     }
     method tipoIngrediente(){
         return queso
     }
 }
 
-class Prepizza inherits Ingrediente {
-    const nombre = "prepizza"
+class Prepizza inherits Ingrediente(nombre = "prepizza") {
     override method image() {
         return "prepizza.jpg"
-    }
-    method nombre() {
-        return nombre
     }
     method tipoIngrediente(){
         return prepizza
     }
 }
 
-class Tomate inherits Ingrediente {
-    const nombre = "tomate"
+class Tomate inherits Ingrediente(nombre = "tomate"){
     override method image() {
         return "tomate.jpeg"
-    }
-    method nombre() {
-        return nombre
     }
     method tipoIngrediente(){
         return tomate
     }
 }
 
-class Jamon inherits Ingrediente {
-    const nombre = "jamon"
+class Jamon inherits Ingrediente(nombre = "jamon"){
     override method image() {
         return "jamon.jpg"
-    }
-    method nombre() {
-        return nombre
     }
     method tipoIngrediente(){
         return jamon
@@ -111,20 +95,16 @@ class Jamon inherits Ingrediente {
 }
 
 
-class Cebolla inherits Ingrediente {
-    const nombre = "cebolla"
+class Cebolla inherits Ingrediente(nombre = "cebolla"){
     override method image() {
         return "cebolla.jpg"
-    }
-    method nombre() {
-        return nombre
     }
     method tipoIngrediente(){
         return cebolla
     }
 }
 
-
+// Esto quedó de cuando los ingredientes eran WKO
 /*object salsa{
     // POSICIÓN ALEATORIA
     const x = 0.randomUpTo(game.width()).truncate(0)
