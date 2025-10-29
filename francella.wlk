@@ -14,12 +14,24 @@ object francella{
 
     // MOVIMIENTOS
     method mover(direccion){
+        self.validarMovimiento(direccion.siguiente(self.position()))
         self.puedeMover(direccion.siguiente(self.position()))
         position = direccion.siguiente(self.position())
     }
+
+    method validarMovimiento(direccion){
+      if (not self.puedeMover(direccion)){
+        self.error("No puedo ir ahí")
+      }
+    }
+
     method puedeMover(siguientePosicion) {
 		  return game.getObjectsIn(siguientePosicion).all({visual => visual.atravesable()})
 	  }
+
+    method atravesable(){
+      return true
+    }
 
     //AGARRAR INGREDIENTE
     method validarAgarrarIngrediente() {            // Verifica si hay algun objeto (ingrediente) en la misma posicion de Francella
