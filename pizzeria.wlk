@@ -18,14 +18,21 @@ object horno {
   method laPizzaSeCocino() {
     pizza.estaCocinada(true)
   }
+  method atravesable(){
+    return false
+  }
 }
 
 object mesada {
-    const property position = game.at(14, 13)    
+  const property position = game.at(14, 13)    
 
-    method image() {
-        return "mesada.png"                   
-    }
+  method image() {
+      return "mesada.png"                   
+  }
+
+  method atravesable(){
+    return false
+  }
 }
 
 object pizza {

@@ -46,6 +46,10 @@ object cliente1  {
     method esLoQuePedi(unaPizza) {
         return unaPizza.ingredientesUsados() == tipoDePizzaPedido.ingredientesNecesarios()
     }
+
+    method atravesable(){
+        return false
+    }
 }
 
 /*
