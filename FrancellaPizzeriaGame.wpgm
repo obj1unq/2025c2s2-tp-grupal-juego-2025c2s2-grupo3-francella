@@ -11,10 +11,10 @@ program francellaPizzeria{
     
 // SETTINGS DEL TABLERO
     game.title("La Pizzería de Francella")
-    game.height(15)
-    game.width(31)
-    game.cellSize(100)
-    game.boardGround("ELFONDO.png")
+    game.height(7)
+    game.width(15)
+    game.cellSize(200)
+    game.boardGround("ELFONDOPLUS2.png")
 
 //AÑADIDAS UNA INSTANCIA DE CADA CLASE DE INGREDIENTE
     const salsa1 = new Salsa(position = randomizer.emptyPosition())

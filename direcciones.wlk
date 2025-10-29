@@ -3,7 +3,7 @@ import francella.*
 
 object izquierda{
     method siguiente(position){
-        return game.at(10.max(position.x() - 1), position.y())
+        return game.at(5.max(position.x() - 1), position.y())
     }
 }
 
