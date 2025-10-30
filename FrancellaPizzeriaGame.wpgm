@@ -10,6 +10,7 @@ import interfaz.*
 program francellaPizzeria{
     
 // SETTINGS DEL TABLERO
+
     game.title("La Pizzería de Francella")
     game.height(8)
     game.width(16)
@@ -17,36 +18,33 @@ program francellaPizzeria{
     game.boardGround("fondo.png")
 
 //AÑADIDAS UNA INSTANCIA DE CADA CLASE DE INGREDIENTE
-    const salsa1 = new Salsa(position = randomizer.emptyPosition())
-    const queso1 = new Queso(position = randomizer.emptyPosition())
-    const prepizza1 = new Prepizza(position = randomizer.emptyPosition())
-    const tomate1 = new Tomate(position = randomizer.emptyPosition())
-    const jamon1 = new Jamon(position = randomizer.emptyPosition())
-    const cebolla1 = new Cebolla(position = randomizer.emptyPosition())
+
+    salsa.spawn()
+    queso.spawn()
+    prepizza.spawn()
+    tomate.spawn()
+    jamon.spawn()
+    cebolla.spawn()
+
 // PERSONAJES Y VISUALES
-    game.addVisual(salsa1)
-    game.addVisual(queso1)
-    game.addVisual(prepizza1)
-    game.addVisual(tomate1)
-    game.addVisual(jamon1)
-    game.addVisual(cebolla1)
-    
+
     game.addVisual(horno)
     game.addVisual(mesada)
 
     game.addVisual(francella)
     game.addVisual(cliente1)
     
-
 // MOVIMIENTO Y ACCIONES
+
     keyboard.right().onPressDo({francella.mover(derecha)})
     keyboard.left().onPressDo({francella.mover(izquierda)})
     keyboard.up().onPressDo({francella.mover(arriba)})
     keyboard.down().onPressDo({francella.mover(abajo)})
 
-    keyboard.t().onPressDo({francella.agarrarIngrediente()})
+    keyboard.i().onPressDo({francella.agarrarIngrediente()})
     keyboard.c().onPressDo({francella.cocinarPizza()})
-    keyboard.f().onPressDo({francella.armarPizza()})
+    keyboard.a().onPressDo({francella.armarPizza()})
+    keyboard.o().onPressDo({francella.colocarIngredienteEnMesada()})
     keyboard.e().onPressDo({francella.entregarPizza()})
 
     game.schedule(4000, {cliente1.hacerPedido()})
