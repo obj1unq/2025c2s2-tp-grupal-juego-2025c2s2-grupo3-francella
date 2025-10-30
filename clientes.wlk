@@ -15,7 +15,7 @@ class Cliente {
 
 object cliente1  {
     const tipoDePizzaPedido = tiposDePizzas.disponibles().anyOne()
-    const property position = game.at(29, 13)
+    const property position = game.at(15, 7)
 
     method hacerPedido() {
         game.say(self, "Quiero ordenar una " + tipoDePizzaPedido.nombreDeLaPizza())

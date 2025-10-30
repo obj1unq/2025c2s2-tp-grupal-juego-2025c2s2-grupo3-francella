@@ -2,7 +2,7 @@ import francella.*
 import game.*
 
 object horno {
-  const property position = game.at(10, 13)            
+  const property position = game.at(5, 7)            
   var estaPrendido = false
 
   method image() {
@@ -24,7 +24,7 @@ object horno {
 }
 
 object mesada {
-  const property position = game.at(14, 13)    
+  const property position = game.at(6, 7)    
 
   method image() {
       return "mesada.png"                   
