@@ -1,6 +1,9 @@
 import francella.*
 import tiposPizzas.*
 import game.*
+import interfaz.*
+
+
 /*
 class Cliente {
     //POSICION ALEATORIA E IMAGEN
@@ -17,20 +20,16 @@ object cliente1  {
     const tipoDePizzaPedido = tiposDePizzas.disponibles().anyOne()
     const property position = game.at(15, 7)
 
-    method hacerPedido() {
-        game.say(self, "Quiero ordenar una " + tipoDePizzaPedido.nombreDeLaPizza())
-    }
-    method tipoDePizzaPedido() {
-        return tipoDePizzaPedido
-    }
     method image() {
         return "cliente1.png"
     }
+
     method validarQueEstaCocinada(unaPizza) {
         if (not unaPizza.estaCocinada()) {
             self.error("Esto está crudo papá")
         }
     }
+
     method recibirPizza(unaPizza) {
         self.validarQueEstaCocinada(unaPizza)
         if (not self.esLoQuePedi(unaPizza)) {
@@ -38,13 +37,32 @@ object cliente1  {
             game.schedule(2000, {francella.gameOver()})
         }
         else game.say(self, "Gracias mostro")
+             game.removeVisual(pedido)
+             game.addVisual(gameWin) // esto es para debuggear
     }
+
     method esLoQuePedi(unaPizza) {
         return unaPizza.ingredientesUsados() == tipoDePizzaPedido.ingredientesNecesarios()
     }
 
     method atravesable(){
         return false
+    }
+
+    // Pedido
+
+    method hacerPedido() {
+        game.say(self, "Quiero ordenar una " + tipoDePizzaPedido.nombreDeLaPizza())
+        self.anotarPedido()
+    }
+
+    method anotarPedido() {
+        pedido.ultimaPizzaPedida(tipoDePizzaPedido.nombreDeLaPizza())
+        game.addVisual(pedido)
+    }
+
+    method tipoDePizzaPedido() {
+        return tipoDePizzaPedido
     }
 }
 

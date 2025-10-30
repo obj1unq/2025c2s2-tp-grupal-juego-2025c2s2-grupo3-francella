@@ -1,3 +1,4 @@
+import ingredientes.*
 import francella.*
 import game.*
 
@@ -11,20 +12,24 @@ object horno {
     }
     else return "hornoApagado.png"                    
   }
+
   method laPizzaSeEstaCocinando(tiempo) {
     estaPrendido = true
     game.schedule(tiempo, {estaPrendido = false; game.say(francella, "Qué pinta eeh")})
   }
+
   method laPizzaSeCocino() {
     pizza.estaCocinada(true)
   }
+
   method atravesable(){
     return false
   }
 }
 
 object mesada {
-  const property position = game.at(6, 7)    
+  const property position = game.at(6, 7)
+  var pizzaEnArmado = pizza    
 
   method image() {
       return "mesada.png"                   
@@ -32,6 +37,10 @@ object mesada {
 
   method atravesable(){
     return false
+  }
+
+  method colocarIngredienteEnMesada(ingrediente) {
+    pizzaEnArmado.agregarIngrediente(ingrediente)
   }
 }
 
@@ -42,9 +51,11 @@ object pizza {
   method ingredientes() {
     return ingredientes
   }
+
   method agregarIngrediente(unIngrediente) {
     ingredientes.add(unIngrediente)
   }
+
   method ingredientesUsados() {
     return ingredientes.map({ingrediente => ingrediente.tipoIngrediente()})
   }
