@@ -2,8 +2,9 @@ NO ELIMINAR LOS ITEMS DE LA LISTA, DESCRIBIR SU ESTADO A LA DERECHA Y ANOTAR QUI
 
 - Francella solo puede agarrar un item a la vez *Por resolver*
 - Mostrar el item de Francella en la interfaz   *Por resolver*
-- Corregir tamaño de celdas                     *Por resolver - Iezzi*
+- Corregir tamaño de celdas                     *Resuelto - Iezzi*
 - Darle facha al fondo                          *Por resolver*
 - Polimorfismo "interactuar"                    *Por resolver - Rodríguez*
 - Timer                                         *Por resolver*
 - Pedido de cliente que permanece en pantalla   *Por resolver*
+- Hacer zoom de pizza en mesada                 *Por resolver*
