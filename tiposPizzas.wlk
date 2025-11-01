@@ -13,7 +13,7 @@ object tiposDePizzas {
 
 //Cada pizza es un objeto, el cual los clientes iran chequeando con la pizza cocinada que Franchella haya hecho para comprobar si es efectivamente lo pedido. Al ser cada ingrediente una instancia de una clase y no un objeto bien definido se trabajará con la clase de los ingredientes usados
 object pizzaMuzzarella {
-    const ingredientesNecesarios = [prepizza, salsa, queso] // NO DEBERÍAN SER STRINGS
+    const ingredientesNecesarios = [masa, salsa, queso] // NO DEBERÍAN SER STRINGS
 
     method ingredientesNecesarios() {
         return ingredientesNecesarios

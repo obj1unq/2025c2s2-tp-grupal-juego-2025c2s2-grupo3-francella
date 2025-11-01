@@ -2,6 +2,7 @@ import francella.*
 import tiposPizzas.*
 import game.*
 import interfaz.*
+import pizzeria.*
 
 
 /*
@@ -16,6 +17,7 @@ class Cliente {
 }
 */
 
+
 object cliente1  {
     const tipoDePizzaPedido = tiposDePizzas.disponibles().anyOne()
     const property position = game.at(15, 7)
@@ -23,6 +25,12 @@ object cliente1  {
     method image() {
         return "cliente1.png"
     }
+
+    method atravesable(){ // capaz nos maten por esto
+        return false
+    }
+
+    // Recibimiento de pizza
 
     method validarQueEstaCocinada(unaPizza) {
         if (not unaPizza.estaCocinada()) {
@@ -33,20 +41,25 @@ object cliente1  {
     method recibirPizza(unaPizza) {
         self.validarQueEstaCocinada(unaPizza)
         if (not self.esLoQuePedi(unaPizza)) {
-            game.say(self, "Flaco, esto no es lo que pedí")
-            game.schedule(2000, {francella.gameOver()})
+            self.recibirPizzaIncorrecta()
         }
-        else game.say(self, "Gracias mostro")
-             game.removeVisual(pedido)
-             game.addVisual(gameWin) // esto es para debuggear
+        else self.recibirPizzaCorrecta()
+    }
+
+    method recibirPizzaCorrecta() {
+        game.say(self, "Gracias mostro")
+        pizza.entregarPizza()
+        game.removeVisual(pedido)
+        game.addVisual(gameWin) // esto es para debuggear
+    }
+
+    method recibirPizzaIncorrecta() {
+        game.say(self, "Flaco, esto no es lo que pedí")
+        game.schedule(1500, {francella.gameOver()})
     }
 
     method esLoQuePedi(unaPizza) {
         return unaPizza.ingredientesUsados() == tipoDePizzaPedido.ingredientesNecesarios()
-    }
-
-    method atravesable(){
-        return false
     }
 
     // Pedido
