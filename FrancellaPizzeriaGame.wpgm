@@ -7,6 +7,7 @@ import pizzeria.*
 import randomizer.*
 import interfaz.*
 
+
 program francellaPizzeria{
     
 // SETTINGS DEL TABLERO
@@ -21,7 +22,7 @@ program francellaPizzeria{
 
     salsa.spawn()
     queso.spawn()
-    prepizza.spawn()
+    masa.spawn()
     tomate.spawn()
     jamon.spawn()
     cebolla.spawn()

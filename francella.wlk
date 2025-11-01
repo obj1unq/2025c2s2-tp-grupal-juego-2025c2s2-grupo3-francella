@@ -15,6 +15,10 @@ object francella{
         return "pepito.png"
     }
 
+    method atravesable(){
+      return true
+    }
+
 
     // MOVIMIENTOS
 
@@ -35,10 +39,6 @@ object francella{
 		  return game.getObjectsIn(siguientePosicion).all({visual => visual.atravesable()})
 	  }
 
-    method atravesable(){
-      return true
-    }
-
 
     //AGARRAR INGREDIENTE
 
@@ -54,19 +54,50 @@ object francella{
     } 
     method esCeldaVacia() {
       return game.colliders(self).isEmpty()
-    }       
+    }
+
+    method validarPizzaEnMano() {
+      if (self.tienePizzaEnMano()) {
+        self.error("No puedo dejar esta pizza acá")
+      }
+    }
+
+    method tienePizzaEnMano() {
+      return self.tieneItem() and itemEnMano.uniqueElement() == pizza
+    }
+
+    method tieneItem() {
+      return not self.noTieneItem()
+    }
     
     method agarrarIngrediente() {
       self.validarAgarrarIngrediente()
-      if ((itemEnMano).isEmpty()) {
-        itemEnMano.add(game.uniqueCollider(self))  // Agrega al itemEnMano de Francella el objeto (ingrediente) que esta en su misma posicion.
-        game.removeVisual(game.uniqueCollider(self))
+      self.validarPizzaEnMano()
+      
+      if (self.noTieneItem()) {
+        self.levantarItem()
       }
-      else itemEnMano.add(game.uniqueCollider(self))
-           game.removeVisual(game.uniqueCollider(self)) // ya se que da error, ok?
-           itemEnMano.first().position(position)
-           game.addVisual(itemEnMano.first())
-           itemEnMano.remove(itemEnMano.first())
+      else self.intercambiarItem()
+    }
+
+    method levantarItem() {
+      itemEnMano.add(game.uniqueCollider(self))
+        game.removeVisual(game.uniqueCollider(self))
+    }
+
+    method dejarItem() {
+      itemEnMano.first().position(position)
+      game.addVisual(itemEnMano.first())
+      itemEnMano.remove(itemEnMano.first())
+    }
+
+    method intercambiarItem() {
+      self.levantarItem()
+      self.dejarItem()
+    }
+
+    method noTieneItem() {
+      return itemEnMano.isEmpty()
     }
 
 
@@ -80,7 +111,7 @@ object francella{
     }
 
     method validarColocarItem() {
-      if (itemEnMano.isEmpty()) {
+      if (self.noTieneItem()) {
         self.error("No tengo nada para colocar en la mesada")
       }
     }
@@ -92,15 +123,29 @@ object francella{
     method colocarIngredienteEnMesada() {
       self.validarDistanciaAMesada()
       self.validarColocarItem()
-      mesada.colocarIngredienteEnMesada(itemEnMano.first())
+
+      mesada.colocarIngredienteEnMesada(itemEnMano.uniqueElement())
       itemEnMano.clear()
     }
 
     method armarPizza() {
       self.validarDistanciaAMesada()
-      itemEnMano.clear()
+
+      if (self.noTieneItem()) {
+        self.levantarPizza()
+      }
+      else self.intercambiarItemPorPizza()
+    }
+
+    method levantarPizza() {
       itemEnMano.add(pizza)
-      game.say(self, "*musiquita italiana de fondo*")
+      mesada.sacarPizzaDeMesada()
+      game.say(self, "*musiquita italiana de fondo*") 
+    }
+
+    method intercambiarItemPorPizza() {
+      self.levantarPizza()
+      self.dejarItem()
     }
 
 
@@ -119,6 +164,7 @@ object francella{
 
     method cocinarPizza() {
       self.validarCocinarPizza()
+
       horno.laPizzaSeEstaCocinando(5000)  // Envia el mensaje al horno con el parametro del tiempo en milisegundos
       horno.laPizzaSeCocino()             // La pizza terminó de cocinarse
     }
@@ -128,7 +174,7 @@ object francella{
 
 
     method validarEntregarItem() {
-      if (itemEnMano.isEmpty()) {
+      if (self.noTieneItem()) {
         self.error("No tengo nada para darle al cliente")
       }
     }
@@ -146,7 +192,8 @@ object francella{
     method entregarPizza() {
       self.validarDistanciaAlCliente()
       self.validarEntregarItem()
-      clienteActual.recibirPizza(itemEnMano.first())        
+
+      clienteActual.recibirPizza(itemEnMano.first())
       itemEnMano.clear()
     }
 
@@ -158,7 +205,6 @@ object francella{
       game.stop()
       game.addVisual(gameOver)
     }
-
 }
 
 

@@ -9,4 +9,4 @@ NO ELIMINAR LOS ITEMS DE LA LISTA, DESCRIBIR SU ESTADO A LA DERECHA Y ANOTAR QUI
 - Timer                                         *Por resolver*
 - Pedido de cliente que permanece en pantalla   *Resuelto - Iezzi*
     - Agrandar texto de pedido                      *Por resolver*
-- Hacer zoom de pizza en mesada                 *Por resolver*
+- Hacer zoom de pizza en mesada                 *Resuelto - Iezzi*
