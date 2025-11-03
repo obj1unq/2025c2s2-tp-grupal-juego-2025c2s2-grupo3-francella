@@ -10,11 +10,11 @@ object musicaDeFondo {
 }
 
 object pizzaPlop {
-    const sonidosAleatorios = #{"plop1.mp3", "plop2.mp3", "plop3.mp3"}
+    const sonidosAleatorios = #{"plop1.mp3", "plop2.mp3"}
 
     method reproducir() {
         const nuevoPlop = game.sound(sonidosAleatorios.anyOne())
-        nuevoPlop.volume(0.7)
+        nuevoPlop.volume(0.8)
         nuevoPlop.play()
     }
 }
@@ -22,7 +22,7 @@ object pizzaPlop {
 object armarPizza {
     method reproducir() {
         const armarPizza = game.sound("armarPizza.wav")
-        armarPizza.volume(0.7)
+        armarPizza.volume(0.8)
         armarPizza.play()
     }
 }

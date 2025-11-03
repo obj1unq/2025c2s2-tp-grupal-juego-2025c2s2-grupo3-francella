@@ -75,41 +75,41 @@ class IngredienteInterfaz {
 object salsaInterfaz inherits IngredienteInterfaz {
 
     override method image() {
-        return "salsainterfaz.png"
+        return "salsaInterfaz.png"
     }
 }
 
 object quesoInterfaz inherits IngredienteInterfaz {
 
     override method image() {
-        return "quesointerfaz.png"
+        return "quesoInterfaz.png"
     }
 }
 
 object masaInterfaz inherits IngredienteInterfaz {
     
     override method image() {
-        return "masainterfaz.png"
+        return "masaInterfaz.png"
     }
 }
 
 object tomateInterfaz inherits IngredienteInterfaz {
 
     override method image() {
-        return "tomateinterfaz.png"
+        return "tomateInterfaz.png"
     }
 }
 
 object jamonInterfaz inherits IngredienteInterfaz {
 
     override method image() {
-        return "jamoninterfaz.png"
+        return "jamonInterfaz.png"
     }
 }
 
 object cebollaInterfaz inherits IngredienteInterfaz {
 
     override method image() {
-        return "cebollainterfaz.png"
+        return "cebollaInterfaz.png"
     }
 }
