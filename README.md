@@ -1,10 +1,11 @@
-# Nombre del juego (<- borrar y completar)
+# Pepe's Pizzeria
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Barigelli, Franco
+- Crescipulli, Lucas
+- Iezzi, Dante
+- Rodríguez, Lucas
 
 ## Capturas
 
