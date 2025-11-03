@@ -1,12 +1,13 @@
 NO ELIMINAR LOS ITEMS DE LA LISTA, DESCRIBIR SU ESTADO A LA DERECHA Y ANOTAR QUIEN LO RESOLVIÓ O LO VA A RESOLVER.
 
-- Francella solo puede agarrar un item a la vez *Resuelto - Iezzi*
+- Francella solo puede agarrar un item a la vez                                           *Resuelto - Iezzi*
     - Replantear sistema de armado de pizza porque el inventario de un solo item lo rompe *Resuelto - Iezzi*
-- Mostrar el item de Francella en la interfaz   *Por resolver*
-- Corregir tamaño de celdas                     *Resuelto - Iezzi*
-- Darle facha al fondo                          *Por resolver*
-- Polimorfismo "interactuar"                    *Por resolver - Rodríguez*
-- Timer                                         *Por resolver*
-- Pedido de cliente que permanece en pantalla   *Resuelto - Iezzi*
-    - Agrandar texto de pedido                      *Por resolver*
-- Hacer zoom de pizza en mesada                 *Resuelto - Iezzi*
+- Mostrar el item de Francella en la interfaz                                             *Por resolver*
+- Corregir tamaño de celdas                                                               *Resuelto - Iezzi*
+- Darle facha al fondo                                                                    *Por resolver - Iezzi*
+- Polimorfismo "interactuar"                                                              *Por resolver - Rodríguez*
+- Timer                                                                                   *Por resolver*
+- Pedido de cliente que permanece en pantalla                                             *Resuelto - Iezzi*
+    - Agrandar texto de pedido                                                            *Por resolver*
+- Hacer zoom de pizza en mesada                                                           *Resuelto - Iezzi*
+- Hacer que el horno solamente se encienda al tener una pizza                             *Por resolver

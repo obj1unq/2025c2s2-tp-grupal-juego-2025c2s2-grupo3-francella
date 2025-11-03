@@ -6,6 +6,7 @@ import clientes.*
 import pizzeria.*
 import randomizer.*
 import interfaz.*
+import audio.*
 
 
 program francellaPizzeria{
@@ -16,7 +17,7 @@ program francellaPizzeria{
     game.height(8)
     game.width(16)
     game.cellSize(200)
-    game.boardGround("fondo.png")
+    game.boardGround("fondoEnProceso.png")
 
 //AÑADIDAS UNA INSTANCIA DE CADA CLASE DE INGREDIENTE
 
@@ -48,7 +49,10 @@ program francellaPizzeria{
     keyboard.o().onPressDo({francella.colocarIngredienteEnMesada()})
     keyboard.e().onPressDo({francella.entregarPizza()})
 
-    game.schedule(4000, {cliente1.hacerPedido()})
+
+// INICIO DE JUEGO
 
     game.start()
+    game.schedule(4000, {cliente1.hacerPedido()})
+    musicaDeFondo.reproducir()
 }
