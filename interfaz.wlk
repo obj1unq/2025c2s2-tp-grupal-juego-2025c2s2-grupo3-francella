@@ -1,4 +1,7 @@
 import ingredientes.*
+import audio.*
+
+
 object pedido {
     var ultimaPizzaPedida = null
 
@@ -29,7 +32,7 @@ object gameOver {
     var property position = game.origin() 
 
     method image() {
-        return "youDied.png"
+        return "gameOverPlaceholder.png"
     }
 }
 
@@ -51,17 +54,19 @@ object ingredientesEnInterfaz {
     method mostrarIngredienteEnInterfaz(ingrediente) {
         ingredientesEnInterfaz.add(ingrediente.visualizacionEnInterfaz())
         game.addVisual(ingrediente.visualizacionEnInterfaz())
+        pizzaPlop.reproducir()
     }
 
     method limpiarIngredientesEnInterfaz() {
         ingredientesEnInterfaz.forEach({visual => game.removeVisual(visual)})
         ingredientesEnInterfaz.clear()
+        armarPizza.reproducir()
     }
 }
 
 
 class IngredienteInterfaz {
-    var property position = game.at(0,1)
+    var property position = game.origin()
     
     method image()
 }
@@ -70,41 +75,41 @@ class IngredienteInterfaz {
 object salsaInterfaz inherits IngredienteInterfaz {
 
     override method image() {
-        return "salsaInterfaz.png"
+        return "salsainterfaz.png"
     }
 }
 
 object quesoInterfaz inherits IngredienteInterfaz {
 
     override method image() {
-        return "quesoInterfaz.png"
+        return "quesointerfaz.png"
     }
 }
 
 object masaInterfaz inherits IngredienteInterfaz {
     
     override method image() {
-        return "masaInterfaz.png"
+        return "masainterfaz.png"
     }
 }
 
 object tomateInterfaz inherits IngredienteInterfaz {
 
     override method image() {
-        return "tomateInterfaz.png"
+        return "tomateinterfaz.png"
     }
 }
 
 object jamonInterfaz inherits IngredienteInterfaz {
 
     override method image() {
-        return "jamonInterfaz.png"
+        return "jamoninterfaz.png"
     }
 }
 
 object cebollaInterfaz inherits IngredienteInterfaz {
 
     override method image() {
-        return "cebollaInterfaz.png"
+        return "cebollainterfaz.png"
     }
 }

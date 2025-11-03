@@ -12,7 +12,7 @@ object francella{
     var clienteActual       = cliente1
 
     method image(){
-        return "pepito.png"
+        return "pepitoHD.png"
     }
 
     method atravesable(){
