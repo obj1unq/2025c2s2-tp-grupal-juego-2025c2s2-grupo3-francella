@@ -6,7 +6,7 @@ NO ELIMINAR LOS ITEMS DE LA LISTA, DESCRIBIR SU ESTADO A LA DERECHA Y ANOTAR QUI
 - Pedido de cliente que permanece en pantalla                                             *Resuelto - Iezzi*
 - Corregir tamaño de celdas                                                               *Resuelto - Iezzi*
 - Darle facha al fondo                                                                    *Por resolver - Iezzi*
-- Polimorfismo "interactuar"                                                              *Por resolver - Rodríguez*
+- Polimorfismo "interactuar"                                                              *Resuelto sin Polimorfismo - Rodríguez*
 - Mostrar el item de Francella en la interfaz                                             *Por resolver*
 - Timer                                                                                   *Por resolver*
 - Cambiar texto de pedidos por imagenes                                                   *Por resolver*

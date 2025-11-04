@@ -1,3 +1,4 @@
+import tiposPizzas.*
 import interfaz.*
 import ingredientes.*
 import francella.*
@@ -22,6 +23,10 @@ object pizza {
 
   method entregarPizza() {
       ingredientes.clear()
+  }
+
+  method coincideCon(unaPizza) {
+    return unaPizza.ingredientesNecesarios() == ingredientes
   }
 }
 
@@ -52,7 +57,7 @@ object horno {
 
 object mesada {
   const property position = game.at(6, 7)
-  var pizzaEnArmado = pizza    
+  const pizzaEnArmado = pizza    
 
   method image() {
       return "mesada.png"                   
@@ -61,6 +66,12 @@ object mesada {
   method colocarIngredienteEnMesada(ingrediente) {
     pizzaEnArmado.agregarIngrediente(ingrediente)
     ingredientesEnInterfaz.mostrarIngredienteEnInterfaz(ingrediente)
+
+    self.queresArmarLaPizza()
+  }
+
+  method queresArmarLaPizza() {
+    game.say(self, "Queres armar la pizza?? Y/N")
   }
 
   method sacarPizzaDeMesada() {

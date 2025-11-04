@@ -9,7 +9,7 @@ import randomizer.*
 
 
 object ingredientes {
-    var ingredientesEnCocina = #{}
+    const ingredientesEnCocina = #{}
 
     method agregarACocina(ingrediente) {
         ingredientesEnCocina.add(ingrediente)
