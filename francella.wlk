@@ -1,3 +1,4 @@
+import audio.*
 import ingredientes.*
 import game.*
 import direcciones.*
@@ -10,15 +11,14 @@ import colisiones.*
 object francella{
     var property position   = game.at(15,6)
     var property itemEnMano = []
-    var clienteActual       = cliente1
+    const clienteActual       = cliente1
 
     method image(){
         return "pepitoHD.png"
     }
 
 
-    // MOVIMIENTOS
-
+    // MOVIMIENTOS -----------------------------------------------------------------------------
 
     method mover(direccion) {
         if (self.puedeMover(direccion)) {
@@ -30,99 +30,116 @@ object francella{
 		  return not colisiones.hayColisionEn(direccion.siguiente(self.position()))
 	  }
 
+    //INTERACTUAR ---------------------------------------------------------------------------------
+    // Con esto así creo que deberia borrar muchas validaciones sobre la posicion del personaje con respecto
+    // de la de los objetos con los que interactuamos, ya que solo enviará los mensajes si se encuentra frente a esos objetos.
 
-    //AGARRAR INGREDIENTE
+    method interactuar() {
+      if (self.estoySobreUnIngrediente()) {
+        self.agarrarIngrediente()
+      }
+      if (self.estoyFrenteALaMesada()) {
+        self.colocarIngredienteEnMesada()
+      }
+      if (self.estoyFrenteAlHorno()) {
+        self.cocinarPizza()
+      }
+      if (self.estoyFrenteAlCliente()) {
+        self.entregarPizza()
+      }
+    }
 
+    method confirmar() {
+      self.armarPizza()
+    }
+    method denegar() {
+      game.say(self, "Necesito más ingredientes")
+    }
 
-    method validarAgarrarIngrediente() {            // Verifica si hay algun objeto (ingrediente) en la misma posicion de Francella
+    //AGARRAR INGREDIENTE----------------------------------------------------------------------------------------
+    //Francella solo puede agarrar una cosa a la vez
+    //Si tiene una pizza en la mano, no puede agarrar ingredientes
+    //Si tiene un ingrediente en la mano, puede intercambiarlo por otro
+
+    method validarSiEstoySobreUnIngrediente() {     // Verifica si hay algun objeto (ingrediente) en la misma posicion de Francella
       if (not self.estoySobreUnIngrediente()) {     // Si no hay ninguno, Francella lo indica en un mensaje.
         self.error("Acá no hay ingredientes")
       }
     }
 
-    method estoySobreUnIngrediente() {
-      return (not self.esCeldaVacia()) and ingredientes.esUnIngrediente(game.uniqueCollider(self))   
+    method estoySobreUnIngrediente() {                                  // Estoy sobre un ingrediente si y solo si:
+      return !self.esCeldaVacia()                                       //La celda actual no está vacía
+          && ingredientes.esUnIngrediente(game.uniqueCollider(self))    //El objeto con el que colisiono es un ingrediente
     } 
+
     method esCeldaVacia() {
       return game.colliders(self).isEmpty()
     }
 
-    method validarPizzaEnMano() {
+    method agarrarIngrediente() {                           //Para agarrar un ingrediente:
+      self.validarSiEstoySobreUnIngrediente()               //Tengo que estar sobre un ingrediente
+      self.validarNoTengoPizzaEnMano()                      //No tengo que tener una pizza en la mano
+          
+      if (!self.tieneItem()) {                              //Si no tengo ningun item
+        self.levantarItem()                                 //Agarro el ingrediente
+      }
+      else self.intercambiarItem()                          //Si tengo un item, los intercambio
+    }
+
+    method validarNoTengoPizzaEnMano() {
       if (self.tienePizzaEnMano()) {
         self.error("No puedo dejar esta pizza acá")
       }
     }
-
     method tienePizzaEnMano() {
       return itemEnMano.contains(pizza)
     }
-
-    method tieneItem() {
-      return not self.noTieneItem()
-    }
     
-    method agarrarIngrediente() {
-      self.validarAgarrarIngrediente()
-      self.validarPizzaEnMano()
-      
-      if (self.noTieneItem()) {
-        self.levantarItem()
-      }
-      else self.intercambiarItem()
+    method intercambiarItem() {
+      self.levantarItem()
+      self.dejarItem()
     }
-
     method levantarItem() {
       itemEnMano.add(game.uniqueCollider(self))
-        game.removeVisual(game.uniqueCollider(self))
+      game.removeVisual(game.uniqueCollider(self))
     }
-
     method dejarItem() {
       itemEnMano.first().position(position)
       game.addVisual(itemEnMano.first())
       itemEnMano.remove(itemEnMano.first())
     }
-
-    method intercambiarItem() {
-      self.levantarItem()
-      self.dejarItem()
-    }
-
-    method noTieneItem() {
-      return itemEnMano.isEmpty()
+    method tieneItem() {
+      return !itemEnMano.isEmpty()
     }
 
 
-    //ARMAR PIZZA
-
-
-    method validarDistanciaAMesada() {
-      if (not self.estoyFrenteALaMesada()) {
+    //ARMAR PIZZA ---------------------------------------------------------------------------------------------
+    method validarEstoyFrenteALaMesada() {
+      if (!self.estoyFrenteALaMesada()) {
         self.error("La mesada esta lejos")
       }
     }
-
+    method estoyFrenteALaMesada() {
+      return position == game.at(mesada.position().x(), mesada.position().y() - 1)
+    }
     method validarColocarItem() {
-      if (self.noTieneItem()) {
+      if (!self.tieneItem()) {
         self.error("No tengo nada para colocar en la mesada")
       }
     }
 
-    method estoyFrenteALaMesada() {
-      return position == game.at(mesada.position().x(), mesada.position().y() - 1)
-    }
-
-    method colocarIngredienteEnMesada() {
-      self.validarDistanciaAMesada()
+    method colocarIngredienteEnMesada() {                             // Si estoy frente a la mesada y tengo algun item, puedo colocar el item
+      self.validarEstoyFrenteALaMesada()
       self.validarColocarItem()
 
-      mesada.colocarIngredienteEnMesada(itemEnMano.uniqueElement())
-      itemEnMano.clear()
-    }
+      mesada.colocarIngredienteEnMesada(itemEnMano.uniqueElement())   // Esta funcion tambien testea cada vez que coloco un item, si el conjunto de
+      itemEnMano.clear()                                              // items en la mesada corresponden con alguna pizza, y pregunta si queres armar
+    }                                                                 // dicha pizza
 
     method armarPizza() {
-      self.validarDistanciaAMesada()
+      self.validarEstoyFrenteALaMesada()
 
-      if (self.noTieneItem()) {
+      if (!self.tieneItem()) {
         self.levantarPizza()
       }
       else self.intercambiarItemPorPizza()
@@ -140,15 +157,12 @@ object francella{
     }
 
 
-    //COCINAR PIZZA
-
-
+    //COCINAR PIZZA ----------------------------------------------------------------------------------------------------
     method validarCocinarPizza() {
       if (not self.estoyFrenteAlHorno()) {
         self.error("El horno está lejos")
       }
     }
-
     method estoyFrenteAlHorno() {
       return position == game.at(horno.position().x(), horno.position().y() - 1)
     }
@@ -161,16 +175,13 @@ object francella{
     }
 
 
-    //ENTREGAR PIZZA
-
-
+    //ENTREGAR PIZZA -----------------------------------------------------------------------------------------------
     method validarEntregarItem() {
-      if (self.noTieneItem()) {
+      if (!self.tieneItem()) {
         self.error("No tengo nada para darle al cliente")
       }
     }
-
-    method validarDistanciaAlCliente() {
+    method validarEstoyFrenteAlCliente() {
       if (not self.estoyFrenteAlCliente()) {
         self.error("El cliente está lejos")
       }
@@ -179,9 +190,8 @@ object francella{
     method estoyFrenteAlCliente() {
       return position == game.at(clienteActual.position().x(), clienteActual.position().y() - 1)
     }
-
     method entregarPizza() {
-      self.validarDistanciaAlCliente()
+      self.validarEstoyFrenteAlCliente()
       self.validarEntregarItem()
 
       clienteActual.recibirPizza(itemEnMano.first())
@@ -189,8 +199,7 @@ object francella{
     }
 
 
-    //PERDER
-
+    //PERDER --------------------------------------------------------------------------------
 
     method gameOver() {
       game.stop()

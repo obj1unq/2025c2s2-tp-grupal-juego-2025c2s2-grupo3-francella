@@ -46,12 +46,16 @@ program francellaPizzeria{
     keyboard.up().onPressDo({francella.mover(arriba)})
     keyboard.down().onPressDo({francella.mover(abajo)})
 
+    keyboard.e().onPressDo({francella.interactuar()})
+    keyboard.y().onPressDo({francella.confirmar()})
+    keyboard.n().onPressDo({francella.denegar()})
+    /*
     keyboard.i().onPressDo({francella.agarrarIngrediente()})
     keyboard.c().onPressDo({francella.cocinarPizza()})
     keyboard.a().onPressDo({francella.armarPizza()})
     keyboard.o().onPressDo({francella.colocarIngredienteEnMesada()})
     keyboard.e().onPressDo({francella.entregarPizza()})
-
+    */
 
 // INICIO DE JUEGO
 
