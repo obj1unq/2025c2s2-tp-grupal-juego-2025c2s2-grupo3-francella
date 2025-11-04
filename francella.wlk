@@ -4,10 +4,11 @@ import direcciones.*
 import pizzeria.*
 import clientes.*
 import interfaz.*
+import colisiones.*
 
 
 object francella{
-    var property position   = game.center()
+    var property position   = game.at(15,6)
     var property itemEnMano = []
     var clienteActual       = cliente1
 
@@ -15,28 +16,18 @@ object francella{
         return "pepitoHD.png"
     }
 
-    method atravesable(){
-      return true
-    }
-
 
     // MOVIMIENTOS
 
 
-    method mover(direccion){
-        self.validarMovimiento(direccion.siguiente(self.position()))
-        self.puedeMover(direccion.siguiente(self.position()))
-        position = direccion.siguiente(self.position())
+    method mover(direccion) {
+        if (self.puedeMover(direccion)) {
+            position = direccion.siguiente(self.position())
+        }
     }
 
-    method validarMovimiento(direccion){
-      if (not self.puedeMover(direccion)){
-        self.error("No puedo ir ahí")
-      }
-    }
-
-    method puedeMover(siguientePosicion) {
-		  return game.getObjectsIn(siguientePosicion).all({visual => visual.atravesable()})
+    method puedeMover(direccion) {
+		  return not colisiones.hayColisionEn(direccion.siguiente(self.position()))
 	  }
 
 
@@ -63,7 +54,7 @@ object francella{
     }
 
     method tienePizzaEnMano() {
-      return self.tieneItem() and itemEnMano.uniqueElement() == pizza
+      return itemEnMano.contains(pizza)
     }
 
     method tieneItem() {
@@ -204,6 +195,11 @@ object francella{
     method gameOver() {
       game.stop()
       game.addVisual(gameOver)
+    }
+
+    method gameWin() {
+      game.stop()
+      game.addVisual(gameWin)
     }
 }
 

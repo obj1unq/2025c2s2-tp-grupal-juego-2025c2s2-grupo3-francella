@@ -26,10 +26,6 @@ object cliente1  {
         return "cliente1.png"
     }
 
-    method atravesable(){ // capaz nos maten por esto
-        return false
-    }
-
     // Recibimiento de pizza
 
     method validarQueEstaCocinada(unaPizza) {
@@ -50,7 +46,7 @@ object cliente1  {
         game.say(self, "Gracias mostro")
         pizza.entregarPizza()
         game.removeVisual(pedido)
-        game.addVisual(gameWin) // esto es para debuggear
+        francella.gameWin()
     }
 
     method recibirPizzaIncorrecta() {

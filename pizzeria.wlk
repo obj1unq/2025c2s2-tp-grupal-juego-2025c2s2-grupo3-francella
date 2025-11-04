@@ -40,10 +40,6 @@ object horno {
     else return "hornoApagado.png"                    
   }
 
-  method atravesable(){
-    return false
-  }
-
   method laPizzaSeEstaCocinando(tiempo) {
     estaPrendido = true
     game.schedule(tiempo, {estaPrendido = false; game.say(francella, "Qué pinta eeh")})
@@ -60,10 +56,6 @@ object mesada {
 
   method image() {
       return "mesada.png"                   
-  }
-
-  method atravesable(){
-    return false
   }
 
   method colocarIngredienteEnMesada(ingrediente) {

@@ -7,6 +7,8 @@ import pizzeria.*
 import randomizer.*
 import interfaz.*
 import audio.*
+import colisiones.*
+
 
 
 program francellaPizzeria{
@@ -18,6 +20,7 @@ program francellaPizzeria{
     game.width(16)
     game.cellSize(200)
     game.boardGround("fondoEnProceso.png")
+    mapaDeColisiones.establecerColisiones()
 
 //AÑADIDAS UNA INSTANCIA DE CADA CLASE DE INGREDIENTE
 
@@ -33,8 +36,8 @@ program francellaPizzeria{
     game.addVisual(horno)
     game.addVisual(mesada)
 
-    game.addVisual(francella)
     game.addVisual(cliente1)
+    game.addVisual(francella)
     
 // MOVIMIENTO Y ACCIONES
 

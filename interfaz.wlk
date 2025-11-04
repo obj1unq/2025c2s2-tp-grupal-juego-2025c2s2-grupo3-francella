@@ -68,48 +68,52 @@ object ingredientesEnInterfaz {
 class IngredienteInterfaz {
     var property position = game.origin()
     
-    method image()
+    method nombre()
+
+    method image() {
+        return self.nombre() + "Interfaz.png"
+    }
 }
 
 
 object salsaInterfaz inherits IngredienteInterfaz {
 
-    override method image() {
-        return "salsainterfaz.png"
+    override method nombre() {
+        return "salsa"
     }
 }
 
 object quesoInterfaz inherits IngredienteInterfaz {
 
-    override method image() {
-        return "quesointerfaz.png"
+    override method nombre() {
+        return "queso"
     }
 }
 
 object masaInterfaz inherits IngredienteInterfaz {
     
-    override method image() {
-        return "masainterfaz.png"
+    override method nombre() {
+        return "masa"
     }
 }
 
 object tomateInterfaz inherits IngredienteInterfaz {
 
-    override method image() {
-        return "tomateinterfaz.png"
+    override method nombre() {
+        return "tomate"
     }
 }
 
 object jamonInterfaz inherits IngredienteInterfaz {
 
-    override method image() {
-        return "jamoninterfaz.png"
+    override method nombre() {
+        return "jamon"
     }
 }
 
 object cebollaInterfaz inherits IngredienteInterfaz {
 
-    override method image() {
-        return "cebollainterfaz.png"
+    override method nombre() {
+        return "cebolla"
     }
 }
