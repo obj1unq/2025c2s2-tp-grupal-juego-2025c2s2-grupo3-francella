@@ -158,7 +158,7 @@ object francella{
 
 
     //COCINAR PIZZA ----------------------------------------------------------------------------------------------------
-    method validarCocinarPizza() {
+    method validarEstoyFrenteAlHorno() {
       if (not self.estoyFrenteAlHorno()) {
         self.error("El horno está lejos")
       }
@@ -166,9 +166,18 @@ object francella{
     method estoyFrenteAlHorno() {
       return position == game.at(horno.position().x(), horno.position().y() - 1)
     }
+    method validarTengoUnaPizza() {
+      if (!self.tengoUnaPizza()) {
+        self.error("No tengo una pizza")
+      }
+    }
+    method tengoUnaPizza() {
+      return itemEnMano.contains(pizza)
+    }
 
     method cocinarPizza() {
-      self.validarCocinarPizza()
+      self.validarEstoyFrenteAlHorno()
+      self.validarTengoUnaPizza()
 
       horno.laPizzaSeEstaCocinando(5000)  // Envia el mensaje al horno con el parametro del tiempo en milisegundos
       horno.laPizzaSeCocino()             // La pizza terminó de cocinarse

@@ -10,7 +10,7 @@ NO ELIMINAR LOS ITEMS DE LA LISTA, DESCRIBIR SU ESTADO A LA DERECHA Y ANOTAR QUI
 - Mostrar el item de Francella en la interfaz                                             *Por resolver*
 - Timer                                                                                   *Por resolver*
 - Cambiar texto de pedidos por imagenes                                                   *Por resolver*
-- Hacer que el horno solamente se encienda al tener una pizza                             *Por resolver*
+- Hacer que el horno solamente se encienda al tener una pizza                             *Resuelto - Rodríguez*
 - Colisiones                                                                              *Por resolver*
 - Habitacion amasado                                                                      *Por resolver*
 - Almacen con rata                                                                        *Por resolver*
