@@ -2,12 +2,17 @@ NO ELIMINAR LOS ITEMS DE LA LISTA, DESCRIBIR SU ESTADO A LA DERECHA Y ANOTAR QUI
 
 - Francella solo puede agarrar un item a la vez                                           *Resuelto - Iezzi*
     - Replantear sistema de armado de pizza porque el inventario de un solo item lo rompe *Resuelto - Iezzi*
-- Mostrar el item de Francella en la interfaz                                             *Por resolver*
+- Hacer zoom de pizza en mesada                                                           *Resuelto - Iezzi*
+- Pedido de cliente que permanece en pantalla                                             *Resuelto - Iezzi*
 - Corregir tamaño de celdas                                                               *Resuelto - Iezzi*
 - Darle facha al fondo                                                                    *Por resolver - Iezzi*
 - Polimorfismo "interactuar"                                                              *Por resolver - Rodríguez*
+- Mostrar el item de Francella en la interfaz                                             *Por resolver*
 - Timer                                                                                   *Por resolver*
-- Pedido de cliente que permanece en pantalla                                             *Resuelto - Iezzi*
-    - Agrandar texto de pedido                                                            *Por resolver*
-- Hacer zoom de pizza en mesada                                                           *Resuelto - Iezzi*
-- Hacer que el horno solamente se encienda al tener una pizza                             *Por resolver
+- Cambiar texto de pedidos por imagenes                                                   *Por resolver*
+- Hacer que el horno solamente se encienda al tener una pizza                             *Por resolver*
+- Colisiones                                                                              *Por resolver*
+- Habitacion amasado                                                                      *Por resolver*
+- Almacen con rata                                                                        *Por resolver*
+- Freezer                                                                                 *Por resolver*
+- Puertas con triggers                                                                    *Por resolver*
