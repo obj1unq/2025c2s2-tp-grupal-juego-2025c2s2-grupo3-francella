@@ -33,10 +33,6 @@ class Ingrediente {
 
     method image()
 
-    method atravesable(){
-        return true
-    }
-
     method visualizacionEnInterfaz()
 }
 
