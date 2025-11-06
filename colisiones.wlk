@@ -1,18 +1,8 @@
-class Colision {
-    var property position
-
-    method image() {
-        return "blank.png"
-    }
-}
-
 object colisiones {
     const celdasConColision = #{}
 
     method establecerNuevaColision(_position) {
-        const nuevaColision = new Colision (position = _position)
         celdasConColision.add(_position)
-        game.addVisual(nuevaColision)
     }
 
     method hayColisionEn(celda) {
