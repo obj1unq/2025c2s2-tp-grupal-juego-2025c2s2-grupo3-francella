@@ -1,18 +1,23 @@
 NO ELIMINAR LOS ITEMS DE LA LISTA, DESCRIBIR SU ESTADO A LA DERECHA Y ANOTAR QUIEN LO RESOLVIÓ O LO VA A RESOLVER.
 
-- Francella solo puede agarrar un item a la vez                                           *Resuelto - Iezzi*
-    - Replantear sistema de armado de pizza porque el inventario de un solo item lo rompe *Resuelto - Iezzi*
-- Hacer zoom de pizza en mesada                                                           *Resuelto - Iezzi*
-- Pedido de cliente que permanece en pantalla                                             *Resuelto - Iezzi*
-- Corregir tamaño de celdas                                                               *Resuelto - Iezzi*
-- Darle facha al fondo                                                                    *Por resolver - Iezzi*
-- Polimorfismo "interactuar"                                                              *Resuelto sin Polimorfismo - Rodríguez*
-- Mostrar el item de Francella en la interfaz                                             *Por resolver*
-- Timer                                                                                   *Por resolver*
-- Cambiar texto de pedidos por imagenes                                                   *Por resolver*
-- Hacer que el horno solamente se encienda al tener una pizza                             *Resuelto - Rodríguez*
-- Colisiones                                                                              *Por resolver*
-- Habitacion amasado                                                                      *Por resolver*
-- Almacen con rata                                                                        *Por resolver*
-- Freezer                                                                                 *Por resolver*
-- Puertas con triggers                                                                    *Por resolver*
+- Francella solo puede agarrar un item a la vez                                                   *Resuelto - Iezzi*
+    - Replantear sistema de armado de pizza porque el inventario de un solo item lo rompe         *Resuelto - Iezzi*
+- Hacer zoom de pizza en mesada                                                                   *Resuelto - Iezzi*
+- Pedido de cliente que permanece en pantalla                                                     *Resuelto - Iezzi*
+- Corregir tamaño de celdas                                                                       *Resuelto - Iezzi*
+- Colisiones                                                                                      *Resuelto - Iezzi*
+- Hacer que el horno solamente se encienda al tener una pizza                                     *Resuelto - Rodríguez*
+- Polimorfismo "interactuar"                                                                      *Resuelto - Rodríguez, Iezzi*
+- Habitacion amasado                                                                              *Resuelto - Iezzi*
+    - Sprites sistema de amasado                                                                  *Por resolver - Iezzi*
+- Darle facha al fondo                                                                            *Por resolver - Iezzi*
+- Mostrar el item de Francella en la interfaz                                                     *Por resolver*
+- Timer                                                                                           *Por resolver*
+- Cambiar texto de pedidos por imagenes                                                           *Por resolver*
+- Almacen con rata                                                                                *Por resolver*
+- Freezer                                                                                         *Por resolver*
+- Puertas con triggers                                                                            *Por resolver*
+- Comprobar el orden en el que se incorporan los ingredientes                                     *Por resolver*
+- Mejorar el sistema que usan las piezas de cocina para llevar registro de su contenido           *Por resolver*
+    (en algunos casos sería mejor usar conjuntos, por ejemplo)
+-
