@@ -9,7 +9,7 @@ object musicaDeFondo {
     }
 }
 
-object pizzaPlop {
+object sonidoPlop {
     const sonidosAleatorios = #{"plop1.mp3", "plop2.mp3"}
 
     method reproducir() {

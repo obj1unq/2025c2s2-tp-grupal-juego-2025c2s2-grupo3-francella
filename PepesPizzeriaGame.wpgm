@@ -1,0 +1,59 @@
+import audio.*
+import clientes.*
+import direcciones.*
+import francella.*
+import game.*
+import ingredientes.*
+import interfazVisual.*
+import mapa.*
+import pizzeria.*
+import randomizer.*
+
+
+program pepesPizzeria{
+    
+// SETTINGS DEL TABLERO
+
+    game.title("Pepes Pizzeria")
+    game.height(8)
+    game.width(16)
+    game.cellSize(200)
+    game.boardGround("fondoEnProceso.png")
+
+//AÑADIDAS UNA INSTANCIA DE CADA CLASE DE INGREDIENTE
+
+    salsa.spawn  (game.at(11,0))
+    queso.spawn  (game.at(10,0))
+    tomate.spawn (game.at(9,0))
+    jamon.spawn  (game.at(6,0))
+    cebolla.spawn(game.at(5,0))
+
+// PERSONAJES Y VISUALES
+
+    game.addVisual(horno)
+    game.addVisual(mesadaParaPizza)
+    game.addVisual(mesadaParaMasa)
+    game.addVisual(sacoDeHarina)
+    game.addVisual(heladera)
+    game.addVisual(canillaDeAgua)
+    game.addVisual(tachoDeBasura)
+    game.addVisual(cliente1)
+    mapa.dibujarMapa()
+    game.addVisual(francella)
+    
+// MOVIMIENTO Y ACCIONES
+
+    keyboard.right().onPressDo({francella.mover(derecha)})
+    keyboard.left().onPressDo({francella.mover(izquierda)})
+    keyboard.up().onPressDo({francella.mover(arriba)})
+    keyboard.down().onPressDo({francella.mover(abajo)})
+
+    keyboard.e().onPressDo({francella.colocar()})
+    keyboard.f().onPressDo({francella.agarrar()})
+
+// INICIO DE JUEGO
+
+    game.start()
+    game.schedule(4000, {cliente1.hacerPedido()})
+    musicaDeFondo.reproducir()
+}

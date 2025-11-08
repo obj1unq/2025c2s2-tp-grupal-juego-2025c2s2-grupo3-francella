@@ -54,7 +54,7 @@ object ingredientesEnInterfaz {
     method mostrarIngredienteEnInterfaz(ingrediente) {
         ingredientesEnInterfaz.add(ingrediente.visualizacionEnInterfaz())
         game.addVisual(ingrediente.visualizacionEnInterfaz())
-        pizzaPlop.reproducir()
+        sonidoPlop.reproducir()
     }
 
     method limpiarIngredientesEnInterfaz() {
@@ -115,5 +115,24 @@ object cebollaInterfaz inherits IngredienteInterfaz {
 
     override method nombre() {
         return "cebolla"
+    }
+}
+
+object harinaInterfaz inherits IngredienteInterfaz {
+    
+    override method nombre() {
+        return "harina"
+    }
+}
+object aguaInterfaz inherits IngredienteInterfaz {
+    
+    override method nombre() {
+        return "agua"
+    }
+}
+object levaduraInterfaz inherits IngredienteInterfaz {
+    
+    override method nombre() {
+        return "levadura"
     }
 }

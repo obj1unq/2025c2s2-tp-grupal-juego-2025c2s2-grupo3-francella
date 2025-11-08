@@ -1,5 +1,7 @@
-import interfaz.*
+import comidas.*
+import francella.*
 import game.*
+import interfazVisual.*
 import randomizer.*
 
 
@@ -29,21 +31,51 @@ object ingredientes {
 
 
 class Ingrediente {
-    var property position
 
     method image()
 
     method visualizacionEnInterfaz()
+
+    method tipoIngrediente()
 }
 
 
-class Salsa inherits Ingrediente{
+class IngredienteParaPizza inherits Ingrediente{
+    var property position
+    const chef = francella
+
+    method recibirAgarrar() {
+        if (not chef.tieneItem()) {
+            self.serLevantado()
+        }
+        else {
+            self.serIntercambiado()
+        }
+    }
+
+    method serLevantado() {
+        chef.itemEnMano().add(self)
+        game.removeVisual(self)
+        ingredientes.eliminarDeCocina(self)
+    }
+
+    method serIntercambiado() {
+        self.serLevantado()
+        ingredientes.agregarACocina(chef.itemEnMano().first())
+        chef.dejarItem()
+    }
+
+    method recibirColocar(item) {}
+}
+
+
+class Salsa inherits IngredienteParaPizza{
 
     override method image() {
         return "salsa.png"
     }
 
-    method tipoIngrediente(){
+     override method tipoIngrediente(){
         return salsa
     }
     
@@ -53,13 +85,13 @@ class Salsa inherits Ingrediente{
 }
 
 
-class Queso inherits Ingrediente{
+class Queso inherits IngredienteParaPizza{
 
     override method image() {
         return "queso.jpeg"
     }
 
-    method tipoIngrediente(){
+    override method tipoIngrediente(){
         return queso
     }
 
@@ -69,13 +101,13 @@ class Queso inherits Ingrediente{
 }
 
 
-class Masa inherits Ingrediente{
+class Masa inherits IngredienteParaPizza{
 
     override method image() {
         return "masa.jpg"
     }
 
-    method tipoIngrediente(){
+    override method tipoIngrediente(){
         return masa
     }
 
@@ -85,13 +117,13 @@ class Masa inherits Ingrediente{
 }
 
 
-class Tomate inherits Ingrediente{
+class Tomate inherits IngredienteParaPizza{
 
     override method image() {
         return "tomate.jpeg"
     }
 
-    method tipoIngrediente(){
+     override method tipoIngrediente(){
         return tomate
     }
 
@@ -101,13 +133,13 @@ class Tomate inherits Ingrediente{
 }
 
 
-class Jamon inherits Ingrediente{
+class Jamon inherits IngredienteParaPizza{
 
     override method image() {
         return "jamon.jpg"
     }
 
-    method tipoIngrediente(){
+    override method tipoIngrediente(){
         return jamon
     }
 
@@ -117,13 +149,13 @@ class Jamon inherits Ingrediente{
 }
 
 
-class Cebolla inherits Ingrediente{
+class Cebolla inherits IngredienteParaPizza{
 
     override method image() {
         return "cebolla.jpg"
     }
 
-    method tipoIngrediente(){
+    override method tipoIngrediente(){
         return cebolla
     }
 
@@ -137,69 +169,95 @@ class Cebolla inherits Ingrediente{
 
 
 object salsa {
-    method tipoIngrediente() {
-        return self
-    }
 
-    method spawn() {
-        const nuevaSalsa = new Salsa(position = randomizer.emptyPosition())
+    method spawn(_position) {
+        const nuevaSalsa = new Salsa(position = _position)
         game.addVisual(nuevaSalsa)
         ingredientes.agregarACocina(nuevaSalsa)
     }
 }
 
 object queso {
-    method tipoIngrediente() {
-        return self
-    }
 
-    method spawn() {
-        const nuevoQueso = new Queso(position = randomizer.emptyPosition())
+    method spawn(_position) {
+        const nuevoQueso = new Queso(position = _position)
         game.addVisual(nuevoQueso)
         ingredientes.agregarACocina(nuevoQueso)
     }
 }
-object masa{
-    method tipoIngrediente() {
-        return self
-    }
-    
-    method spawn() {
-        const nuevaMasa = new Masa(position = randomizer.emptyPosition())
-        game.addVisual(nuevaMasa)
-        ingredientes.agregarACocina(nuevaMasa)
-    }
-}
+
 object tomate{
-    method tipoIngrediente() {
-        return self
-    }
     
-    method spawn() {
-        const nuevoTomate = new Tomate(position = randomizer.emptyPosition())
+    method spawn(_position) {
+        const nuevoTomate = new Tomate(position = _position)
         game.addVisual(nuevoTomate)
         ingredientes.agregarACocina(nuevoTomate)
     }
 }
+
 object jamon{
-    method tipoIngrediente() {
-        return self
-    }
     
-    method spawn() {
-        const nuevoJamon = new Jamon(position = randomizer.emptyPosition())
+    method spawn(_position) {
+        const nuevoJamon = new Jamon(position = _position)
         game.addVisual(nuevoJamon)
         ingredientes.agregarACocina(nuevoJamon)
     }
 }
+
 object cebolla{
-    method tipoIngrediente() {
-        return self
-    }
     
-    method spawn() {
-        const nuevaCebolla = new Cebolla(position = randomizer.emptyPosition())
+    method spawn(_position) {
+        const nuevaCebolla = new Cebolla(position = _position)
         game.addVisual(nuevaCebolla)
         ingredientes.agregarACocina(nuevaCebolla)
+    }
+}
+
+
+// Ingredientes para masa -------------------------------------------------
+
+
+object harina inherits Ingrediente{
+
+    override method image() {
+        return "harina.jpg"
+    }
+
+    override method tipoIngrediente(){
+        return harina
+    }
+
+    override method visualizacionEnInterfaz() {
+        return harinaInterfaz
+    }
+}
+
+object agua inherits Ingrediente{
+
+    override method image() {
+        return "agua.jpg"
+    }
+
+    override method tipoIngrediente(){
+        return agua
+    }
+
+    override method visualizacionEnInterfaz() {
+        return aguaInterfaz
+    }
+}
+
+object levadura inherits Ingrediente{
+
+    override method image() {
+        return "levadura.jpg"
+    }
+
+    override method tipoIngrediente(){
+        return levadura
+    }
+
+    override method visualizacionEnInterfaz() {
+        return levaduraInterfaz
     }
 }
