@@ -18,7 +18,7 @@ program pepesPizzeria{
     game.height(8)
     game.width(16)
     game.cellSize(200)
-    game.boardGround("fondoEnProceso.png")
+    game.boardGround("fondoTest.png")
 
 //AÑADIDAS UNA INSTANCIA DE CADA CLASE DE INGREDIENTE
 
@@ -31,12 +31,12 @@ program pepesPizzeria{
 // PERSONAJES Y VISUALES
 
     game.addVisual(horno)
+    game.addVisual(tachoDeBasura)
     game.addVisual(mesadaParaPizza)
     game.addVisual(mesadaParaMasa)
     game.addVisual(sacoDeHarina)
     game.addVisual(heladera)
     game.addVisual(canillaDeAgua)
-    game.addVisual(tachoDeBasura)
     game.addVisual(cliente1)
     mapa.dibujarMapa()
     game.addVisual(francella)
