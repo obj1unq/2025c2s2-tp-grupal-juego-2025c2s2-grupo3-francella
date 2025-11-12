@@ -8,11 +8,11 @@ import interfazVisual.*
 // Electrodomésticos y muebles de cocina-----------------------------------------------
 
 object tachoDeBasura {
-  const property position = game.at(7, 7)
+  const property position = game.at(9, 7)
   const chef = francella
 
   method image() {
-    return "tachoDeBasura.png"
+    return "tachoDeBasura.gif"
   }
 
   method recibirColocar(item) {
@@ -68,14 +68,14 @@ object sacoDeHarina inherits PiezaDeSeccionDeAmasado(position = game.at(13, 3), 
   }
 }
 
-object canillaDeAgua inherits PiezaDeSeccionDeAmasado(position = game.at(13, 0), contenido = agua){
+object canillaDeAgua inherits PiezaDeSeccionDeAmasado(position = game.at(15, 0), contenido = agua){
   var estaAbierta = false  
 
   override method image() {
     if (estaAbierta) {
-        return "canillaAbierta.png"                   
+        return "canillaAbierta.gif"                   
     }
-    else return "canillaCerrada.png"                                      
+    else return "canillaCerrada.gif"                                      
   }
 
   override method recibirAgarrar() {
@@ -153,10 +153,6 @@ object horno inherits PiezaDeCocina(position = game.at(5, 7), contenido = forro)
 
 class Mesada inherits PiezaDeCocina {
 
-  override method image() {
-      return "mesada.png"                   
-  }
-
   override method recibirColocar(item) {
     contenido.agregarIngrediente(item)
     chef.itemEnMano().clear()
@@ -175,10 +171,16 @@ class Mesada inherits PiezaDeCocina {
   }
 }
 
-object mesadaParaPizza inherits Mesada(position = game.at(6, 7), contenido = pizza) {
+object mesadaParaPizza inherits Mesada(position = game.at(7, 7), contenido = pizza) {
   
+  override method image() {
+    return "mesadaPizzaTest.png"
+  }
 }
 
-object mesadaParaMasa inherits Mesada(position = game.at(15,0), contenido = masa) {
+object mesadaParaMasa inherits Mesada(position = game.at(13,0), contenido = masa) {
 
+  override method image() {
+    return "mesadaMasa.png"
+  }
 }

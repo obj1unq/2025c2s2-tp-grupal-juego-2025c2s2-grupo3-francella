@@ -38,22 +38,27 @@ object intermediariosDeInteraccion {
         return game.getObjectsIn(_position).uniqueElement()
     }
 
-    method establecerNuevoIntermediarioAbajo(_position) {
+    method establecerNuevoIntermediarioHere(_position) {
+        const nuevoIntermediario = new IntermediarioDeInteraccion (position = _position, receptorDeInteraccion = self.objetoEn(_position))
+        game.addVisual(nuevoIntermediario)
+    }
+
+    method establecerNuevoIntermediarioDown(_position) {
         const nuevoIntermediario = new IntermediarioDeInteraccion (position = _position, receptorDeInteraccion = self.objetoEn(game.at(_position.x(), _position.y() + 1)))
         game.addVisual(nuevoIntermediario)
     }
 
-    method establecerNuevoIntermediarioSuperior(_position) {
+    method establecerNuevoIntermediarioUp(_position) {
         const nuevoIntermediario = new IntermediarioDeInteraccion (position = _position, receptorDeInteraccion = self.objetoEn(game.at(_position.x(), _position.y() - 1)))
         game.addVisual(nuevoIntermediario)
     }
 
-    method establecerNuevoIntermediarioIzquierdo(_position) {
+    method establecerNuevoIntermediarioLeft(_position) {
         const nuevoIntermediario = new IntermediarioDeInteraccion (position = _position, receptorDeInteraccion = self.objetoEn(game.at(_position.x() + 1, _position.y())))
         game.addVisual(nuevoIntermediario)
     }
 
-    method establecerNuevoIntermediarioDerecho(_position) {
+    method establecerNuevoIntermediarioRight(_position) {
         const nuevoIntermediario = new IntermediarioDeInteraccion (position = _position, receptorDeInteraccion = self.objetoEn(game.at(_position.x() - 1, _position.y())))
         game.addVisual(nuevoIntermediario)
     }
@@ -77,44 +82,51 @@ object cc{
 
 }
 
-object ia {
-  
+object ih {
+    
     method dibujar(position) {
-        intermediariosDeInteraccion.establecerNuevoIntermediarioAbajo(position)
-    }
-}
-
-object is {
-  
-    method dibujar(position) {
-        intermediariosDeInteraccion.establecerNuevoIntermediarioSuperior(position)
-    }
-}
-
-object ii {
-  
-    method dibujar(position) {
-        intermediariosDeInteraccion.establecerNuevoIntermediarioIzquierdo(position)
+        intermediariosDeInteraccion.establecerNuevoIntermediarioHere(position)
     }
 }
 
 object id {
   
     method dibujar(position) {
-        intermediariosDeInteraccion.establecerNuevoIntermediarioDerecho(position)
+        intermediariosDeInteraccion.establecerNuevoIntermediarioDown(position)
+    }
+}
+
+object iu {
+  
+    method dibujar(position) {
+        intermediariosDeInteraccion.establecerNuevoIntermediarioUp(position)
+    }
+}
+
+object il {
+  
+    method dibujar(position) {
+        intermediariosDeInteraccion.establecerNuevoIntermediarioLeft(position)
+    }
+}
+
+object ir {
+  
+    method dibujar(position) {
+        intermediariosDeInteraccion.establecerNuevoIntermediarioRight(position)
     }
 }
 
 object mapa {
     const dibujo =[
-        [ __, __, __, __, __, cc, cc, cc, __, __, __, __, __, __, ii, cc ],
-        [ __, __, __, __, __, ia, ia, ia, __, __, __, __, __, __, __, __ ],
+        [ __, __, __, __, __, cc, cc, cc, cc, cc, __, __, __, __, il, cc ],
+        [ __, __, __, __, __, id, __, id, __, id, __, __, __, __, __, __ ],
         [ __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __ ],
         [ __, __, __, __, __, cc, __, cc, cc, cc, __, cc, cc, cc, __, cc ],
-        [ __, __, __, __, __, __, __, __, cc, __, __, __, cc, __, __, __ ],
-        [ __, __, __, __, __, __, __, __, cc, __, __, __, cc, ia, __, ia ],
-        [ __, __, __, __, __, __, __, __, cc, __, __, __, cc, is, __, is ],
-        [ __, __, __, __, __, __, __, __, cc, __, __, __, cc, __, __, cc ]
+        [ __, __, __, __, __, __, __, __, cc, __, __, __, cc, cc, __, cc ],
+        [ __, __, __, __, __, __, __, __, cc, __, __, __, cc, id, __, id ],
+        [ __, __, __, __, __, __, __, __, cc, __, __, __, cc, iu, __, iu ],
+        [ __, __, __, __, __, __, __, __, cc, __, __, __, cc, cc, cc, cc ]
     ].reverse()
 
     method dibujarMapa() {
