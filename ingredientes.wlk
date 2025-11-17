@@ -52,6 +52,7 @@ class IngredienteParaPizza inherits Ingrediente{
         chef.agregarAlInventario(self)
         game.removeVisual(self)
         ingredientes.eliminarDeCocina(self)
+        interfazInventario.cambiarContenidoMostrado(self)
     }
     method serIntercambiado() {
         self.serLevantado()
@@ -193,7 +194,7 @@ object cebolla {
 
 object harina inherits Ingrediente{
     override method image() {
-        return "harina.jpg"
+        return "harina.png"
     }
     override method tipoIngrediente(){
         return self
@@ -205,7 +206,7 @@ object harina inherits Ingrediente{
 
 object agua inherits Ingrediente{
     override method image() {
-        return "agua.jpg"
+        return "agua.png"
     }
     override method tipoIngrediente(){
         return self
@@ -217,7 +218,7 @@ object agua inherits Ingrediente{
 
 object levadura inherits Ingrediente{
     override method image() {
-        return "levadura.jpg"
+        return "levadura.png"
     }
     override method tipoIngrediente(){
         return self

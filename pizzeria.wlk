@@ -17,6 +17,7 @@ object tachoDeBasura {
 
   method recibirColocar(item) {
     chef.itemEnMano().clear()
+    interfazInventario.borrarContenidoMostrado()
   }
 
   method recibirAgarrar() {
@@ -57,6 +58,7 @@ class PiezaDeSeccionDeAmasado inherits PiezaDeCocina {
   override method recibirAgarrar() {
     if (not chef.tieneItem()) {
         chef.itemEnMano().add(contenido)
+        interfazInventario.cambiarContenidoMostrado(contenido)
     }
   }
 }
@@ -101,9 +103,9 @@ object heladera inherits PiezaDeSeccionDeAmasado(position = game.at(15, 3), cont
   }
 }
 
-object forro {} // quiero poner null y no me dejaaaaaaaaaaaa dios necesito terminar ya
 
-object horno inherits PiezaDeCocina(position = game.at(5, 7), contenido = forro){         
+
+object horno inherits PiezaDeCocina(position = game.at(5, 7), contenido = vacio){         
   var estaPrendido = false
 
   override method image() {
@@ -156,6 +158,7 @@ class Mesada inherits PiezaDeCocina {
   override method recibirColocar(item) {
     contenido.agregarIngrediente(item)
     chef.itemEnMano().clear()
+    interfazInventario.borrarContenidoMostrado()
     ingredientesEnInterfaz.mostrarIngredienteEnInterfaz(item)
   }
 

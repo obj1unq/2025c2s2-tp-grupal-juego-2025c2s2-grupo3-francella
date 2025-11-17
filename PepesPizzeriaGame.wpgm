@@ -41,6 +41,10 @@ program pepesPizzeria{
     mapa.dibujarMapa()
     game.addVisual(francella)
     
+// INTERFAZ
+
+    game.addVisual(interfazInventario)
+
 // MOVIMIENTO Y ACCIONES
 
     keyboard.right().onPressDo({francella.mover(derecha)})
