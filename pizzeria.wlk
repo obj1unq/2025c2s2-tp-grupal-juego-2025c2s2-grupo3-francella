@@ -45,7 +45,6 @@ class PiezaDeCocina {
 
   method serLevantado() {
     chef.itemEnMano().add(contenido)
-    interfazInventario.cambiarContenidoMostrado(contenido)
   }
 
   method serIntercambiado() {
@@ -59,6 +58,7 @@ class PiezaDeSeccionDeAmasado inherits PiezaDeCocina {
   override method recibirAgarrar() {
     if (not chef.tieneItem()) {
         chef.itemEnMano().add(contenido)
+        interfazInventario.cambiarContenidoMostrado(contenido)
     }
   }
 }
