@@ -88,6 +88,11 @@ object francella{
           game.uniqueCollider(self).recibirColocar(itemEnMano.uniqueElement())
       }
     }
+
+    method agregarAlInventario(algo) {
+      // Lo necesita la clase IngredienteParaPizza en 'ingredientes'
+      itemEnMano.add(algo)
+    }
   
 
     //PERDER --------------------------------------------------------------------------------
