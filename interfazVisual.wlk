@@ -159,7 +159,7 @@ object interfazInventario {                               //Interfaz del inventa
     }
 }
 
-object vacio {
+object vacio {                                          //Objeto "vacio" utilizado para representar un objeto vacio
     method image() {
         return "blank.png"
     }
