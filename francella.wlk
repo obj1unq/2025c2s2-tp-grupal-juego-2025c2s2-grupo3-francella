@@ -24,7 +24,7 @@ object francella{
 
     method estoySobreUnIngrediente() {                                  // Estoy sobre un ingrediente si y solo si:
       return !self.esCeldaVacia()                                       //La celda actual no está vacía
-          && ingredientes.esUnIngrediente(game.uniqueCollider(self))    //El objeto con el que colisiono es un ingrediente
+          && gestorIngredientes.esUnIngrediente(game.uniqueCollider(self))    //El objeto con el que colisiono es un ingrediente
     } 
 
     method tengoUnaPizza() {
