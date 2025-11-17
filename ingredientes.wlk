@@ -36,21 +36,19 @@ class Ingrediente {
     var property position
     const chef = francella
 
+    method recibirColocar(item){}
+
     method recibirAgarrar() {
         if (not chef.tieneItem()) {
             self.serLevantado()
         }
-        else {
-            self.serIntercambiado()
-        }
+        else self.serIntercambiado()
     }
-
     method serLevantado() {
-        chef.itemEnMano().add(self)
+        chef.agregarAlInventario(self)
         game.removeVisual(self)
         gestorIngredientes.eliminarDeCocina(self)
     }
-
     method serIntercambiado() {
         self.serLevantado()
         gestorIngredientes.agregarACocina(chef.itemEnMano().first())
@@ -77,11 +75,9 @@ class Salsa inherits Ingrediente{
     override method image() {
         return "salsa.png"
     }
-
-     override method tipoIngrediente(){
+    override method tipoIngrediente(){
         return salsa
     }
-    
     override method visualizacionEnInterfaz() {
         return salsaInterfaz
     }
@@ -93,11 +89,9 @@ class Queso inherits Ingrediente{
     override method image() {
         return "queso.jpeg"
     }
-
     override method tipoIngrediente(){
         return queso
     }
-
     override method visualizacionEnInterfaz() {
         return quesoInterfaz
     }
@@ -109,11 +103,9 @@ class Queso inherits Ingrediente{
     override method image() {
         return "masa.jpg"
     }
-
     override method tipoIngrediente(){
         return masa
     }
-
     override method visualizacionEnInterfaz() {
         return masaInterfaz
     }
@@ -126,11 +118,9 @@ class Tomate inherits Ingrediente{
     override method image() {
         return "tomate.jpeg"
     }
-
-     override method tipoIngrediente(){
+    override method tipoIngrediente(){
         return tomate
     }
-
     override method visualizacionEnInterfaz() {
         return tomateInterfaz
     }
@@ -142,11 +132,9 @@ class Jamon inherits Ingrediente{
     override method image() {
         return "jamon.jpg"
     }
-
     override method tipoIngrediente(){
         return jamon
     }
-
     override method visualizacionEnInterfaz() {
         return jamonInterfaz
     }
@@ -158,11 +146,9 @@ class Cebolla inherits Ingrediente{
     override method image() {
         return "cebolla.jpg"
     }
-
     override method tipoIngrediente(){
         return cebolla
     }
-
     override method visualizacionEnInterfaz() {
         return cebollaInterfaz
     }
@@ -170,13 +156,11 @@ class Cebolla inherits Ingrediente{
 
 class Harina inherits Ingrediente{
     override method image() {
-        return "harina.jpg"
+        return "harina.png"
     }
-
     override method tipoIngrediente(){
-        return harina
+        return self
     }
-
     override method visualizacionEnInterfaz() {
         return harinaInterfaz
     }
@@ -184,13 +168,11 @@ class Harina inherits Ingrediente{
 
 class Agua inherits Ingrediente{
     override method image() {
-        return "agua.jpg"
+        return "agua.png"
     }
-
     override method tipoIngrediente(){
-        return agua
+        return self
     }
-
     override method visualizacionEnInterfaz() {
         return aguaInterfaz
     }
@@ -198,13 +180,11 @@ class Agua inherits Ingrediente{
 
 class Levadura inherits Ingrediente{
     override method image() {
-        return "levadura.jpg"
+        return "levadura.png"
     }
-
     override method tipoIngrediente(){
-        return levadura
+        return self
     }
-
     override method visualizacionEnInterfaz() {
         return levaduraInterfaz
     }

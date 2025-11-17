@@ -75,36 +75,44 @@ object tiposDePizzas {
     }
 }
 
-//Cada pizza es un objeto, el cual los clientes iran chequeando con la pizza cocinada que Franchella haya hecho para comprobar si es efectivamente lo pedido. Al ser cada ingrediente una instancia de una clase y no un objeto bien definido se trabajará con la clase de los ingredientes usados
-object pizzaMuzzarella {
-    const ingredientesNecesarios = [masa, salsa, queso] // NO DEBERÍAN SER STRINGS
+class Pizzas {
+    const ingredientesNecesarios = [masa, salsa, queso]
 
     method ingredientesNecesarios() {
         return ingredientesNecesarios
     }
     method nombreDeLaPizza() {
-        return "Pizza de Mozzarella"
+        return "Pizza "
+    }
+}
+//Cada pizza es un objeto, el cual los clientes iran chequeando con la pizza 
+//cocinada que Franchella haya hecho para comprobar si es efectivamente lo pedido. 
+//Al ser cada ingrediente una instancia de una clase y no un objeto bien definido 
+//se trabajará con la clase de los ingredientes usados.
+
+object pizzaMuzzarella inherits Pizzas {
+
+    override method nombreDeLaPizza() {
+        return super() + "de Muzzarella"
     }
 }
 
-object pizzaNapolitana {
-    const ingredientesNecesarios = pizzaMuzzarella.ingredientesNecesarios() + [tomate, jamon]
+object pizzaNapolitana inherits Pizzas {
 
-    method ingredientesNecesarios() {
-        return ingredientesNecesarios
+    override method ingredientesNecesarios() {
+        return super() + [tomate, jamon]
     }
-    method nombreDeLaPizza() {
-        return "Pizza Napolitana"
+    override method nombreDeLaPizza() {
+        return super() + "Napolitana"
     }
 }
 
-object pizzaCebolla {
-    const ingredientesNecesarios = pizzaMuzzarella.ingredientesNecesarios() + [cebolla]
+object pizzaCebolla inherits Pizzas {
 
-    method ingredientesNecesarios() {
-        return ingredientesNecesarios
+    override method ingredientesNecesarios() {
+        return super() + [cebolla]
     }
-    method nombreDeLaPizza() {
-        return "Pizza de Cebolla"
+    override method nombreDeLaPizza() {
+        return super() + "de Cebolla"
     }
 }

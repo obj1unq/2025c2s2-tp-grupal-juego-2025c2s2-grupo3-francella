@@ -11,7 +11,8 @@ NO ELIMINAR LOS ITEMS DE LA LISTA, DESCRIBIR SU ESTADO A LA DERECHA Y ANOTAR QUI
 - Habitacion amasado                                                                              *Resuelto - Iezzi*
     - Sprites sistema de amasado                                                                  *Por resolver - Iezzi*
 - Darle facha al fondo                                                                            *Por resolver - Iezzi*
-- Mostrar el item de Francella en la interfaz                                                     *Por resolver*
+- Mostrar el item de Francella en la interfaz                                                     *Resuelto - Barigelli*
+- Comprimir placeholders del agua, harina y levadura                                              *Por resolver*
 - Timer                                                                                           *Por resolver*
 - Cambiar texto de pedidos por imagenes                                                           *Por resolver*
 - Almacen con rata                                                                                *Por resolver*
