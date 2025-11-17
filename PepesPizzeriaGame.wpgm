@@ -22,11 +22,11 @@ program pepesPizzeria{
 
 //AÑADIDAS UNA INSTANCIA DE CADA CLASE DE INGREDIENTE
 
-    salsa.spawn  (game.at(11,0))
-    queso.spawn  (game.at(10,0))
-    tomate.spawn (game.at(9,0))
-    jamon.spawn  (game.at(6,0))
-    cebolla.spawn(game.at(5,0))
+    factorySalsa.spawn  (game.at(11,0))
+    factoryQueso.spawn  (game.at(10,0))
+    factoryTomate.spawn (game.at(9,0))
+    factoryJamon.spawn  (game.at(6,0))
+    factoryCebolla.spawn(game.at(5,0))
 
 // PERSONAJES Y VISUALES
 

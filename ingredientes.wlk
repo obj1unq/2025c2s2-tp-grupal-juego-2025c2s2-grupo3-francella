@@ -10,7 +10,7 @@ import randomizer.*
 // Los tipos de ingredientes son wko en sí mismos.
 
 
-object ingredientes {
+object gestorIngredientes {
     const ingredientesEnCocina = #{}
 
     method agregarACocina(ingrediente) {
@@ -31,12 +31,8 @@ object ingredientes {
 
 
 class Ingrediente {
-    method image()
-    method visualizacionEnInterfaz()
-    method tipoIngrediente()
-}
+    // SUPERCLASE ABSTRACTA que sirve para definir los comportamientos de los ingredientes
 
-class IngredienteParaPizza inherits Ingrediente{
     var property position
     const chef = francella
 
@@ -51,18 +47,30 @@ class IngredienteParaPizza inherits Ingrediente{
     method serLevantado() {
         chef.agregarAlInventario(self)
         game.removeVisual(self)
-        ingredientes.eliminarDeCocina(self)
-        interfazInventario.cambiarContenidoMostrado(self)
+        gestorIngredientes.eliminarDeCocina(self)
     }
     method serIntercambiado() {
         self.serLevantado()
-        ingredientes.agregarACocina(chef.itemEnMano().first())
+        gestorIngredientes.agregarACocina(chef.itemEnMano().first())
         chef.dejarItem()
-    } 
+    }
+
+    method recibirColocar(item) {}
+
+    method image()
+
+    method visualizacionEnInterfaz()
+
+    method tipoIngrediente()
 }
 
 
-class Salsa inherits IngredienteParaPizza{
+// class IngredienteParaPizza inherits Ingrediente{
+// Todos los ingredientes deberían ser de la misma clase, sin importar si se usan para la masa o para la pizza
+// }
+
+
+class Salsa inherits Ingrediente{
 
     override method image() {
         return "salsa.png"
@@ -76,7 +84,7 @@ class Salsa inherits IngredienteParaPizza{
 }
 
 
-class Queso inherits IngredienteParaPizza{
+class Queso inherits Ingrediente{
 
     override method image() {
         return "queso.jpeg"
@@ -89,8 +97,8 @@ class Queso inherits IngredienteParaPizza{
     }
 }
 
-
-class Masa inherits IngredienteParaPizza{
+// QUÉ PASA CON ESTA CLASE? ES UN INGREDIENTE O ES UNA COMIDA???
+ /* class Masa inherits Ingrediente{
 
     override method image() {
         return "masa.jpg"
@@ -102,9 +110,10 @@ class Masa inherits IngredienteParaPizza{
         return masaInterfaz
     }
 }
+*/
 
 
-class Tomate inherits IngredienteParaPizza{
+class Tomate inherits Ingrediente{
 
     override method image() {
         return "tomate.jpeg"
@@ -118,7 +127,7 @@ class Tomate inherits IngredienteParaPizza{
 }
 
 
-class Jamon inherits IngredienteParaPizza{
+class Jamon inherits Ingrediente{
 
     override method image() {
         return "jamon.jpg"
@@ -132,7 +141,7 @@ class Jamon inherits IngredienteParaPizza{
 }
 
 
-class Cebolla inherits IngredienteParaPizza{
+class Cebolla inherits Ingrediente{
 
     override method image() {
         return "cebolla.jpg"
@@ -145,54 +154,7 @@ class Cebolla inherits IngredienteParaPizza{
     }
 }
 
-
-// Instancias de ingredientes -------------------------------------------------
-
-object salsa {
-    method spawn(_position) {
-        const nuevaSalsa = new Salsa (position = _position)
-        game.addVisual(nuevaSalsa)
-        ingredientes.agregarACocina(nuevaSalsa)
-    }
-}
-
-object queso {
-    method spawn(_position) {
-        const nuevoQueso = new Queso(position = _position)
-        game.addVisual(nuevoQueso)
-        ingredientes.agregarACocina(nuevoQueso)
-    }
-}
-
-object tomate {
-    method spawn(_position) {
-        const nuevoTomate = new Tomate(position = _position)
-        game.addVisual(nuevoTomate)
-        ingredientes.agregarACocina(nuevoTomate)
-    }
-}
-
-object jamon {
-    method spawn(_position) {
-        const nuevoJamon = new Jamon(position = _position)
-        game.addVisual(nuevoJamon)
-        ingredientes.agregarACocina(nuevoJamon)
-    }
-}
-
-object cebolla {
-    method spawn(_position) {
-        const nuevaCebolla = new Cebolla(position = _position)
-        game.addVisual(nuevaCebolla)
-        ingredientes.agregarACocina(nuevaCebolla)
-    }
-}
-
-
-// Ingredientes para masa -------------------------------------------------
-
-
-object harina inherits Ingrediente{
+class Harina inherits Ingrediente{
     override method image() {
         return "harina.png"
     }
@@ -204,7 +166,7 @@ object harina inherits Ingrediente{
     }
 }
 
-object agua inherits Ingrediente{
+class Agua inherits Ingrediente{
     override method image() {
         return "agua.png"
     }
@@ -216,7 +178,7 @@ object agua inherits Ingrediente{
     }
 }
 
-object levadura inherits Ingrediente{
+class Levadura inherits Ingrediente{
     override method image() {
         return "levadura.png"
     }
@@ -227,3 +189,56 @@ object levadura inherits Ingrediente{
         return levaduraInterfaz
     }
 }
+
+// Factories para la creación de instancias de ingredientes -------------------------------------------------
+
+class Factory{
+    // SUPERCLASE: SE ENCARGA DE LA CREACIÓN DE INSTANCIAS DE LAS CLASES DE CADA INGREDIENTE
+    method spawn(_position) {
+        const nuevoIngrediente = self.instanciaIngrediente(_position)
+        game.addVisual(nuevoIngrediente)
+        gestorIngredientes.agregarACocina(nuevoIngrediente)
+    }
+    method instanciaIngrediente(_position)
+}
+object factorySalsa inherits Factory {
+    override method instanciaIngrediente(_position){
+        return new Salsa(position = _position)
+    }
+}
+
+object factoryQueso inherits Factory {
+    override method instanciaIngrediente(_position){
+        return new Queso(position = _position)
+    }
+}
+
+object factoryTomate inherits Factory{
+    override method instanciaIngrediente(_position){
+        return new Tomate(position = _position)
+    }
+}
+
+object factoryJamon inherits Factory{
+    override method instanciaIngrediente(_position){
+        return new Jamon(position = _position)
+    }
+}
+
+object factoryCebolla inherits Factory{
+    override method instanciaIngrediente(_position){
+        return new Cebolla(position = _position)
+    }
+}
+
+// WKO que sirven para determinar los tipos de los ingredientes:
+
+// object masa{}
+object salsa{}
+object queso{}
+object tomate{}
+object cebolla{}
+object jamon{}
+object levadura{}
+object agua{}
+object harina{}
