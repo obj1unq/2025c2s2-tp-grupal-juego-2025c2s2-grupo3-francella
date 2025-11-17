@@ -27,15 +27,19 @@ object tachoDeBasura {
 
 class PiezaDeCocina {
   const property position
-  var contenido
+
   const chef = francella
 
   method image()
 
+  method factory() {
+    return
+  }
+
   method recibirColocar(item) {}
 
   method recibirAgarrar() {
-    if (not chef.tieneItem()) {
+    if (self.puedeAgarrarse()) {
         self.serLevantado()
     }
     else {
@@ -43,8 +47,16 @@ class PiezaDeCocina {
     }
   }
 
+  method puedeAgarrarse() {
+    return not chef.tieneItem()
+  }
+
   method serLevantado() {
-    chef.itemEnMano().add(contenido)
+    chef.itemEnMano().add(self.nuevoIngrediente())
+  }
+
+  method nuevoIngrediente() {
+    return self.factory().instanciaIngrediente(position)
   }
 
   method serIntercambiado() {
@@ -56,21 +68,26 @@ class PiezaDeCocina {
 
 class PiezaDeSeccionDeAmasado inherits PiezaDeCocina {
   override method recibirAgarrar() {
-    if (not chef.tieneItem()) {
-        chef.itemEnMano().add(contenido)
-        interfazInventario.cambiarContenidoMostrado(contenido)
+    if (self.puedeAgarrarse()) {
+        const nuevoIngrediente = self.nuevoIngrediente()
+        chef.itemEnMano().add(nuevoIngrediente)
+        interfazInventario.cambiarContenidoMostrado(nuevoIngrediente)
     }
   }
 }
 
-object sacoDeHarina inherits PiezaDeSeccionDeAmasado(position = game.at(13, 3), contenido = harina){
+object sacoDeHarina inherits PiezaDeSeccionDeAmasado(position = game.at(13, 3)){
   
   override method image() {
     return "sacoDeHarina.png"                   
   }
+
+  override method factory() {
+    return factoryHarina
+  }
 }
 
-object canillaDeAgua inherits PiezaDeSeccionDeAmasado(position = game.at(15, 0), contenido = agua){
+object canillaDeAgua inherits PiezaDeSeccionDeAmasado(position = game.at(15, 0)){
   var estaAbierta = false  
 
   override method image() {
@@ -78,6 +95,10 @@ object canillaDeAgua inherits PiezaDeSeccionDeAmasado(position = game.at(15, 0),
         return "canillaAbierta.gif"                   
     }
     else return "canillaCerrada.gif"                                      
+  }
+
+  override method factory() {
+    return factoryAgua
   }
 
   override method recibirAgarrar() {
@@ -96,17 +117,23 @@ object canillaDeAgua inherits PiezaDeSeccionDeAmasado(position = game.at(15, 0),
 }
   
 
-object heladera inherits PiezaDeSeccionDeAmasado(position = game.at(15, 3), contenido = levadura){
+object heladera inherits PiezaDeSeccionDeAmasado(position = game.at(15, 3)){
   
   override method image() {
     return "heladera.png"                   
+  }
+
+  override method factory() {
+    return factoryLevadura
   }
 }
 
 
 
-object horno inherits PiezaDeCocina(position = game.at(5, 7), contenido = vacio){         
+object horno inherits PiezaDeCocina(position = game.at(5, 7)){         
   var estaPrendido = false
+
+  var contenido = vacio
 
   override method image() {
     if (estaPrendido) {
@@ -155,35 +182,58 @@ object horno inherits PiezaDeCocina(position = game.at(5, 7), contenido = vacio)
 
 class Mesada inherits PiezaDeCocina {
 
+  const ingredientesEncima = []
+
+  method ingredientesEncima() {
+    return ingredientesEncima
+  }
+  
   override method recibirColocar(item) {
-    contenido.agregarIngrediente(item)
     chef.itemEnMano().clear()
+    ingredientesEncima.add(item)
     interfazInventario.borrarContenidoMostrado()
     ingredientesEnInterfaz.mostrarIngredienteEnInterfaz(item)
   }
 
   override method serLevantado() {
-    super()
+    chef.itemEnMano().add(self.contenido())
+    ingredientesEncima.clear()
     ingredientesEnInterfaz.limpiarIngredientesEnInterfaz()
   }
 
   override method recibirAgarrar() {
-    if (contenido.puedeAgarrarse()) {
+    if (self.puedeAgarrarse()) {
       super()
     }
   }
+
+  method contenido() {
+    return 
+  }
 }
 
-object mesadaParaPizza inherits Mesada(position = game.at(7, 7), contenido = pizza) {
+object mesadaParaPizza inherits Mesada(position = game.at(7, 7)) {
   
   override method image() {
     return "mesadaPizzaTest.png"
   }
+
+  override method contenido() {
+    return pizza
+  }
 }
 
-object mesadaParaMasa inherits Mesada(position = game.at(13,0), contenido = masa) {
+object mesadaParaMasa inherits Mesada(position = game.at(13,0)) {
 
   override method image() {
     return "mesadaMasa.png"
+  }
+
+  override method contenido() {
+    return masa
+  }
+
+  override method puedeAgarrarse() {
+    return self.contenido().hayIngredientesNecesariosEn(ingredientesEncima)
   }
 }

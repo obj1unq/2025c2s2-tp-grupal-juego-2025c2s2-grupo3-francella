@@ -229,6 +229,25 @@ object factoryCebolla inherits Factory{
     }
 }
 
+object factoryHarina inherits Factory{
+    override method instanciaIngrediente(_position){
+        return new Harina(position = _position)
+    }
+}
+
+object factoryAgua inherits Factory{
+    override method instanciaIngrediente(_position){
+        return new Agua(position = _position)
+    }
+}
+
+object factoryLevadura inherits Factory{
+    override method instanciaIngrediente(_position){
+        return new Levadura(position = _position)
+    }
+}
+
+
 // WKO que sirven para determinar los tipos de los ingredientes:
 
 // object masa{}

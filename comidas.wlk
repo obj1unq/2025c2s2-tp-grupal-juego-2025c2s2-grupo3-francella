@@ -16,7 +16,7 @@ class Comida {
   }
   
   method ingredientesUsados() {
-    return ingredientes.map({ingrediente => ingrediente.tipoIngrediente()})
+    return ingredientes.map({ingrediente => ingrediente.tipoIngrediente()}).asSet()
   }
 
   method agregarIngrediente(unIngrediente) {
@@ -25,36 +25,36 @@ class Comida {
 }
 
 object pizza inherits Comida {
-  var property estaCocinada = false
+    var property estaCocinada = false
 
-  override method puedeAgarrarse() {
-      return ingredientes.size() > 0
-  }
+    method image() {
+        return "pizza.png"
+    }
 
-  method entregarPizza() {
-      ingredientes.clear()
-  }
+    override method puedeAgarrarse() {
+        return ingredientes.size() > 0
+    }
 
-  method coincideCon(unaPizza) {
-    return unaPizza.ingredientesNecesarios() == ingredientes
-  }
+    method entregarPizza() {
+        ingredientes.clear()
+    }
+
+    method coincideCon(unaPizza) {
+        return unaPizza.ingredientesNecesarios() == ingredientes
+    }
 }
 
 object masa inherits Comida {
     const recetaDeMasa = [harina, agua, levadura]
 
-    override method puedeAgarrarse() {
-        return ingredientes.size() == recetaDeMasa.size()
+    method image() {
+        return "masa.jpg"
     }
+
+    method position(_position) {}
 
     method tipoIngrediente() {
         return self
-    }
-    
-    method spawn() {
-        const nuevaMasa = new Masa(position = mesadaParaMasa.position())
-        game.addVisual(nuevaMasa)
-        ingredientes.agregarACocina(nuevaMasa)
     }
 
     method coincideCon() {
@@ -64,6 +64,19 @@ object masa inherits Comida {
     method visualizacionEnInterfaz() {
         return masaInterfaz
     }
+
+    method hayIngredientesNecesariosEn(ingredientesEncima) {
+        return recetaDeMasa.all({ingredienteReceta => self.estaElIngredienteEn(ingredienteReceta, ingredientesEncima)})
+    }
+
+    method estaElIngredienteEn(ingrediente, ingredientesDados) {
+        return self.tiposDe(ingredientesDados).contains(ingrediente)
+    }
+
+    method tiposDe(ingredientesAnalizados) {
+        return ingredientesAnalizados.map({ingrediente => ingrediente.tipoIngrediente()})
+    }
+
 }
 
 //El objeto tipos de pizzas será usado para que los clientes sepan cuales tipos de pizzas existen y elegir uno de ellos
