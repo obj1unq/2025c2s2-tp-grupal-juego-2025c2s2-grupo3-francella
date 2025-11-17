@@ -221,7 +221,7 @@ object cebolla{
 object harina inherits Ingrediente{
 
     override method image() {
-        return "harina.jpg"
+        return "harina.png"
     }
 
     override method tipoIngrediente(){
@@ -236,7 +236,7 @@ object harina inherits Ingrediente{
 object agua inherits Ingrediente{
 
     override method image() {
-        return "agua.jpg"
+        return "agua.png"
     }
 
     override method tipoIngrediente(){
@@ -251,7 +251,7 @@ object agua inherits Ingrediente{
 object levadura inherits Ingrediente{
 
     override method image() {
-        return "levadura.jpg"
+        return "levadura.png"
     }
 
     override method tipoIngrediente(){
