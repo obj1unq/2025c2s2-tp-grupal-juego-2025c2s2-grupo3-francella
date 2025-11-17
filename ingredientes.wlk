@@ -57,6 +57,7 @@ class IngredienteParaPizza inherits Ingrediente{
         chef.itemEnMano().add(self)
         game.removeVisual(self)
         ingredientes.eliminarDeCocina(self)
+        interfazInventario.cambiarContenidoMostrado(self)
     }
 
     method serIntercambiado() {

@@ -17,6 +17,7 @@ object tachoDeBasura {
 
   method recibirColocar(item) {
     chef.itemEnMano().clear()
+    interfazInventario.borrarContenidoMostrado()
   }
 
   method recibirAgarrar() {
@@ -44,6 +45,7 @@ class PiezaDeCocina {
 
   method serLevantado() {
     chef.itemEnMano().add(contenido)
+    interfazInventario.cambiarContenidoMostrado(contenido)
   }
 
   method serIntercambiado() {
@@ -156,6 +158,7 @@ class Mesada inherits PiezaDeCocina {
   override method recibirColocar(item) {
     contenido.agregarIngrediente(item)
     chef.itemEnMano().clear()
+    interfazInventario.borrarContenidoMostrado()
     ingredientesEnInterfaz.mostrarIngredienteEnInterfaz(item)
   }
 
