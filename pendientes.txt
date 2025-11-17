@@ -12,6 +12,7 @@ NO ELIMINAR LOS ITEMS DE LA LISTA, DESCRIBIR SU ESTADO A LA DERECHA Y ANOTAR QUI
     - Sprites sistema de amasado                                                                  *Por resolver - Iezzi*
 - Darle facha al fondo                                                                            *Por resolver - Iezzi*
 - Mostrar el item de Francella en la interfaz                                                     *Resuelto - Barigelli*
+- Agregar el sistema de vidas                                                                     *Por resolver - Barigelli*
 - Comprimir placeholders del agua, harina y levadura                                              *Por resolver*
 - Timer                                                                                           *Por resolver*
 - Cambiar texto de pedidos por imagenes                                                           *Por resolver*
