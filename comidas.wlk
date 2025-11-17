@@ -45,7 +45,7 @@ object pizza inherits Comida {
 }
 
 object masa inherits Comida {
-    const recetaDeMasa = [harina, agua, levadura]
+    const recetaDeMasa = #{harina, agua, levadura}
 
     method image() {
         return "masa.jpg"
@@ -57,24 +57,16 @@ object masa inherits Comida {
         return self
     }
 
-    method coincideCon() {
-        return recetaDeMasa == ingredientes
-    }
-
     method visualizacionEnInterfaz() {
         return masaInterfaz
     }
 
     method hayIngredientesNecesariosEn(ingredientesEncima) {
-        return recetaDeMasa.all({ingredienteReceta => self.estaElIngredienteEn(ingredienteReceta, ingredientesEncima)})
-    }
-
-    method estaElIngredienteEn(ingrediente, ingredientesDados) {
-        return self.tiposDe(ingredientesDados).contains(ingrediente)
+        return recetaDeMasa == self.tiposDe(ingredientesEncima)
     }
 
     method tiposDe(ingredientesAnalizados) {
-        return ingredientesAnalizados.map({ingrediente => ingrediente.tipoIngrediente()})
+        return ingredientesAnalizados.map({ingrediente => ingrediente.tipoIngrediente()}).asSet()
     }
 
 }

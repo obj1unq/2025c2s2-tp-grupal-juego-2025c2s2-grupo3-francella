@@ -157,7 +157,7 @@ class Harina inherits Ingrediente{
         return "harina.png"
     }
     override method tipoIngrediente(){
-        return self
+        return harina
     }
     override method visualizacionEnInterfaz() {
         return harinaInterfaz
@@ -169,7 +169,7 @@ class Agua inherits Ingrediente{
         return "agua.png"
     }
     override method tipoIngrediente(){
-        return self
+        return agua
     }
     override method visualizacionEnInterfaz() {
         return aguaInterfaz
@@ -181,7 +181,7 @@ class Levadura inherits Ingrediente{
         return "levadura.png"
     }
     override method tipoIngrediente(){
-        return self
+        return levadura
     }
     override method visualizacionEnInterfaz() {
         return levaduraInterfaz

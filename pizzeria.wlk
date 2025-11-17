@@ -182,11 +182,7 @@ object horno inherits PiezaDeCocina(position = game.at(5, 7)){
 
 class Mesada inherits PiezaDeCocina {
 
-  const ingredientesEncima = []
-
-  method ingredientesEncima() {
-    return ingredientesEncima
-  }
+  const ingredientesEncima = #{}
   
   override method recibirColocar(item) {
     chef.itemEnMano().clear()
