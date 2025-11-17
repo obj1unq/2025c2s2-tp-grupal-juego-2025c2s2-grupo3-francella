@@ -103,9 +103,9 @@ object heladera inherits PiezaDeSeccionDeAmasado(position = game.at(15, 3), cont
   }
 }
 
-object forro {} // quiero poner null y no me dejaaaaaaaaaaaa dios necesito terminar ya
 
-object horno inherits PiezaDeCocina(position = game.at(5, 7), contenido = forro){         
+
+object horno inherits PiezaDeCocina(position = game.at(5, 7), contenido = vacio){         
   var estaPrendido = false
 
   override method image() {

@@ -140,7 +140,7 @@ object levaduraInterfaz inherits IngredienteInterfaz {
 // Visualizacion de item una vez agarrado en el inventario -------------------------------
 
 object interfazInventario {                               //Interfaz del inventario, usada para mostrar que ingrediente tiene Francella en mano
-    var contenidoAMostrar = blank                       //Inicializa en blank, no mostrando ningún ingrediente en absoluto
+    var contenidoAMostrar = vacio                       //Inicializa en blank, no mostrando ningún ingrediente en absoluto
 
     method position() {
         return game.at(1,7)
@@ -155,11 +155,11 @@ object interfazInventario {                               //Interfaz del inventa
     }                                                       //descarta el posible uso de condicionales para ese caso
 
     method borrarContenidoMostrado() {                    //Deja en blanco el inventario, usado para casos en que el ingrediente no se
-        contenidoAMostrar = blank                         //intercambia, como por ejemplo colocarlo en la mesada o borrarlo
+        contenidoAMostrar = vacio                         //intercambia, como por ejemplo colocarlo en la mesada o borrarlo
     }
 }
 
-object blank {
+object vacio {
     method image() {
         return "blank.png"
     }
