@@ -1,3 +1,6 @@
+import francella.*
+
+
 // Objetos de mapa ---------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -10,6 +13,31 @@ object colisiones {
 
     method hayColisionEn(celda) {
         return celdasConColision.contains(celda)
+    }
+}
+
+object freezer {
+    const celdasDelFreezer = #{}
+    const victima          = francella 
+
+    method establecerNuevaCeldaDelFreezer(_position) {
+        celdasDelFreezer.add(_position)
+    }
+
+    method estaVictimaEnCelda(celda) {
+        return celda.position() == victima.position()
+    }
+
+    method estaVictimaEnElFreezer() {
+        return celdasDelFreezer.any({celda => self.estaVictimaEnCelda(celda)})
+    }
+
+    method congelarAlVictimaSiEsta() {
+        game.onTick(2500, "congelador", {
+            if (self.estaVictimaEnElFreezer()) {
+                victima.recibirDanio(1)
+            }
+        })
     }
 }
 
@@ -82,6 +110,13 @@ object cc{
 
 }
 
+object fr {
+    
+    method dibujar(position) {
+        freezer.establecerNuevaCeldaDelFreezer(position)
+    }
+}
+
 object ih {
     
     method dibujar(position) {
@@ -123,10 +158,10 @@ object mapa {
         [ __, __, __, __, __, id, __, id, __, id, __, __, __, __, __, __ ],
         [ __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __ ],
         [ __, __, __, __, __, cc, __, cc, cc, cc, __, cc, cc, cc, __, cc ],
-        [ __, __, __, __, __, __, __, __, cc, __, __, __, cc, cc, __, cc ],
-        [ __, __, __, __, __, __, __, __, cc, __, __, __, cc, id, __, id ],
-        [ __, __, __, __, __, __, __, __, cc, __, __, __, cc, iu, __, iu ],
-        [ __, __, __, __, __, __, __, __, cc, __, __, __, cc, cc, cc, cc ]
+        [ __, __, __, __, __, fr, fr, fr, cc, __, __, __, cc, cc, __, cc ],
+        [ __, __, __, __, __, fr, fr, fr, cc, __, __, __, cc, id, __, id ],
+        [ __, __, __, __, __, fr, fr, fr, cc, __, __, __, cc, iu, __, iu ],
+        [ __, __, __, __, __, fr, fr, fr, cc, __, __, __, cc, cc, cc, cc ]
     ].reverse()
 
     method dibujarMapa() {
