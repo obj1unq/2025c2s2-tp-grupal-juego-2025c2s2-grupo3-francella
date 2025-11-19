@@ -47,6 +47,7 @@ class Ingrediente {
     method serLevantado() {
         chef.agregarAlInventario(self)
         game.removeVisual(self)
+        interfazInventario.cambiarContenidoMostrado(self)
         gestorIngredientes.eliminarDeCocina(self)
     }
     method serIntercambiado() {

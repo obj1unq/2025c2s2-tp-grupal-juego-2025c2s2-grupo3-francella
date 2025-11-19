@@ -144,6 +144,7 @@ object horno inherits PiezaDeCocina(position = game.at(5, 7)){
 
   override method recibirColocar(item) {
     if (chef.tengoUnaPizza()) {
+        interfazInventario.borrarContenidoMostrado()
         contenido = item
         chef.itemEnMano().clear()
         self.prenderHorno()
@@ -159,7 +160,8 @@ object horno inherits PiezaDeCocina(position = game.at(5, 7)){
   }
 
   override method serLevantado() {
-    super()
+    chef.itemEnMano().add(contenido)
+    interfazInventario.cambiarContenidoMostrado(contenido)
     contenido = null
   }
 
@@ -194,6 +196,7 @@ class Mesada inherits PiezaDeCocina {
   override method serLevantado() {
     chef.itemEnMano().add(self.contenido())
     ingredientesEncima.clear()
+    interfazInventario.cambiarContenidoMostrado(self.contenido())
     ingredientesEnInterfaz.limpiarIngredientesEnInterfaz()
   }
 
@@ -216,6 +219,15 @@ object mesadaParaPizza inherits Mesada(position = game.at(7, 7)) {
 
   override method contenido() {
     return pizza
+  }
+
+  override method puedeAgarrarse() {
+    return ingredientesEncima.size() > 0
+  }
+
+  override method serLevantado() {
+    self.contenido().agregarIngredientes(ingredientesEncima)
+    super()
   }
 }
 

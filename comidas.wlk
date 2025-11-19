@@ -7,21 +7,21 @@ import wollok.game.*
 // Comidas armables -------------------------------------------------------------------
 
 class Comida {
-  const ingredientes = []
+    const ingredientes = #{}
 
-  method puedeAgarrarse() {}
+    method puedeAgarrarse() {}
 
-  method ingredientes() {
-    return ingredientes
-  }
-  
-  method ingredientesUsados() {
+    method ingredientes() {
+        return ingredientes
+    }
+
+    method ingredientesUsados() {
     return ingredientes.map({ingrediente => ingrediente.tipoIngrediente()}).asSet()
-  }
+    }
 
-  method agregarIngrediente(unIngrediente) {
-    ingredientes.add(unIngrediente)
-  }
+    method agregarIngredientes(unosIngredientes) {
+        ingredientes.addAll(unosIngredientes)
+    }
 }
 
 object pizza inherits Comida {
@@ -29,10 +29,6 @@ object pizza inherits Comida {
 
     method image() {
         return "pizza.png"
-    }
-
-    override method puedeAgarrarse() {
-        return ingredientes.size() > 0
     }
 
     method entregarPizza() {
