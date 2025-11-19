@@ -95,17 +95,19 @@ object francella{
     }
   
 
-    //PERDER --------------------------------------------------------------------------------
+    //GAMESTATES --------------------------------------------------------------------------------
 
+    method gameState(visual) {
+      game.stop()
+      game.addVisual(visual)
+    }
 
     method gameOver() {
-      game.stop()
-      game.addVisual(gameOver)
+      game.schedule(3000, {self.gameState(gameOver)})
     }
 
     method gameWin() {
-      game.stop()
-      game.addVisual(gameWin)
+      game.schedule(3000, {self.gameState(gameWin)})
     }
 
 

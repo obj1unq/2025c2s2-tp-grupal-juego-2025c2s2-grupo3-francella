@@ -40,7 +40,7 @@ object gameWin {
     var property position = game.origin()
 
     method image() {
-        return "winPlaceholder.png"
+        return "gameWinPlaceholder.png"
     } 
 }
 
