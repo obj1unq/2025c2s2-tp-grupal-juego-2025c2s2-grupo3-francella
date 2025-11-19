@@ -60,4 +60,5 @@ program pepesPizzeria{
     game.start()
     game.schedule(4000, {cliente1.hacerPedido()})
     musicaDeFondo.reproducir()
+    freezer.congelarAlVictimaSiEsta()
 }

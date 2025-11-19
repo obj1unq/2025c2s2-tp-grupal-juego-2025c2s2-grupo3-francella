@@ -22,11 +22,6 @@ object francella{
     // BOOLEANOS -------------------------------------------------------------------------------
 
 
-    method estoySobreUnIngrediente() {                                  // Estoy sobre un ingrediente si y solo si:
-      return !self.esCeldaVacia()                                       //La celda actual no está vacía
-          && gestorIngredientes.esUnIngrediente(game.uniqueCollider(self))    //El objeto con el que colisiono es un ingrediente
-    } 
-
     method tengoUnaPizza() {
       return itemEnMano.contains(pizza)
     }
@@ -117,12 +112,6 @@ object francella{
     method validarSiTengoPizzaEnMano() {
       if (self.tengoUnaPizza()) {
         self.error("No puedo dejar esta pizza acá")
-      }
-    }
-
-    method validarTengoUnaPizza() {
-      if (!self.tengoUnaPizza()) {
-        self.error("No tengo una pizza")
       }
     }
 }
