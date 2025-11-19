@@ -55,8 +55,6 @@ class Ingrediente {
         chef.dejarItem()
     }
 
-    method recibirColocar(item) {}
-
     method image()
 
     method visualizacionEnInterfaz()

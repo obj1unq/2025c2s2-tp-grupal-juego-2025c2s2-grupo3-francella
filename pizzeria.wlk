@@ -110,7 +110,7 @@ object horno inherits PiezaDeCocina(position = game.at(5, 7), contenido = vacio)
 
   override method image() {
     if (estaPrendido) {
-        return "hornoEncendido.png"                   
+        return "hornoEncendido.gif"                   
     }
     else return "hornoApagado.png"                    
   }
