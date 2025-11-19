@@ -44,7 +44,7 @@ object cliente1  {
     }
 
     method esLoQuePedi(unaPizza) {
-        return unaPizza.ingredientesUsados() == tipoDePizzaPedido.ingredientesNecesarios()
+        return unaPizza.coincideCon(tipoDePizzaPedido)
     }
 
     method recibirAgarrar() {
@@ -61,10 +61,6 @@ object cliente1  {
     method anotarPedido() {
         pedido.ultimaPizzaPedida(tipoDePizzaPedido.nombreDeLaPizza())
         game.addVisual(pedido)
-    }
-
-    method tipoDePizzaPedido() {
-        return tipoDePizzaPedido
     }
 }
 

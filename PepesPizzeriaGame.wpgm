@@ -8,6 +8,8 @@ import interfazVisual.*
 import mapa.*
 import pizzeria.*
 import randomizer.*
+import timer.*
+import enemigos.*
 
 
 program pepesPizzeria{
@@ -40,6 +42,8 @@ program pepesPizzeria{
     game.addVisual(cliente1)
     mapa.dibujarMapa()
     game.addVisual(francella)
+    game.addVisual(timer)
+    game.addVisual(rata)
     
 // INTERFAZ
 
@@ -59,5 +63,7 @@ program pepesPizzeria{
 
     game.start()
     game.schedule(4000, {cliente1.hacerPedido()})
+    timer.start(120)
     musicaDeFondo.reproducir()
+    freezer.congelarAlVictimaSiEsta()
 }

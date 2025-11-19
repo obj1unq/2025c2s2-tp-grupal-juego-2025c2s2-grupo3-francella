@@ -10,22 +10,6 @@ import randomizer.*
 // Los tipos de ingredientes son wko en sí mismos.
 
 
-object gestorIngredientes {
-    const ingredientesEnCocina = #{}
-
-    method agregarACocina(ingrediente) {
-        ingredientesEnCocina.add(ingrediente)
-    }
-
-    method eliminarDeCocina(ingrediente) {
-        ingredientesEnCocina.remove(ingrediente)
-    }
-
-    method esUnIngrediente(ingrediente) {
-        return ingredientesEnCocina.contains(ingrediente)
-    }
-}
-
 
 // Clases de ingredientes -----------------------------------------------------
 
@@ -52,7 +36,6 @@ class Ingrediente {
     }
     method serIntercambiado() {
         self.serLevantado()
-        gestorIngredientes.agregarACocina(chef.itemEnMano().first())
         chef.dejarItem()
     }
 
@@ -196,7 +179,6 @@ class Factory{
     method spawn(_position) {
         const nuevoIngrediente = self.instanciaIngrediente(_position)
         game.addVisual(nuevoIngrediente)
-        gestorIngredientes.agregarACocina(nuevoIngrediente)
     }
     method instanciaIngrediente(_position)
 }
