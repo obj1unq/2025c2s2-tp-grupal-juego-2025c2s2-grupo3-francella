@@ -12,12 +12,12 @@ import pizzeria.*
 object francella{
     var property position   = game.at(15,6)
     var property itemEnMano = []
-    const clienteActual       = cliente1
+    const clienteActual = cliente1
+    var vidas = 3
 
     method image(){
         return "pepitoHD.png"
     }
-
 
     // BOOLEANOS -------------------------------------------------------------------------------
 

@@ -16,8 +16,8 @@ NO ELIMINAR LOS ITEMS DE LA LISTA, DESCRIBIR SU ESTADO A LA DERECHA Y ANOTAR QUI
 - Comprimir placeholders del agua, harina y levadura                                              *Por resolver*
 - Timer                                                                                           *Por resolver - Crescipulli*
 - Cambiar texto de pedidos por imagenes                                                           *Por resolver*
-- Almacen con rata                                                                                *Por resolver*
-- Freezer                                                                                         *Por resolver*
+- Almacen con rata                                                                                *Por resolver - Crescipulli*
+- Freezer                                                                                         *Por resolver - Crescipulli*
 - Puertas con triggers                                                                            *Por resolver*
 - Comprobar el orden en el que se incorporan los ingredientes                                     *Por resolver*
 - Mejorar el sistema que usan las piezas de cocina para llevar registro de su contenido           *Por resolver*
