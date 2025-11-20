@@ -1,11 +1,12 @@
 import francella.*
 
 
-// Objetos de mapa ---------------------------------------------------------------------------------------------------------------------------------------------
+// Objetos de mapa------------------------------------------------------------
+//Aca va todo lo relacionado a objetos del mapa en si, como colisiones, freezer e intermediarios de interaccion entre francella y otros objetos.
 
 
-object colisiones {
-    const celdasConColision = #{}
+object colisiones { //Objeto encargado de manejar las colisiones en el mapa
+    const celdasConColision = #{} //Set de celdas que tienen colision
 
     method establecerNuevaColision(_position) {
         celdasConColision.add(_position)
@@ -16,7 +17,7 @@ object colisiones {
     }
 }
 
-object freezer {
+object freezer { //Establece las celdas a lo referente al freezer, que le quitara vida a francella si está mucho tiempo en ellas.
     const celdasDelFreezer = #{}
     const victima          = francella 
 
@@ -41,7 +42,7 @@ object freezer {
     }
 }
 
-class IntermediarioDeInteraccion {
+class IntermediarioDeInteraccion { //Clase diseñada para los objetos intermediarios que permiten la interaccion entre francella y otros objetos, apareciendo como un circulo.
     const property position
     const receptorDeInteraccion
 

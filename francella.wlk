@@ -85,8 +85,10 @@ object francella{
     }
 
     method agregarAlInventario(algo) {
-      // Lo necesita la clase IngredienteParaPizza en 'ingredientes'
+      // Lo necesita la clase IngredienteParaPizza en 'ingredientes'. Además lo remueve visualmente y lo agrega visualmente a la interfaz de inventario.
       itemEnMano.add(algo)
+      game.removeVisual(algo)
+      interfazInventario.cambiarContenidoMostrado(algo)
     }
   
 

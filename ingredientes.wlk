@@ -7,7 +7,7 @@ import randomizer.*
 
 //Todos los ingredientes pertenecen a una clase a la cual pertenecen dependiendo de que ingrediente sean. 
 //Todas las clases heredan de la clase ingrediente la posición aleatoria y el metodo abstracto image el cual cada clase tendrá la suya propia
-// Los tipos de ingredientes son wko en sí mismos.
+// Los tipos de ingredientes son wko en sí mismos, y permiten realizar la comparación con el cliente
 
 
 
@@ -15,34 +15,33 @@ import randomizer.*
 
 
 class Ingrediente {
-    // SUPERCLASE ABSTRACTA que sirve para definir los comportamientos de los ingredientes
+    // SUPERCLASE ABSTRACTA que sirve para definir los comportamientos de los ingredientes de manera general. Todos reaccionan a los mensajes necesarios para que francella pueda interactuar con ellos.
 
     var property position
     const chef = francella
 
     method recibirColocar(item){}
 
-    method recibirAgarrar() {
+    method recibirAgarrar() { //Los ingredientes al ser agarrados por francella chequean si él tiene un item en mano o no para saber si deben ser levantados o intercambiados
         if (not chef.tieneItem()) {
             self.serLevantado()
         }
         else self.serIntercambiado()
     }
-    method serLevantado() {
+    method serLevantado() { //Si lo levanta, le manda a francella a agregarlo a su inventario, se remueve del mapa y se actualiza la interfaz del inventario
         chef.agregarAlInventario(self)
-        game.removeVisual(self)
-        interfazInventario.cambiarContenidoMostrado(self)
     }
+
     method serIntercambiado() {
         self.serLevantado()
         chef.dejarItem()
     }
 
-    method image()
+    method image() //Cada ingrediente tiene su propia imagen
 
-    method visualizacionEnInterfaz()
+    method visualizacionEnInterfaz() //Cada ingrediente tiene su propia visualización en la interfaz de la mesada
 
-    method tipoIngrediente()
+    method tipoIngrediente() //Cada ingrediente tiene su propio tipo para poder ser identificado.
 }
 
 
@@ -175,12 +174,14 @@ class Levadura inherits Ingrediente{
 
 class Factory{
     // SUPERCLASE: SE ENCARGA DE LA CREACIÓN DE INSTANCIAS DE LAS CLASES DE CADA INGREDIENTE
-    method spawn(_position) {
+    method spawn(_position) { //Cada factory tiene un método spawn que crea una instancia del ingrediente correspondiente en la posición dada
         const nuevoIngrediente = self.instanciaIngrediente(_position)
         game.addVisual(nuevoIngrediente)
     }
-    method instanciaIngrediente(_position)
+
+    method instanciaIngrediente(_position) //Pero cada factory crea una instancia de una clase distinta.
 }
+
 object factorySalsa inherits Factory {
     override method instanciaIngrediente(_position){
         return new Salsa(position = _position)
@@ -230,7 +231,7 @@ object factoryLevadura inherits Factory{
 }
 
 
-// WKO que sirven para determinar los tipos de los ingredientes:
+// WKO que sirven para determinar los tipos de los ingredientes a la hora de las comparaciones:
 
 // object masa{}
 object salsa{}
