@@ -172,7 +172,7 @@ class Levadura inherits Ingrediente{
 
 // Factories para la creación de instancias de ingredientes -------------------------------------------------
 
-class Factory{
+class FactoryIngredientes {
     // SUPERCLASE: SE ENCARGA DE LA CREACIÓN DE INSTANCIAS DE LAS CLASES DE CADA INGREDIENTE
     method spawn(_position) { //Cada factory tiene un método spawn que crea una instancia del ingrediente correspondiente en la posición dada
         const nuevoIngrediente = self.instanciaIngrediente(_position)
@@ -182,49 +182,49 @@ class Factory{
     method instanciaIngrediente(_position) //Pero cada factory crea una instancia de una clase distinta.
 }
 
-object factorySalsa inherits Factory {
+object factorySalsa inherits FactoryIngredientes {
     override method instanciaIngrediente(_position){
         return new Salsa(position = _position)
     }
 }
 
-object factoryQueso inherits Factory {
+object factoryQueso inherits FactoryIngredientes {
     override method instanciaIngrediente(_position){
         return new Queso(position = _position)
     }
 }
 
-object factoryTomate inherits Factory{
+object factoryTomate inherits FactoryIngredientes {
     override method instanciaIngrediente(_position){
         return new Tomate(position = _position)
     }
 }
 
-object factoryJamon inherits Factory{
+object factoryJamon inherits FactoryIngredientes {
     override method instanciaIngrediente(_position){
         return new Jamon(position = _position)
     }
 }
 
-object factoryCebolla inherits Factory{
+object factoryCebolla inherits FactoryIngredientes {
     override method instanciaIngrediente(_position){
         return new Cebolla(position = _position)
     }
 }
 
-object factoryHarina inherits Factory{
+object factoryHarina inherits FactoryIngredientes {
     override method instanciaIngrediente(_position){
         return new Harina(position = _position)
     }
 }
 
-object factoryAgua inherits Factory{
+object factoryAgua inherits FactoryIngredientes {
     override method instanciaIngrediente(_position){
         return new Agua(position = _position)
     }
 }
 
-object factoryLevadura inherits Factory{
+object factoryLevadura inherits FactoryIngredientes {
     override method instanciaIngrediente(_position){
         return new Levadura(position = _position)
     }
