@@ -1,5 +1,8 @@
 import game.*
 import PepesPizzeriaGame.*
+
+//Timer que servirá para mostrar de manera gráfica el tiempo que da el cliente para entregarle una pizza. A fecha de este comentario aún sigue en desarollo.
+
 object timer{
     
     // Todavía no logré que aparezca en pantalla... o que corra.

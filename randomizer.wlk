@@ -1,5 +1,7 @@
 import wollok.game.*
 
+//Randomizer que usabamos en las primeras versiones del juego para que los ingredientes spawneen aleatoriamente. No deberiamos borrarlo por si necesitamos usarlo en un futuro.
+
 object randomizer {
 		
 	method position() {

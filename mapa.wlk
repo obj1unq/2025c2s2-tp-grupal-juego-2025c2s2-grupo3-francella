@@ -6,8 +6,11 @@ import interfazVisual.*
 //Aca va todo lo relacionado a objetos del mapa en si, como colisiones, freezer e intermediarios de interaccion entre francella y otros objetos.
 
 
-object colisiones { //Objeto encargado de manejar las colisiones en el mapa
-    const celdasConColision = #{} //Set de celdas que tienen colision
+object colisiones { 
+//Objeto encargado de manejar las colisiones en el mapa
+
+    const celdasConColision = #{} 
+    //Set de celdas que tienen colision
 
     method establecerNuevaColision(_position) {
         celdasConColision.add(_position)
@@ -18,23 +21,32 @@ object colisiones { //Objeto encargado de manejar las colisiones en el mapa
     }
 }
 
-object freezer { //Establece las celdas a lo referente al freezer, que le quitara vida a francella si está mucho tiempo en ellas.
+object freezer { 
+//Establece las celdas a lo referente al freezer, que le quitara vida a francella si está mucho tiempo en ellas.
+
     const celdasDelFreezer = #{}
-    const victima          = francella 
+    //Set de celdas que pertenecen al freezer
+
+    const victima          = francella
+    //La victima del freezer es francella 
 
     method establecerNuevaCeldaDelFreezer(_position) {
+    //Agrega una nueva celda al set de celdas del freezer
         celdasDelFreezer.add(_position)
     }
 
     method estaVictimaEnCelda(celda) {
+    //Chequea si la victima está en la celda dada
         return celda.position() == victima.position()
     }
 
     method estaVictimaEnElFreezer() {
+    //Chequea si la victima está en alguna de las celdas del freezer
         return celdasDelFreezer.any({celda => self.estaVictimaEnCelda(celda)})
     }
 
     method congelarAlVictimaSiEsta() {
+    //Cada cierto tiempo chequea si la victima está en el freezer, y si es así le quita vida
         game.onTick(2500, "congelador", {
             if (self.estaVictimaEnElFreezer()) {
                 victima.recibirDanio(1)
@@ -44,7 +56,9 @@ object freezer { //Establece las celdas a lo referente al freezer, que le quitar
 }
 
 // Intermediarios de interaccion -------------------------------------------------------------------
-class IntermediarioDeInteraccion { //Clase diseñada crear instancias que sirvar para como medio para que francella interaccione con ellos. 
+class IntermediarioDeInteraccion { 
+//Clase diseñada crear instancias que sirvar para como medio para que francella interaccione con ellos. 
+
     const property position
 
     const receptorDeInteraccion
@@ -54,10 +68,12 @@ class IntermediarioDeInteraccion { //Clase diseñada crear instancias que sirvar
     }
 
     method recibirColocar(item) {
+    //Envía el mensaje recibirColocar al objeto con el que interacciona
         receptorDeInteraccion.recibirColocar(item)
     }
 
     method recibirAgarrar() {
+    //Envía el mensaje recibirAgarrar al objeto con el que interacciona
         receptorDeInteraccion.recibirAgarrar()
     }
 
@@ -65,28 +81,34 @@ class IntermediarioDeInteraccion { //Clase diseñada crear instancias que sirvar
 
 
 
-class FactoryIntermediarioInteraccion { //Clase que generaliza el proceso que hace cada factory para crear un intermediario de interacción
+class FactoryIntermediarioInteraccion { 
+//Clase que generaliza el proceso que hace cada factory para crear un intermediario de interacción
 
-    method posicionEstablecida(_position) { //La posición establecida es un método hook que dependerá de cada factory en dónde colocar el intermediario
+    method posicionEstablecida(_position) { 
+    //La posición establecida es un método hook que dependerá de cada factory en dónde colocar el intermediario
         return _position
     }
 
-    method objetoEn(_position) { //Establece a qué objeto sirve el intermediador
+    method objetoEn(_position) { 
+    //Establece a qué objeto sirve el intermediador
         return game.getObjectsIn(self.posicionEstablecida(_position)).uniqueElement()
     }
 
-    method establecerNuevoIntermediario(_position) { //Template method que generaliza la creación de intermediarios.
+    method establecerNuevoIntermediario(_position) { 
+    //Template method que generaliza la creación de intermediarios.
         const nuevoIntermediario = new IntermediarioDeInteraccion (position = _position, receptorDeInteraccion = self.objetoEn(_position))
         game.addVisual(nuevoIntermediario)
     }
 }
 
 
-object factoryIntermediarioHere inherits FactoryIntermediarioInteraccion { //Factory de intermediadores que son medio de un objeto en la misma posicion que les fue dada
+object factoryIntermediarioHere inherits FactoryIntermediarioInteraccion { 
+//Factory de intermediadores que son medio de un objeto en la misma posicion que les fue dada
 
 }
 
-object factoryIntermediarioUp inherits FactoryIntermediarioInteraccion { //Factory que crea un intermediador que interacciona con un objeto que se encuentra arriba de la posición dada.
+object factoryIntermediarioUp inherits FactoryIntermediarioInteraccion { 
+//Factory que crea un intermediador que interacciona con un objeto que se encuentra arriba de la posición dada.
 
     override method posicionEstablecida(_position) {
         return arriba.siguiente(_position)
@@ -94,7 +116,8 @@ object factoryIntermediarioUp inherits FactoryIntermediarioInteraccion { //Facto
 
 }
 
-object factoryIntermediarioDown inherits FactoryIntermediarioInteraccion { //Factory que crea un intermediador que interacciona con un objeto que se encuentra abajo de la posición dada.
+object factoryIntermediarioDown inherits FactoryIntermediarioInteraccion { 
+//Factory que crea un intermediador que interacciona con un objeto que se encuentra abajo de la posición dada.
 
     override method posicionEstablecida(_position) {
         return abajo.siguiente(_position)
@@ -102,7 +125,8 @@ object factoryIntermediarioDown inherits FactoryIntermediarioInteraccion { //Fac
 
 }
 
-object factoryIntermediarioLeft inherits FactoryIntermediarioInteraccion { //Factory que crea un intermediador que interacciona con un objeto que se encuentra izquierda de la posición dada.
+object factoryIntermediarioLeft inherits FactoryIntermediarioInteraccion { 
+//Factory que crea un intermediador que interacciona con un objeto que se encuentra izquierda de la posición dada.
 
     override method posicionEstablecida(_position) {
         return izquierda.siguiente(_position)
@@ -112,7 +136,8 @@ object factoryIntermediarioLeft inherits FactoryIntermediarioInteraccion { //Fac
 
 
 
-object factoryIntermediarioRight inherits FactoryIntermediarioInteraccion { //Factory que crea un intermediador que interacciona con un objeto que se encuentra derecha de la posición dada.
+object factoryIntermediarioRight inherits FactoryIntermediarioInteraccion { 
+//Factory que crea un intermediador que interacciona con un objeto que se encuentra derecha de la posición dada.
 
     override method posicionEstablecida(_position) {
         return derecha.siguiente(_position)
@@ -122,19 +147,24 @@ object factoryIntermediarioRight inherits FactoryIntermediarioInteraccion { //Fa
 
 
 // Mapa --------------------------------------------------------------------------------------------------------------------------------------------------------
+
 //Cada posible objeto que pueda ser dibujado está representado por dos caracteres, y todos comparten la interfaz dibujon, que tiene el método dibujar(position), que dibuja el objeto en la posición dada.
 
-class Dibujo { //Interfaz que comparten todos los objetos dibujables en el mapa
+class Dibujo { 
+//Interfaz que comparten todos los objetos dibujables en el mapa
+
     method dibujar(position) {
 
     }
 }
 
-object __ inherits Dibujo { //Representa un espacio vacío en el mapa
+object __ inherits Dibujo { 
+//Representa un espacio vacío en el mapa
 
 }
 
-object cc inherits Dibujo { //Representa una celda con colisión en el mapa
+object cc inherits Dibujo { 
+//Representa una celda con colisión en el mapa
 
     override method dibujar(position) {
         colisiones.establecerNuevaColision(position)
@@ -142,21 +172,24 @@ object cc inherits Dibujo { //Representa una celda con colisión en el mapa
 
 }
 
-object fr inherits Dibujo { //Representa una celda del freezer en el mapa
+object fr inherits Dibujo { 
+//Representa una celda del freezer en el mapa
     
     override method dibujar(position) {
         freezer.establecerNuevaCeldaDelFreezer(position)
     }
 }
 
-object ih inherits Dibujo { //Representa un intermediario en la misma posición del mapa
+object ih inherits Dibujo { 
+//Representa un intermediario en la misma posición del mapa
     
     override method dibujar(position) {
         factoryIntermediarioHere.establecerNuevoIntermediario(position)
     }
 }
 
-object iu inherits Dibujo { //Representa un intermediario arriba en el mapa
+object iu inherits Dibujo { 
+//Representa un intermediario arriba en el mapa
 
     override method dibujar(position) {
         factoryIntermediarioUp.establecerNuevoIntermediario(position)
@@ -164,7 +197,8 @@ object iu inherits Dibujo { //Representa un intermediario arriba en el mapa
 }
 
 
-object id inherits Dibujo { //Representa un intermediario abajo en el mapa
+object id inherits Dibujo { 
+//Representa un intermediario abajo en el mapa
 
     override method dibujar(position) {
         factoryIntermediarioDown.establecerNuevoIntermediario(position)
@@ -173,19 +207,22 @@ object id inherits Dibujo { //Representa un intermediario abajo en el mapa
 
 
 
-object il inherits Dibujo { //Representa un intermediario a la izquierda en el mapa
+object il inherits Dibujo { 
+//Representa un intermediario a la izquierda en el mapa
 
     override method dibujar(position) {
         factoryIntermediarioLeft.establecerNuevoIntermediario(position)
     }
 }
 
-object ir inherits Dibujo { //Representa un intermediario a la derecha en el mapa
+object ir inherits Dibujo { 
+//Representa un intermediario a la derecha en el mapa
     
     override method dibujar(position) {
         factoryIntermediarioRight.establecerNuevoIntermediario(position)
     }
 }
+
 
 //El objeto mapa es el que se encarga de dibujar el mapa del juego, utilizando una matriz de objetos que representan las distintas partes objetos posibles, representados por dos caracteres, recorriendo dicha matriz y llamando al método dibujar de cada objeto en la posición correspondiente.
 object mapa {
@@ -201,6 +238,7 @@ object mapa {
     ].reverse()
 
     method dibujarMapa() {
+    //Dibuja el mapa en el juego, recorriendo la matriz de dibujo y llamando al método dibujar de cada objeto en la posición correspondiente
         game.height(dibujo.size())
         game.width(dibujo.anyOne().size())
         (0 .. game.width() - 1).forEach({ x => 

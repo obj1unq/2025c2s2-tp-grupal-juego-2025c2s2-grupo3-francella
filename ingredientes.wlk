@@ -22,26 +22,33 @@ class Ingrediente {
 
     method recibirColocar(item){}
 
-    method recibirAgarrar() { //Los ingredientes al ser agarrados por francella chequean si él tiene un item en mano o no para saber si deben ser levantados o intercambiados
+    method recibirAgarrar() { 
+    //Los ingredientes al ser agarrados por francella chequean si él tiene un item en mano o no para saber si deben ser levantados o intercambiados
         if (not chef.tieneItem()) {
             self.serLevantado()
         }
         else self.serIntercambiado()
     }
-    method serLevantado() { //Si lo levanta, le manda a francella a agregarlo a su inventario, se remueve del mapa y se actualiza la interfaz del inventario
-        chef.agregarAlInventario(self)
+
+    method serLevantado() { 
+    //Si lo levanta, le manda a francella a agregarlo a su inventario, se remueve del mapa y se actualiza la interfaz del inventario
+        chef.agregarAlInventarioDelPiso(self)
     }
 
     method serIntercambiado() {
+    //Si lo intercambia, se levanta el ingrediente en la celda y se deja el que francella tenía en mano
         self.serLevantado()
         chef.dejarItem()
     }
 
-    method image() //Cada ingrediente tiene su propia imagen
+    method image() 
+    //Cada ingrediente tiene su propia imagen
 
-    method visualizacionEnInterfaz() //Cada ingrediente tiene su propia visualización en la interfaz de la mesada
+    method visualizacionEnInterfaz() 
+    //Cada ingrediente tiene su propia visualización en la interfaz de la mesada
 
-    method tipoIngrediente() //Cada ingrediente tiene su propio tipo para poder ser identificado.
+    method tipoIngrediente() 
+    //Cada ingrediente tiene su propio tipo para poder ser identificado.
 }
 
 
@@ -173,13 +180,16 @@ class Levadura inherits Ingrediente{
 // Factories para la creación de instancias de ingredientes -------------------------------------------------
 
 class FactoryIngredientes {
-    // SUPERCLASE: SE ENCARGA DE LA CREACIÓN DE INSTANCIAS DE LAS CLASES DE CADA INGREDIENTE
-    method spawn(_position) { //Cada factory tiene un método spawn que crea una instancia del ingrediente correspondiente en la posición dada
+// SUPERCLASE: SE ENCARGA DE LA CREACIÓN DE INSTANCIAS DE LAS CLASES DE CADA INGREDIENTE
+
+    method spawn(_position) { 
+    //Cada factory tiene un método spawn que crea una instancia del ingrediente correspondiente en la posición dada
         const nuevoIngrediente = self.instanciaIngrediente(_position)
         game.addVisual(nuevoIngrediente)
     }
 
-    method instanciaIngrediente(_position) //Pero cada factory crea una instancia de una clase distinta.
+    method instanciaIngrediente(_position) 
+    //Pero cada factory crea una instancia de una clase distinta.
 }
 
 object factorySalsa inherits FactoryIngredientes {

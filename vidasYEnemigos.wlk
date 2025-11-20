@@ -1,5 +1,7 @@
 //Sistema de vidas-----------------------------------------------------------
 
+//Sistema de vidas rudimentario que está desacoplado de francella. En futuras versiones puede ser modelado para que interactue con francella u otros cambios.
+
 object sistemaVidas {
     var vidasLlenas = 3
 

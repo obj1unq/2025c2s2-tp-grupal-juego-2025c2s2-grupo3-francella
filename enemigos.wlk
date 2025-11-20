@@ -12,18 +12,24 @@ object rata{
     var property position = estado.position()
     method image() = "ratamalvada.jpg"
 
-    method recibirGolpe(){ //La rata pierde vidas de a uno
+    method recibirGolpe(){ 
+    //La rata pierde vidas de a uno
         vidas -= 1
     }
-    method modoAtaque(){ //Prepara a la rata para atacar a francella
+
+    method modoAtaque(){ 
+    //Prepara a la rata para atacar a francella
         estado = rataAtacando
     }
-    method inflingirDanio(){ //La rata infligue 4 de daño
+
+    method inflingirDanio(){ 
+    //La rata infligue 4 de daño
         victima.recibirDanio(4)
     }
 
 }
-object rataEsperando{ //El estado inicial de la rata, antes de empezar a perseguir a francella
+object rataEsperando{ 
+//El estado inicial de la rata, antes de empezar a perseguir a francella
     method position() = game.at(9,3)
 }
 
