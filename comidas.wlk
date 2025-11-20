@@ -48,7 +48,7 @@ object masa inherits Comida {
     const recetaDeMasa = #{harina, agua, levadura}
 
     method image() {
-        return "masa.jpg"
+        return "bolloInventario.png"
     }
 
     method position(_position) {}
