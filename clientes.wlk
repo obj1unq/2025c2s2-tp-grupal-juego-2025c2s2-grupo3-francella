@@ -10,7 +10,7 @@ class Cliente {
     const chef = francella
 
     method image() {
-      return "cliente1"
+        return "cliente.png"
     }
 
     // HACER PEDIDO ---------------------------------------------------------------------------------------------
