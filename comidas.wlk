@@ -64,7 +64,7 @@ object masa inherits Comida {
 
     //Metodos game
     method image() {
-        return "masa.jpg"
+        return "bolloInventario.png"
     }
 
     method position(_position) {}
