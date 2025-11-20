@@ -137,7 +137,7 @@ class Cebolla inherits Ingrediente{
 
 class Harina inherits Ingrediente{
     override method image() {
-        return "harina.png"
+        return "harinaInventario.png"
     }
     override method tipoIngrediente(){
         return harina
@@ -149,7 +149,7 @@ class Harina inherits Ingrediente{
 
 class Agua inherits Ingrediente{
     override method image() {
-        return "agua.png"
+        return "aguaInventario.png"
     }
     override method tipoIngrediente(){
         return agua
@@ -161,7 +161,7 @@ class Agua inherits Ingrediente{
 
 class Levadura inherits Ingrediente{
     override method image() {
-        return "levadura.png"
+        return "levaduraInventario.png"
     }
     override method tipoIngrediente(){
         return levadura
