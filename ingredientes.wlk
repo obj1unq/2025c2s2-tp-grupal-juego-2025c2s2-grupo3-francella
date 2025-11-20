@@ -68,7 +68,7 @@ class Salsa inherits Ingrediente{
 class Queso inherits Ingrediente{
 
     override method image() {
-        return "queso.jpeg"
+        return "queso.png"
     }
     override method tipoIngrediente(){
         return queso
@@ -97,7 +97,7 @@ class Queso inherits Ingrediente{
 class Tomate inherits Ingrediente{
 
     override method image() {
-        return "tomate.jpeg"
+        return "tomate.png"
     }
     override method tipoIngrediente(){
         return tomate
@@ -111,7 +111,7 @@ class Tomate inherits Ingrediente{
 class Jamon inherits Ingrediente{
 
     override method image() {
-        return "jamon.jpg"
+        return "jamon.png"
     }
     override method tipoIngrediente(){
         return jamon
@@ -125,7 +125,7 @@ class Jamon inherits Ingrediente{
 class Cebolla inherits Ingrediente{
 
     override method image() {
-        return "cebolla.jpg"
+        return "cebolla.png"
     }
     override method tipoIngrediente(){
         return cebolla
