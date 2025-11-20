@@ -22,6 +22,10 @@ class Comida {
     method agregarIngredientes(unosIngredientes) {
         ingredientes.addAll(unosIngredientes)
     }
+
+    method tiposDe(ingredientesAnalizados) {
+        return ingredientesAnalizados.map({ingrediente => ingrediente.tipoIngrediente()}).asSet()
+    }
 }
 
 object pizza inherits Comida {
@@ -36,7 +40,7 @@ object pizza inherits Comida {
     }
 
     method coincideCon(unaPizza) {
-        return unaPizza.ingredientesNecesarios() == ingredientes
+        return unaPizza.ingredientesNecesarios() == self.tiposDe(ingredientes)
     }
 }
 
@@ -60,11 +64,6 @@ object masa inherits Comida {
     method hayIngredientesNecesariosEn(ingredientesEncima) {
         return recetaDeMasa == self.tiposDe(ingredientesEncima)
     }
-
-    method tiposDe(ingredientesAnalizados) {
-        return ingredientesAnalizados.map({ingrediente => ingrediente.tipoIngrediente()}).asSet()
-    }
-
 }
 
 //El objeto tipos de pizzas será usado para que los clientes sepan cuales tipos de pizzas existen y elegir uno de ellos
@@ -77,7 +76,7 @@ object tiposDePizzas {
 }
 
 class Pizzas {
-    const ingredientesNecesarios = [masa, salsa, queso]
+    const ingredientesNecesarios = #{masa, salsa, queso}
 
     method ingredientesNecesarios() {
         return ingredientesNecesarios
@@ -101,7 +100,7 @@ object pizzaMuzzarella inherits Pizzas {
 object pizzaNapolitana inherits Pizzas {
 
     override method ingredientesNecesarios() {
-        return super() + [tomate, jamon]
+        return super() + #{tomate, jamon}
     }
     override method nombreDeLaPizza() {
         return super() + "Napolitana"
@@ -111,7 +110,7 @@ object pizzaNapolitana inherits Pizzas {
 object pizzaCebolla inherits Pizzas {
 
     override method ingredientesNecesarios() {
-        return super() + [cebolla]
+        return super() + #{cebolla}
     }
     override method nombreDeLaPizza() {
         return super() + "de Cebolla"
