@@ -2,8 +2,11 @@ import ingredientes.*
 import audio.*
 
 
-object pedido {
-    var ultimaPizzaPedida = null
+object pedido { 
+//Objeto que muestra en la interfaz visual el pedido del cliente actual
+
+    var ultimaPizzaPedida = vacio 
+    //Guarda el nombre de la última pizza pedida para mostrarla en la interfaz, por defecto está vacia.
 
     method ultimaPizzaPedida(nombreDePizza) {
         ultimaPizzaPedida = nombreDePizza
@@ -28,7 +31,9 @@ object pedido {
 // Gamestate visuals ----------------------------------------------------------------------
 
 
-object gameOver {
+object gameOver { 
+//Estado Gameover cuando Francella entrega mal una pizza
+
     var property position = game.origin() 
 
     method image() {
@@ -36,7 +41,9 @@ object gameOver {
     }
 }
 
-object gameWin {
+object gameWin { 
+//Estado Gamewin cuando Francella entrega correctamente la pizza
+
     var property position = game.origin()
 
     method image() {
@@ -48,16 +55,21 @@ object gameWin {
 // Visualizacion de ingredientes en zoom de mesada ----------------------------------------
 
 
-object ingredientesEnInterfaz {
-    const ingredientesEnInterfaz = #{}
+object ingredientesEnInterfaz { 
+//Objeto encargado de mostrar los ingredientes en la interfaz visual de la mesada
 
-    method mostrarIngredienteEnInterfaz(ingrediente) {
+    const ingredientesEnInterfaz = #{} 
+    //Set de ingredientes que se están mostrando en la interfaz
+
+    method mostrarIngredienteEnInterfaz(ingrediente) { 
+    //Agrega un ingrediente a la interfaz visual
         ingredientesEnInterfaz.add(ingrediente.visualizacionEnInterfaz())
         game.addVisual(ingrediente.visualizacionEnInterfaz())
         sonidoPlop.reproducir()
     }
 
-    method limpiarIngredientesEnInterfaz() {
+    method limpiarIngredientesEnInterfaz() { 
+    //Limpia todos los ingredientes que se están mostrando en la interfaz visual
         ingredientesEnInterfaz.forEach({visual => game.removeVisual(visual)})
         ingredientesEnInterfaz.clear()
         armarPizza.reproducir()
@@ -65,7 +77,9 @@ object ingredientesEnInterfaz {
 }
 
 
-class IngredienteInterfaz {
+class IngredienteInterfaz { 
+//Clase abstracta que sirve como superclase para las visualizaciones de cada ingrediente en la interfaz de mesada
+
     var property position = game.origin()
     
     method nombre()
@@ -139,29 +153,41 @@ object levaduraInterfaz inherits IngredienteInterfaz {
 
 // Visualizacion de item una vez agarrado en el inventario -------------------------------
 
-object interfazInventario {                               //Interfaz del inventario, usada para mostrar que ingrediente tiene Francella en mano
-    var contenidoAMostrar = vacio                       //Inicializa en blank, no mostrando ningún ingrediente en absoluto
+object interfazInventario { 
+//Interfaz del inventario, usada para mostrar que ingrediente tiene francella en mano. Se usa un objeto aparte para considerar el caso en que francella no tenga objeto en mano
+
+    var contenidoAMostrar = vacio  
+    //Inicializa en blank, no mostrando ningún ingrediente en absoluto.
 
     method position() {
         return game.at(1,7)
     }
 
     method image() {
-        return contenidoAMostrar.image()
+    //Muestra la imagen del ingrediente que tiene francella en mano
+        return contenidoAMostrar.image() 
     }
 
-    method cambiarContenidoMostrado(contenidoNuevo) {   //Metodo para cambiar el ingrediente mostrado, use una variable y no preguntarle a 
-        contenidoAMostrar = contenidoNuevo              //Francella ya que es posible que Francella no tenga ingredienes, aunque no se
-    }                                                       //descarta el posible uso de condicionales para ese caso
+    method cambiarContenidoMostrado(contenidoNuevo) {   
+    //Metodo para cambiar el ingrediente mostrado en la interfaz del inventario.
+        contenidoAMostrar = contenidoNuevo              
+    }                                                       
 
-    method borrarContenidoMostrado() {                    //Deja en blanco el inventario, usado para casos en que el ingrediente no se
-        contenidoAMostrar = vacio                         //intercambia, como por ejemplo colocarlo en la mesada o borrarlo
+    method borrarContenidoMostrado() {  
+    //Deja en blanco el inventario, usado para casos en que el ingrediente no se
+        contenidoAMostrar = vacio                         
     }
 }
 
-object vacio {                                          //Objeto "vacio" utilizado para representar un objeto vacio
+object vacio { 
+//Objeto "vacio" utilizado para representar un objeto vacio, tanto para la interfaz del inventario como para otros posibles usos.
     method image() {
         return "blank.png"
+    }
+
+    method estaCocinada() { 
+    //Usado para el horno, indica que un objeto vacio no puede estar cocinado
+        return false
     }
 }
 

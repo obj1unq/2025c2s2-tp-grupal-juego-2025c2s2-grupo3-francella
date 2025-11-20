@@ -1,6 +1,9 @@
 import ingredientes.*
 import francella.*
 
+//Enemigos del juego -----------------------
+
+//Por el momento (y muy seguramente en la versión final) solo habrá una rata como enemigo en el almacen custiodiando el queso y la salsa. El como persigue a francella y el sistema de vidas quedará para más adelante.
 object rata{
     var estado = rataEsperando
     var vidas = 3
@@ -9,18 +12,24 @@ object rata{
     var property position = estado.position()
     method image() = "ratamalvada.jpg"
 
-    method recibirGolpe(){
+    method recibirGolpe(){ 
+    //La rata pierde vidas de a uno
         vidas -= 1
     }
-    method modoAtaque(){
+
+    method modoAtaque(){ 
+    //Prepara a la rata para atacar a francella
         estado = rataAtacando
     }
-    method inflingirDanio(){
+
+    method inflingirDanio(){ 
+    //La rata infligue 4 de daño
         victima.recibirDanio(4)
     }
 
 }
-object rataEsperando{
+object rataEsperando{ 
+//El estado inicial de la rata, antes de empezar a perseguir a francella
     method position() = game.at(9,3)
 }
 
