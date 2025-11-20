@@ -12,11 +12,20 @@ import pizzeria.*
 object francella{
     var property position   = game.at(15,6)
     var property itemEnMano = []
-    const clienteActual = cliente1
-    var vidas = 3
+    const clienteActual     = cliente1
+    var vidas               = 10
+    var ultimaDireccion     = abajo
 
     method image(){
-        return "pepitoHD.png"
+        return "pepito" + ultimaDireccion.nombre() + ".png"
+    }
+
+    method image(newImage) {
+        return newImage
+    }
+
+    method recibirDanio(cantidadDeDanio) {
+        vidas -= cantidadDeDanio
     }
 
     // BOOLEANOS -------------------------------------------------------------------------------
@@ -37,12 +46,17 @@ object francella{
     method hayMasDeUnItemEnLaCelda() {
         return game.colliders(self).size() > 1
     }
+
+    method hayEnemigoAdelante() {
+        return not game.getObjectsIn(ultimaDireccion).isEmpty() // and como carajo saco un booleano lindo de esto
+    }
     
 
     // MOVIMIENTOS -----------------------------------------------------------------------------
 
 
     method mover(direccion) {
+        ultimaDireccion = direccion
         if (self.puedeMover(direccion)) {
             position = direccion.siguiente(self.position())
         }
@@ -90,7 +104,20 @@ object francella{
     }
   
 
+    //ATACAR ------------------------------------------------------------------------------------
+
+
+    method atacar() {
+      self.image("pepitoAtacando" + ultimaDireccion.nombre() + ".png")
+      game.schedule(100, self.image("pepito" + ultimaDireccion.nombre() + ".png"))
+      if (self.hayEnemigoAdelante()) {
+        game.getObjectsIn(ultimaDireccion).uniqueElement().recibirDanio(1)
+      }
+    }
+
+
     //GAMESTATES --------------------------------------------------------------------------------
+
 
     method gameState(visual) {
       game.stop()

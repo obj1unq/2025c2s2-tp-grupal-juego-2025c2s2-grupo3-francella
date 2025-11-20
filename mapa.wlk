@@ -25,7 +25,7 @@ object freezer {
     }
 
     method estaVictimaEnCelda(celda) {
-        return celda.position() == victima.position()
+        return celda == victima.position()
     }
 
     method estaVictimaEnElFreezer() {
