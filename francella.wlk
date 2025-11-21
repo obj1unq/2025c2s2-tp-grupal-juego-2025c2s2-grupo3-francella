@@ -7,12 +7,12 @@ import ingredientes.*
 import interfazVisual.*
 import mapa.*
 import pizzeria.*
+import vidasYEnemigos.*
 
 
 object francella{
     var property position   = game.at(15,6)
     var property itemEnMano = []
-    var vidas = 3
 
     method image(){
         return "pepitoHD.png"
@@ -101,6 +101,19 @@ object francella{
       interfazInventario.borrarContenidoMostrado()
     }
   
+    //SISTEMA DE VIDAS -----------------------------------------------------------------------
+    method recibirDanio(cantidad) {
+      sistemaVidas.restarVidas(cantidad)
+      self.perderSiNoTieneVidas()
+    }
+
+    method perderSiNoTieneVidas() {
+      if (sistemaVidas.vidasLlenas() == 0) {
+        self.gameOver()
+      }
+    }
+
+
     //GAMESTATES --------------------------------------------------------------------------------
 
     method gameState(visual) {
