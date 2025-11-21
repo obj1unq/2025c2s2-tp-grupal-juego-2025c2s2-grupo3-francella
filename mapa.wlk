@@ -37,7 +37,7 @@ object freezer {
 
     method estaVictimaEnCelda(celda) {
     //Chequea si la victima está en la celda dada
-        return celda.position() == victima.position()
+        return celda == victima.position()
     }
 
     method estaVictimaEnElFreezer() {

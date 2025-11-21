@@ -9,7 +9,7 @@ import mapa.*
 import pizzeria.*
 import randomizer.*
 import timer.*
-import enemigos.*
+import vidasYEnemigos.*
 
 
 program pepesPizzeria{
@@ -46,6 +46,7 @@ program pepesPizzeria{
     
 // INTERFAZ
     game.addVisual(interfazInventario)
+    game.addVisual(sistemaVidas)
 
 // MOVIMIENTO Y ACCIONES
     keyboard.right().onPressDo({francella.mover(derecha)})
@@ -62,4 +63,5 @@ program pepesPizzeria{
     timer.start(120)
     musicaDeFondo.reproducir()
     freezer.congelarAlVictimaSiEsta()
+    francella.restaurarVidasReposo()
 }
