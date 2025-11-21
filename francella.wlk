@@ -37,6 +37,9 @@ object francella{
         return game.colliders(self).size() > 1
     }
     
+    method estoyFueraDePeligro() {
+      return not freezer.estaVictimaEnElFreezer()
+    }
 
     // MOVIMIENTOS -----------------------------------------------------------------------------
 
@@ -111,6 +114,14 @@ object francella{
       if (sistemaVidas.vidasLlenas() == 0) {
         self.gameOver()
       }
+    }
+
+    method restaurarVidasReposo() {
+      game.onTick(5000, "restaurarVidas", {
+        if (self.estoyFueraDePeligro()) {
+          sistemaVidas.restaurarVidas(1)
+        }
+      })
     }
 
 

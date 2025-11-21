@@ -7,6 +7,7 @@ import francella.*
 
 object sistemaVidas {
     var vidasLlenas = self.vidasMaximas()
+    //Francella empieza con la cantidad máxima de vidas
 
     method position() {
         return game.at(10,7)
@@ -16,15 +17,22 @@ object sistemaVidas {
         return "corazones" + vidasLlenas.toString() + ".png"
     }
 
-    method restarVidas(cantidad) {
-        vidasLlenas -= self.vidasMaximas().min(cantidad)
-    }
-
     method vidasLlenas() {
         return vidasLlenas
     }
 
+    method restarVidas(cantidad) {
+    //Resta vidas hasta llegar a 0
+        vidasLlenas -= self.vidasMaximas().min(cantidad)
+    }
+
+    method restaurarVidas(cantidad) {
+    //Restaura vidas hasta el máximo permitido
+        vidasLlenas = (vidasLlenas + cantidad).min(self.vidasMaximas())
+    }
+
     method vidasMaximas() {
+    //El sistema de vidas tiene 3 vidas máximas
         return 3
     }
 }
