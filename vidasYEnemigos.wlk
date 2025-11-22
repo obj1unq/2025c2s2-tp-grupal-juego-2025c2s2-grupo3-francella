@@ -56,6 +56,7 @@ object rata{
     method modoAtaque(){ 
     //Prepara a la rata para atacar a francella
         estado = rataAtacando
+        estado.iniciarMovimiento()
     }
 
     method inflingirDanio(){ 
@@ -65,16 +66,32 @@ object rata{
 
 }
 object rataEsperando{ 
-//El estado inicial de la rata, antes de empezar a perseguir a francella
+    //El estado inicial de la rata, antes de empezar a perseguir a francella
     method position() = game.at(9,3)
 }
 
 object rataAtacando{
-    method position(){
-        // lo tiene que comparar con algo, pero sería position?
-        //if ()
+    const victima = francella
+
+    var property position = game.at(9, 1)
+
+    // Métodos para poder obtener los valores de x e y en cada momento
+    method x() = self.position().x()
+    method y() = self.position().y()
+
+    method iniciarMovimiento(){ // NO FUNCIONA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // Comienza un onTick para mover a la rata hacia francella cada cierto tiempo
+        game.onTick(500, "Persecusión de la rata", {self.moverseHaciaVictima()})
     }
-    // cómo modelamos la persecusión?!?!?!
-    // la idea sería ir comparando self.position.x() con la de francella para poder ir moviéndose en esa dirección
-    // method position() tiene que ser persiguiendo a francella de alguna manera
+
+    method moverseHaciaVictima(){ // NO FUNCIONA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // Compara la posición de francella con la propia para poder dirigirse hacia él.
+        if(victima.x() > self.x()) {self.position().right(1)}
+        if(victima.x() < self.x()) {self.position().left(1)}
+        if(victima.y() > self.y()) {self.position().up(1)}
+        if(victima.y() < self.y()) {self.position().down(1)}
+    }
 }
+
+
+

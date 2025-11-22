@@ -54,6 +54,9 @@ object francella{
 		  return not colisiones.hayColisionEn(direccion.siguiente(self.position()))
 	  }
 
+    method x() = self.position().x()
+    method y() = self.position().y()
+
 
     //INTERACTUAR ---------------------------------------------------------------------------------
 
