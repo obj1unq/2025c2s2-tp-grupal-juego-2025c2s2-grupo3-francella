@@ -63,5 +63,6 @@ program pepesPizzeria{
     timer.start(120)
     musicaDeFondo.reproducir()
     freezer.congelarAlVictimaSiEsta()
+    gestorPuertas.iniciarPuertas()
     francella.restaurarVidasReposo()
 }
