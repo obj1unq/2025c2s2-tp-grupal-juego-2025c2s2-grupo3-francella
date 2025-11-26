@@ -55,6 +55,68 @@ object freezer {
     }
 }
 
+// Puertas -------------------------------------------------------------------
+object gestorPuertas {
+    const puertas = #{}
+
+    method establecerNuevaPuerta(_position) {
+        const nuevaPuerta = new Puerta(position = _position)
+        puertas.add(nuevaPuerta)
+        game.addVisual(nuevaPuerta)
+    }
+
+    method iniciarPuertas() {
+        puertas.forEach({puerta => puerta.mecanismoCuandoPasaFrancella()})
+    }
+}
+class Puerta {
+//Clase que representa una puerta en el mapa, que puede estar abierta o cerrada
+
+    const property position
+
+    var estado = puertaCerrada
+
+    const chef = francella
+
+    method image() {
+        return estado.image()
+    }
+
+    method abrir() {
+        estado = puertaAbierta
+    }
+
+    method cerrar() {
+        estado = puertaCerrada
+    }
+
+    method chefPasaSobreLaPuerta() {
+        return chef.position() == position
+    }
+
+    method mecanismoCuandoPasaFrancella() {
+        game.onTick(100, "puerta", {
+            if (self.chefPasaSobreLaPuerta()) {
+                self.abrir()
+                game.schedule(3000, {self.cerrar()})
+            }
+        })
+    }
+
+}
+//Estados de las puertas -------------------------------------------------------
+object puertaAbierta {
+    method image() {
+        return "puertaAbierta.png"
+    }
+}
+
+object puertaCerrada {
+    method image() {
+        return "puertaCerrada.png"
+    }
+}
+
 // Intermediarios de interaccion -------------------------------------------------------------------
 class IntermediarioDeInteraccion { 
 //Clase diseñada crear instancias que sirvar para como medio para que francella interaccione con ellos. 
@@ -223,6 +285,13 @@ object ir inherits Dibujo {
     }
 }
 
+object pt inherits Dibujo { 
+//Representa una puerta en el mapa
+
+    override method dibujar(position) {
+        gestorPuertas.establecerNuevaPuerta(position)
+    }
+}
 
 //El objeto mapa es el que se encarga de dibujar el mapa del juego, utilizando una matriz de objetos que representan las distintas partes objetos posibles, representados por dos caracteres, recorriendo dicha matriz y llamando al método dibujar de cada objeto en la posición correspondiente.
 object mapa {
@@ -230,7 +299,7 @@ object mapa {
         [ __, __, __, __, __, cc, cc, cc, cc, cc, __, __, __, __, ir, cc ],
         [ __, __, __, __, __, iu, __, iu, __, iu, __, __, __, __, __, __ ],
         [ __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __ ],
-        [ __, __, __, __, __, cc, __, cc, cc, cc, __, cc, cc, cc, __, cc ],
+        [ __, __, __, __, __, cc, pt, cc, cc, cc, pt, cc, cc, cc, pt, cc ],
         [ __, __, __, __, __, fr, fr, fr, cc, __, __, __, cc, cc, __, cc ],
         [ __, __, __, __, __, fr, fr, fr, cc, __, __, __, cc, iu, __, iu ],
         [ __, __, __, __, __, fr, fr, fr, cc, __, __, __, cc, id, __, id ],
