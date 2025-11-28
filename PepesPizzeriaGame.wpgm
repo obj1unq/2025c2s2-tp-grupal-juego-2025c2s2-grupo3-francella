@@ -66,4 +66,5 @@ program pepesPizzeria{
     freezer.congelarAlVictimaSiEsta()
     gestorPuertas.iniciarPuertas()
     francella.restaurarVidasReposo()
+    game.schedule(10000, {rata.iniciarPersecusion()})
 }

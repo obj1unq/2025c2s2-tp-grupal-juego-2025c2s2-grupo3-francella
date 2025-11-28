@@ -13,16 +13,12 @@ import vidasYEnemigos.*
 object francella{
     var property position   = game.at(15,6)
     var property itemEnMano = []
-    var clienteActual     = vacio
+    var vidas               = 10
     var ultimaDireccion     = abajo
     var estadoActual        = relajado
 
     method image(){
         return "pepito" + estadoActual.nombre() + ultimaDireccion.nombre() + ".gif"
-    }
-
-    method clienteActual(_cliente) {
-      clienteActual = _cliente
     }
 
     // BOOLEANOS -------------------------------------------------------------------------------
@@ -65,9 +61,6 @@ object francella{
     method puedeMover(direccion) {
 		  return not colisiones.hayColisionEn(direccion.siguiente(self.position()))
 	  }
-
-    method x() = self.position().x()
-    method y() = self.position().y()
 
 
     //INTERACTUAR ---------------------------------------------------------------------------------
@@ -118,8 +111,11 @@ object francella{
       itemEnMano.clear()
       interfazInventario.borrarContenidoMostrado()
     }
+
   
     //SISTEMA DE VIDAS -----------------------------------------------------------------------
+
+
     method recibirDanio(cantidad) {
       sistemaVidas.restarVidas(cantidad)
       self.perderSiNoTieneVidas()

@@ -1,24 +1,20 @@
 import game.*
 import francella.*
 
-class Direccion {
+
+//Direcciones para moverse por el mapa:
+//Son las direcciones hacia las cuales se puede mover el jugador. Están limitadas desde el eje x para no moverse sobre la seccion de la pantalla dedicada a mostrar las mesadas
+
+
+class DireccionJugador {
 
     method nombre()
 
     method siguiente(position)
 }
 
-/*object izquierda inherits Direccion{
 
-    override method nombre(){
-        return "Izquierda"
-    }
-
-    override method siguiente(position){*/
-//Direcciones para moverse por el mapa -----------------------
-
-//Es el rango de direcciones por el cual se puede mover francella. Está limitado desde el eje x para que no se sobreponga sobre la parte de la pantalla dedicada a mostrar las mesadas
-object izquierda inherits Direccion{
+object izquierda inherits DireccionJugador{
 
     override method nombre(){
         return "Izquierda"
@@ -29,7 +25,7 @@ object izquierda inherits Direccion{
     }
 }
 
-object derecha inherits Direccion{
+object derecha inherits DireccionJugador{
     
     override method nombre(){
         return "Derecha"
@@ -40,7 +36,7 @@ object derecha inherits Direccion{
     }
 }
 
-object arriba inherits Direccion{
+object arriba inherits DireccionJugador{
     
     override method nombre(){
         return "Arriba"
@@ -51,7 +47,7 @@ object arriba inherits Direccion{
     }
 }
 
-object abajo inherits Direccion{
+object abajo inherits DireccionJugador{
     
     override method nombre(){
         return "Abajo"
@@ -59,5 +55,44 @@ object abajo inherits Direccion{
     
     override method siguiente(position){
         return game.at(position.x(), 0.max(position.y() - 1))
+    }
+}
+
+
+// Direcciones de persecusión:
+// Son las direcciones que usan los enemigos para perseguir al jugador y asegurarse de no seguir de largo una vez que se encuentren sobre el mismo.
+
+
+class DireccionPersecusion{
+    
+    method siguiente(enemigoPosition, victimaPosition)
+}
+
+
+object izquierdaPersecusion inherits DireccionPersecusion{
+
+    override method siguiente(enemigoPosition, victimaPosition){
+        return game.at(victimaPosition.x().max(enemigoPosition.x() - 1), enemigoPosition.y())
+    }
+}
+
+object derechaPersecusion inherits DireccionPersecusion{
+    
+    override method siguiente(enemigoPosition, victimaPosition){
+        return game.at(victimaPosition.x().min(enemigoPosition.x() + 1), enemigoPosition.y())
+    }
+}
+
+object arribaPersecusion inherits DireccionPersecusion{
+    
+    override method siguiente(enemigoPosition, victimaPosition){
+        return game.at(enemigoPosition.x(), victimaPosition.y().min(enemigoPosition.y() + 1))
+    }
+}
+
+object abajoPersecusion inherits DireccionPersecusion{
+    
+    override method siguiente(enemigoPosition, victimaPosition){
+        return game.at(enemigoPosition.x(), victimaPosition.y().max(enemigoPosition.y() - 1))
     }
 }
