@@ -1,12 +1,13 @@
 import game.*
 import PepesPizzeriaGame.*
+
+//Timer que servirá para mostrar de manera gráfica el tiempo que da el cliente para entregarle una pizza. A fecha de este comentario aún sigue en desarollo.
+
 object timer{
-    
-    // Todavía no logré que aparezca en pantalla... o que corra.
 
     var tiempoRestante = 0
 
-    method position() = game.at(3,9)
+    method position() = game.at(1,9)
 
     method start(tiempo){
         self.establecerTiempo(tiempo)
@@ -22,6 +23,6 @@ object timer{
     }
 
     method text(){
-        return tiempoRestante
+        return tiempoRestante.toString()
     }
 }

@@ -7,62 +7,83 @@ import wollok.game.*
 // Comidas armables -------------------------------------------------------------------
 
 class Comida {
-  const ingredientes = []
 
-  method puedeAgarrarse() {}
+    method puedeAgarrarse() {} 
+    //Usado para recibir el mensaje desde Francella
 
-  method ingredientes() {
-    return ingredientes
-  }
-  
-  method ingredientesUsados() {
-    return ingredientes.map({ingrediente => ingrediente.tipoIngrediente()})
-  }
-
-  method agregarIngrediente(unIngrediente) {
-    ingredientes.add(unIngrediente)
-  }
+    method tiposDe(ingredientesAnalizados) { 
+    //Usado para acceder a los tipos de ingredientes y permitir la comparación
+        return ingredientesAnalizados.map({ingrediente => ingrediente.tipoIngrediente()}).asSet()
+    }
 }
 
+//Pizza (armable desde la mesada de pizza) -----------------------
 object pizza inherits Comida {
-  var property estaCocinada = false
+    //Atributos
+    const ingredientes = #{} 
 
-  override method puedeAgarrarse() {
-      return ingredientes.size() > 0
-  }
+    //Set de ingredientes que componen la pizza
+    var property estaCocinada = false 
+    //Indica si la pizza ya fue cocinada
 
-  method entregarPizza() {
-      ingredientes.clear()
-  }
-
-  method coincideCon(unaPizza) {
-    return unaPizza.ingredientesNecesarios() == ingredientes
-  }
-}
-
-object masa inherits Comida {
-    const recetaDeMasa = [harina, agua, levadura]
-
-    override method puedeAgarrarse() {
-        return ingredientes.size() == recetaDeMasa.size()
+    //Metodos game
+    method image() {
+        return "pizza.png"
     }
 
-    method tipoIngrediente() {
+    //Metodos lookup
+    method ingredientes() {
+        return ingredientes
+    }
+
+    //Metodos funcionales
+    method agregarIngredientes(unosIngredientes) { 
+    //Sirve para agregar ingredientes a la pizza a la hora de sacarla de la mesada de la cocina
+        ingredientes.addAll(unosIngredientes)
+    }
+
+    method entregarPizza() { 
+    //Sirve para reiniciar la pizza una vez entregada al cliente
+        ingredientes.clear()
+    }
+
+    //Booleanos
+
+    method coincideCon(unaPizza) { 
+    //Compara si la pizza cocinada coincide con la pizza pedida por el cliente, que la recibe por parametro
+        return unaPizza.ingredientesNecesarios() == self.tiposDe(ingredientes)
+    }
+}
+
+//Masa (armable desde la mesada de masa) -------------------------
+object masa inherits Comida {
+    //Atributos
+
+    const recetaDeMasa = #{harina, agua, levadura} 
+    //Set de ingredientes necesarios para armar la masa
+
+    //Metodos game
+    method image() {
+        return "bolloInventario.png"
+    }
+
+    method position(_position) {}
+
+    //Metodos funcionales
+    method tipoIngrediente() { 
+    //Sirve a la hora de pedir su tipo
         return self
     }
-    
-    method spawn() {
-        const nuevaMasa = new Masa(position = mesadaParaMasa.position())
-        game.addVisual(nuevaMasa)
-        ingredientes.agregarACocina(nuevaMasa)
-    }
 
-    method coincideCon() {
-        return recetaDeMasa == ingredientes
-    }
-
-    method visualizacionEnInterfaz() {
+    method visualizacionEnInterfaz() { 
+    //Sirve para obtener la interfaz visual de la masa
         return masaInterfaz
+    }
+
+    //Booleanos
+    method hayIngredientesNecesariosEn(ingredientesEncima) { 
+    //Sirve a la hora de chequear si los ingredientes encima de la mesada de la sección de amasado son los necesarios para armar la masa
+        return recetaDeMasa == self.tiposDe(ingredientesEncima)
     }
 }
 
@@ -76,7 +97,7 @@ object tiposDePizzas {
 }
 
 class Pizzas {
-    const ingredientesNecesarios = [masa, salsa, queso]
+    const ingredientesNecesarios = #{masa, salsa, queso}
 
     method ingredientesNecesarios() {
         return ingredientesNecesarios
@@ -85,10 +106,11 @@ class Pizzas {
         return "Pizza "
     }
 }
-//Cada pizza es un objeto, el cual los clientes iran chequeando con la pizza 
-//cocinada que Franchella haya hecho para comprobar si es efectivamente lo pedido. 
-//Al ser cada ingrediente una instancia de una clase y no un objeto bien definido 
-//se trabajará con la clase de los ingredientes usados.
+
+/*Cada pizza es un objeto, el cual los clientes iran chequeando con la pizza 
+cocinada que Franchella haya hecho para comprobar si es efectivamente lo pedido. 
+Al ser cada ingrediente una instancia de una clase y no un objeto bien definido 
+se trabajará con la clase de los ingredientes usados.*/
 
 object pizzaMuzzarella inherits Pizzas {
 
@@ -100,7 +122,7 @@ object pizzaMuzzarella inherits Pizzas {
 object pizzaNapolitana inherits Pizzas {
 
     override method ingredientesNecesarios() {
-        return super() + [tomate, jamon]
+        return super() + #{tomate, jamon}
     }
     override method nombreDeLaPizza() {
         return super() + "Napolitana"
@@ -110,7 +132,7 @@ object pizzaNapolitana inherits Pizzas {
 object pizzaCebolla inherits Pizzas {
 
     override method ingredientesNecesarios() {
-        return super() + [cebolla]
+        return super() + #{cebolla}
     }
     override method nombreDeLaPizza() {
         return super() + "de Cebolla"

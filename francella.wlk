@@ -7,6 +7,7 @@ import ingredientes.*
 import interfazVisual.*
 import mapa.*
 import pizzeria.*
+import vidasYEnemigos.*
 
 
 object francella{
@@ -48,6 +49,9 @@ object francella{
       return not ((game.getObjectsIn(ultimaDireccion.siguiente(self.position()))).isEmpty())
     }
     
+    method estoyFueraDePeligro() {
+      return not freezer.estaVictimaEnElFreezer()
+    }
 
     // MOVIMIENTOS -----------------------------------------------------------------------------
 
@@ -62,6 +66,9 @@ object francella{
     method puedeMover(direccion) {
 		  return not colisiones.hayColisionEn(direccion.siguiente(self.position()))
 	  }
+
+    method x() = self.position().x()
+    method y() = self.position().y()
 
 
     //INTERACTUAR ---------------------------------------------------------------------------------
@@ -96,10 +103,43 @@ object francella{
     }
 
     method agregarAlInventario(algo) {
-      // Lo necesita la clase IngredienteParaPizza en 'ingredientes'
+      // Proposito: Agrega el item dado al inventario de francella. Además actualiza la interfaz de inventario.
       itemEnMano.add(algo)
+      interfazInventario.cambiarContenidoMostrado(algo)
+      
+    }
+    method agregarAlInventarioDelPiso(algo) {
+      // Necesaria para agregar ingredientes del suelo, removiendolos visualmente.
+      self.agregarAlInventario(algo)
+      game.removeVisual(algo)
+    }
+
+    method borrarItemMano() { 
+      //Borra lo que tiene francella en mano.
+      itemEnMano.clear()
+      interfazInventario.borrarContenidoMostrado()
     }
   
+    //SISTEMA DE VIDAS -----------------------------------------------------------------------
+    method recibirDanio(cantidad) {
+      sistemaVidas.restarVidas(cantidad)
+      self.perderSiNoTieneVidas()
+    }
+
+    method perderSiNoTieneVidas() {
+      if (sistemaVidas.vidasLlenas() == 0) {
+        self.gameOver()
+      }
+    }
+
+    method restaurarVidasReposo() {
+      game.onTick(5000, "restaurarVidas", {
+        if (self.estoyFueraDePeligro()) {
+          sistemaVidas.restaurarVidas(1)
+        }
+      })
+    }
+
 
     //ATACAR ------------------------------------------------------------------------------------
 

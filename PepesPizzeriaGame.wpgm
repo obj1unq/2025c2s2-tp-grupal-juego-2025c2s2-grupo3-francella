@@ -9,29 +9,28 @@ import mapa.*
 import pizzeria.*
 import randomizer.*
 import timer.*
-import enemigos.*
+import vidasYEnemigos.*
 
 
 program pepesPizzeria{
     
 // SETTINGS DEL TABLERO
-
     game.title("Pepes Pizzeria")
     game.height(8)
     game.width(16)
     game.cellSize(200)
     game.boardGround("fondoTest.png")
 
-//AÑADIDAS UNA INSTANCIA DE CADA CLASE DE INGREDIENTE
-
+// AÑADIDAS INSTANCIAS
     factorySalsa.spawn  (game.at(11,0))
     factoryQueso.spawn  (game.at(10,0))
     factoryTomate.spawn (game.at(9,0))
     factoryJamon.spawn  (game.at(6,0))
     factoryCebolla.spawn(game.at(5,0))
 
-// PERSONAJES Y VISUALES
+    const cliente = new Cliente()
 
+// PERSONAJES Y VISUALES
     game.addVisual(horno)
     game.addVisual(tachoDeBasura)
     game.addVisual(mesadaParaPizza)
@@ -39,18 +38,17 @@ program pepesPizzeria{
     game.addVisual(sacoDeHarina)
     game.addVisual(heladera)
     game.addVisual(canillaDeAgua)
-    game.addVisual(cliente1)
+    game.addVisual(cliente)
     mapa.dibujarMapa()
     game.addVisual(francella)
     game.addVisual(timer)
     game.addVisual(rata)
     
 // INTERFAZ
-
     game.addVisual(interfazInventario)
+    game.addVisual(sistemaVidas)
 
 // MOVIMIENTO Y ACCIONES
-
     keyboard.right().onPressDo({francella.mover(derecha)})
     keyboard.left().onPressDo({francella.mover(izquierda)})
     keyboard.up().onPressDo({francella.mover(arriba)})
@@ -61,10 +59,11 @@ program pepesPizzeria{
     keyboard.space().onPressDo({francella.atacar()})
 
 // INICIO DE JUEGO
-
     game.start()
-    game.schedule(4000, {cliente1.hacerPedido()})
+    game.schedule(4000, {cliente.hacerPedido()})
     timer.start(120)
     musicaDeFondo.reproducir()
     freezer.congelarAlVictimaSiEsta()
+    gestorPuertas.iniciarPuertas()
+    francella.restaurarVidasReposo()
 }
