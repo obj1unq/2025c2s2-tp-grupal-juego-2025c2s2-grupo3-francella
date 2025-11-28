@@ -15,13 +15,10 @@ object francella{
     const clienteActual     = cliente1
     var vidas               = 10
     var ultimaDireccion     = abajo
+    var estadoActual        = relajado
 
     method image(){
-        return "pepito" + ultimaDireccion.nombre() + ".png"
-    }
-
-    method image(newImage) {
-        return newImage
+        return "pepito" + estadoActual.nombre() + ultimaDireccion.nombre() + ".gif"
     }
 
     method recibirDanio(cantidadDeDanio) {
@@ -44,11 +41,11 @@ object francella{
     }
 
     method hayMasDeUnItemEnLaCelda() {
-        return game.colliders(self).size() > 1
+      return game.colliders(self).size() > 1
     }
 
-    method hayEnemigoAdelante() {
-        return not game.getObjectsIn(ultimaDireccion).isEmpty() // and como carajo saco un booleano lindo de esto
+    method hayAlgoAdelante() {
+      return not ((game.getObjectsIn(ultimaDireccion.siguiente(self.position()))).isEmpty())
     }
     
 
@@ -108,10 +105,10 @@ object francella{
 
 
     method atacar() {
-      self.image("pepitoAtacando" + ultimaDireccion.nombre() + ".png")
-      game.schedule(100, self.image("pepito" + ultimaDireccion.nombre() + ".png"))
-      if (self.hayEnemigoAdelante()) {
-        game.getObjectsIn(ultimaDireccion).uniqueElement().recibirDanio(1)
+      estadoActual = atacando
+      game.schedule(250, {estadoActual = relajado})
+      if (self.hayAlgoAdelante()) {
+        game.getObjectsIn(ultimaDireccion.siguiente(self.position())).uniqueElement().recibirDanio(1)
       }
     }
 
@@ -143,5 +140,27 @@ object francella{
     }
 }
 
+
+// ESTADOS DE PEPE --------------------------------------------------------------------------------
+
+
+class Estado {
+
+    method nombre()
+}
+
+object relajado inherits Estado {
+
+    override method nombre() {
+        return "Relajado"
+    }
+}
+
+object atacando inherits Estado {
+
+    override method nombre() {
+        return "Atacando"
+    }
+}
 
 

@@ -58,6 +58,7 @@ program pepesPizzeria{
 
     keyboard.e().onPressDo({francella.colocar()})
     keyboard.f().onPressDo({francella.agarrar()})
+    keyboard.space().onPressDo({francella.atacar()})
 
 // INICIO DE JUEGO
 
