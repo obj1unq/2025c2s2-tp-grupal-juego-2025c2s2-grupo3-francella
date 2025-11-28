@@ -70,6 +70,7 @@ object masa inherits Comida {
     method position(_position) {}
 
     //Metodos funcionales
+
     method tipoIngrediente() { 
     //Sirve a la hora de pedir su tipo
         return self
@@ -81,6 +82,7 @@ object masa inherits Comida {
     }
 
     //Booleanos
+    
     method hayIngredientesNecesariosEn(ingredientesEncima) { 
     //Sirve a la hora de chequear si los ingredientes encima de la mesada de la sección de amasado son los necesarios para armar la masa
         return recetaDeMasa == self.tiposDe(ingredientesEncima)
