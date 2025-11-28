@@ -14,7 +14,6 @@ object francella{
     var property position   = game.at(15,6)
     var property itemEnMano = []
     var clienteActual     = vacio
-    var vidas               = 10
     var ultimaDireccion     = abajo
     var estadoActual        = relajado
 
