@@ -20,6 +20,7 @@ class Cliente {
     method hacerPedido() {
         game.say(self, "Quiero ordenar una " + tipoDePizzaPedido.nombreDeLaPizza())
         self.anotarPedido()
+        chef.clienteActual(self)
     }
     method anotarPedido() {
         pedido.ultimaPizzaPedida(tipoDePizzaPedido.nombreDeLaPizza())
