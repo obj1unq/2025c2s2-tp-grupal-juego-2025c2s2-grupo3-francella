@@ -19,6 +19,10 @@ object colisiones {
         celdasConColision.add(_position)
     }
 
+    method removerColision(_position) {
+        celdasConColision.remove(_position)
+    }
+
     method hayColisionEn(celda) {
         return celdasConColision.contains(celda)
     }
@@ -98,9 +102,24 @@ class Puerta {
 
     method mecanismoCuandoPasaFrancella() {
         game.onTick(100, "puerta", {
-            if (self.chefPasaSobreLaPuerta() and self.condicionParaAbrir()) {
-                self.abrir()
-                game.schedule(3000, {self.cerrar()})
+            if (self.condicionParaAbrir()) {
+                colisiones.removerColision(position)
+                self.abrirPuertaTemporalmente()
+            }
+        })
+    }
+
+    method abrirPuertaTemporalmente() {
+        if (self.chefPasaSobreLaPuerta()) {
+            self.abrir()
+            game.schedule(3000, {self.cerrar()})
+        }
+    }
+
+    method cerrarPuertasQueNoCumplenCondicion() {
+        game.onTick(100, "cerrarPuertas", {
+            if (not self.condicionParaAbrir()) {
+                colisiones.establecerNuevaColision(position)
             }
         })
     }
@@ -309,6 +328,7 @@ object pf inherits Dibujo {
 //Representa la puerta del freezer en el mapa
     override method dibujar(position) {
         puertaDelFreezer.position(position)
+        colisiones.establecerNuevaColision(position)
         game.addVisual(puertaDelFreezer)
     }
 }
@@ -317,6 +337,7 @@ object pa inherits Dibujo {
 //Representa la puerta del almacen en el mapa
     override method dibujar(position) {
         puertaDelAlmacen.position(position)
+        colisiones.establecerNuevaColision(position)
         game.addVisual(puertaDelAlmacen)
     }
 }
@@ -325,6 +346,7 @@ object pm inherits Dibujo {
 //Representa la puerta de la seccion de amasado en el mapa
     override method dibujar(position) {
         puertaDeLaSeccionDeAmasado.position(position)
+        colisiones.establecerNuevaColision(position)
         game.addVisual(puertaDeLaSeccionDeAmasado)
     }
 }
