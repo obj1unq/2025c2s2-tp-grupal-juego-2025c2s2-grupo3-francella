@@ -195,7 +195,7 @@ class Mesada inherits PiezaDeCocina {
 
   const ingredientesEncima = #{}
   //Ingredientes que están sobre la mesada
-  
+
   method contenido() {
   //Cada mesada tiene un contenido distinto (masa o pizza)
     return 
@@ -246,6 +246,11 @@ object mesadaParaPizza inherits Mesada(position = game.at(7, 7)) {
   //Le da al chef una pizza con los ingredientes que tiene encima
     self.contenido().agregarIngredientes(ingredientesEncima)
     super()
+  }
+
+  method tieneEncima(ingrediente) {
+  //Devuelve true si el ingrediente pedido está sobre la mesada
+    return ingredientesEncima.any({ingredienteEncima => ingredienteEncima.tipoIngrediente() == ingrediente})
   }
 }
 

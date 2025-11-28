@@ -13,8 +13,7 @@ import vidasYEnemigos.*
 object francella{
     var property position   = game.at(15,6)
     var property itemEnMano = []
-    const clienteActual     = cliente1
-    var vidas               = 10
+    var clienteActual     = vacio
     var ultimaDireccion     = abajo
     var estadoActual        = relajado
 
@@ -22,8 +21,8 @@ object francella{
         return "pepito" + estadoActual.nombre() + ultimaDireccion.nombre() + ".gif"
     }
 
-    method recibirDanio(cantidadDeDanio) {
-        vidas -= cantidadDeDanio
+    method clienteActual(_cliente) {
+      clienteActual = _cliente
     }
 
     // BOOLEANOS -------------------------------------------------------------------------------

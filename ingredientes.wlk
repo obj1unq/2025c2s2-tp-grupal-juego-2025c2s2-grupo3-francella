@@ -243,7 +243,7 @@ object factoryLevadura inherits FactoryIngredientes {
 
 // WKO que sirven para determinar los tipos de los ingredientes a la hora de las comparaciones:
 
-// object masa{}
+//object masa{}
 object salsa{}
 object queso{}
 object tomate{}

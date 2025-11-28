@@ -1,6 +1,9 @@
+import pizzeria.*
 import francella.*
 import direcciones.*
 import interfazVisual.*
+import comidas.*
+import ingredientes.*
 
 // Objetos de mapa------------------------------------------------------------
 //Aca va todo lo relacionado a objetos del mapa en si, como colisiones, freezer e intermediarios de interaccion entre francella y otros objetos.
@@ -14,6 +17,10 @@ object colisiones {
 
     method establecerNuevaColision(_position) {
         celdasConColision.add(_position)
+    }
+
+    method removerColision(_position) {
+        celdasConColision.remove(_position)
     }
 
     method hayColisionEn(celda) {
@@ -57,13 +64,7 @@ object freezer {
 
 // Puertas -------------------------------------------------------------------
 object gestorPuertas {
-    const puertas = #{}
-
-    method establecerNuevaPuerta(_position) {
-        const nuevaPuerta = new Puerta(position = _position)
-        puertas.add(nuevaPuerta)
-        game.addVisual(nuevaPuerta)
-    }
+    const puertas = #{puertaDelAlmacen, puertaDelFreezer, puertaDeLaSeccionDeAmasado}
 
     method iniciarPuertas() {
         puertas.forEach({puerta => puerta.mecanismoCuandoPasaFrancella()})
@@ -72,7 +73,7 @@ object gestorPuertas {
 class Puerta {
 //Clase que representa una puerta en el mapa, que puede estar abierta o cerrada
 
-    const property position
+    var property position
 
     var estado = puertaCerrada
 
@@ -90,20 +91,60 @@ class Puerta {
         estado = puertaCerrada
     }
 
+
     method chefPasaSobreLaPuerta() {
         return chef.position() == position
     }
 
+    method condicionParaAbrir() {
+        return true
+    }
+
     method mecanismoCuandoPasaFrancella() {
         game.onTick(100, "puerta", {
-            if (self.chefPasaSobreLaPuerta()) {
-                self.abrir()
-                game.schedule(3000, {self.cerrar()})
+            if (self.condicionParaAbrir()) {
+                colisiones.removerColision(position)
+                self.abrirPuertaTemporalmente()
+            }
+        })
+    }
+
+    method abrirPuertaTemporalmente() {
+        if (self.chefPasaSobreLaPuerta()) {
+            self.abrir()
+            game.schedule(3000, {self.cerrar()})
+        }
+    }
+
+    method cerrarPuertasQueNoCumplenCondicion() {
+        game.onTick(100, "cerrarPuertas", {
+            if (not self.condicionParaAbrir()) {
+                colisiones.establecerNuevaColision(position)
             }
         })
     }
 
 }
+
+//Puertas disponibles -------------------------------------------------------
+object puertaDelAlmacen inherits Puerta (position = game.at(5,3)) {
+    override method condicionParaAbrir() {
+        return mesadaParaPizza.tieneEncima(masa)
+    }
+}
+
+object puertaDelFreezer inherits Puerta (position = game.at(15,0)) {
+    override method condicionParaAbrir() {
+        return  mesadaParaPizza.tieneEncima(salsa) and 
+                mesadaParaPizza.tieneEncima(queso)
+    }
+}
+
+object puertaDeLaSeccionDeAmasado inherits Puerta (position = game.at(15,3)) {
+}
+
+
+
 //Estados de las puertas -------------------------------------------------------
 object puertaAbierta {
     method image() {
@@ -267,8 +308,6 @@ object id inherits Dibujo {
     }
 }
 
-
-
 object il inherits Dibujo { 
 //Representa un intermediario a la izquierda en el mapa
 
@@ -285,13 +324,34 @@ object ir inherits Dibujo {
     }
 }
 
-object pt inherits Dibujo { 
-//Representa una puerta en el mapa
-
+object pf inherits Dibujo {
+//Representa la puerta del freezer en el mapa
     override method dibujar(position) {
-        gestorPuertas.establecerNuevaPuerta(position)
+        puertaDelFreezer.position(position)
+        colisiones.establecerNuevaColision(position)
+        game.addVisual(puertaDelFreezer)
     }
 }
+
+object pa inherits Dibujo {
+//Representa la puerta del almacen en el mapa
+    override method dibujar(position) {
+        puertaDelAlmacen.position(position)
+        colisiones.establecerNuevaColision(position)
+        game.addVisual(puertaDelAlmacen)
+    }
+}
+
+object pm inherits Dibujo {
+//Representa la puerta de la seccion de amasado en el mapa
+    override method dibujar(position) {
+        puertaDeLaSeccionDeAmasado.position(position)
+        colisiones.establecerNuevaColision(position)
+        game.addVisual(puertaDeLaSeccionDeAmasado)
+    }
+}
+
+
 
 //El objeto mapa es el que se encarga de dibujar el mapa del juego, utilizando una matriz de objetos que representan las distintas partes objetos posibles, representados por dos caracteres, recorriendo dicha matriz y llamando al método dibujar de cada objeto en la posición correspondiente.
 object mapa {
@@ -299,7 +359,7 @@ object mapa {
         [ __, __, __, __, __, cc, cc, cc, cc, cc, __, __, __, __, ir, cc ],
         [ __, __, __, __, __, iu, __, iu, __, iu, __, __, __, __, __, __ ],
         [ __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __ ],
-        [ __, __, __, __, __, cc, pt, cc, cc, cc, pt, cc, cc, cc, pt, cc ],
+        [ __, __, __, __, __, cc, pf, cc, cc, cc, pa, cc, cc, cc, pm, cc ],
         [ __, __, __, __, __, fr, fr, fr, cc, __, __, __, cc, cc, __, cc ],
         [ __, __, __, __, __, fr, fr, fr, cc, __, __, __, cc, iu, __, iu ],
         [ __, __, __, __, __, fr, fr, fr, cc, __, __, __, cc, id, __, id ],
