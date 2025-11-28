@@ -229,7 +229,7 @@ class Mesada inherits PiezaDeCocina {
 object mesadaParaPizza inherits Mesada(position = game.at(7, 7)) {
   
   override method image() {
-    return "mesadaPizzaTest.png"
+    return "mesadaPizza.png"
   }
 
   override method contenido() {

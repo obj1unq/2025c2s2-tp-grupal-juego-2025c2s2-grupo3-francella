@@ -13,9 +13,17 @@ import vidasYEnemigos.*
 object francella{
     var property position   = game.at(15,6)
     var property itemEnMano = []
+    const clienteActual     = cliente1
+    var vidas               = 10
+    var ultimaDireccion     = abajo
+    var estadoActual        = relajado
 
     method image(){
-        return "pepitoHD.png"
+        return "pepito" + estadoActual.nombre() + ultimaDireccion.nombre() + ".gif"
+    }
+
+    method recibirDanio(cantidadDeDanio) {
+        vidas -= cantidadDeDanio
     }
 
     // BOOLEANOS -------------------------------------------------------------------------------
@@ -34,7 +42,11 @@ object francella{
     }
 
     method hayMasDeUnItemEnLaCelda() {
-        return game.colliders(self).size() > 1
+      return game.colliders(self).size() > 1
+    }
+
+    method hayAlgoAdelante() {
+      return not ((game.getObjectsIn(ultimaDireccion.siguiente(self.position()))).isEmpty())
     }
     
     method estoyFueraDePeligro() {
@@ -45,6 +57,7 @@ object francella{
 
 
     method mover(direccion) {
+        ultimaDireccion = direccion
         if (self.puedeMover(direccion)) {
             position = direccion.siguiente(self.position())
         }
@@ -128,7 +141,20 @@ object francella{
     }
 
 
+    //ATACAR ------------------------------------------------------------------------------------
+
+
+    method atacar() {
+      estadoActual = atacando
+      game.schedule(250, {estadoActual = relajado})
+      if (self.hayAlgoAdelante()) {
+        game.getObjectsIn(ultimaDireccion.siguiente(self.position())).uniqueElement().recibirDanio(1)
+      }
+    }
+
+
     //GAMESTATES --------------------------------------------------------------------------------
+
 
     method gameState(visual) {
       game.stop()
@@ -154,5 +180,27 @@ object francella{
     }
 }
 
+
+// ESTADOS DE PEPE --------------------------------------------------------------------------------
+
+
+class Estado {
+
+    method nombre()
+}
+
+object relajado inherits Estado {
+
+    override method nombre() {
+        return "Relajado"
+    }
+}
+
+object atacando inherits Estado {
+
+    override method nombre() {
+        return "Atacando"
+    }
+}
 
 
