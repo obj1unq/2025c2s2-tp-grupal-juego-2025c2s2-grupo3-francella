@@ -41,7 +41,7 @@ object sistemaVidas {
 
 //Por el momento (y muy seguramente en la versión final) solo habrá una rata como enemigo en el almacen custiodiando el queso y la salsa. El como persigue a francella y el sistema de vidas quedará para más adelante.
 object rata{
-    var estado = rataEsperando
+    var estado = rataAtacando
     var vidas = 3
     const victima = francella
 
@@ -79,19 +79,38 @@ object rataAtacando{
     method x() = self.position().x()
     method y() = self.position().y()
 
-    method iniciarMovimiento(){ // NO FUNCIONA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // Comienza un onTick para mover a la rata hacia francella cada cierto tiempo
-        game.onTick(500, "Persecusión de la rata", {self.moverseHaciaVictima()})
+    // Máximo de x
+    method maxX() = 11
+
+    method movimiento(){
+        game.onTick(500, "Rata en movimiento", {self.trasladarse()})
     }
 
-    method moverseHaciaVictima(){ // NO FUNCIONA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // Compara la posición de francella con la propia para poder dirigirse hacia él.
-        if(victima.x() > self.x()) {self.position().right(1)}
-        if(victima.x() < self.x()) {self.position().left(1)}
-        if(victima.y() > self.y()) {self.position().up(1)}
-        if(victima.y() < self.y()) {self.position().down(1)}
+    method trasladarse(){
+        if (self.x() < self.maxX()){
+            self.position().right(1)
+        }
+        else if (self.x() == self.maxX()){
+            self.position().left(2)
+        }
     }
+
+        
+    // method iniciarMovimiento(){ // NO FUNCIONA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //     // Comienza un onTick para mover a la rata hacia francella cada cierto tiempo
+    //     game.onTick(500, "Persecusión de la rata", {self.moverseHaciaVictima()})
+    // }
+
+    // method moverseHaciaVictima(){ // NO FUNCIONA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //     // Compara la posición de francella con la propia para poder dirigirse hacia él.
+    //     if(victima.x() > self.x()) {self.position().right(1)}
+    //     if(victima.x() < self.x()) {self.position().left(1)}
+    //     if(victima.y() > self.y()) {self.position().up(1)}
+    //     if(victima.y() < self.y()) {self.position().down(1)}
+    // }
+
 }
+
 
 
 

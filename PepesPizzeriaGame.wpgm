@@ -61,6 +61,7 @@ program pepesPizzeria{
     game.start()
     game.schedule(4000, {cliente.hacerPedido()})
     timer.start(120)
+    rataAtacando.movimiento()
     musicaDeFondo.reproducir()
     freezer.congelarAlVictimaSiEsta()
     gestorPuertas.iniciarPuertas()
