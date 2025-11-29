@@ -1,6 +1,6 @@
 import game.*
 import francella.*
-
+import mapa.*
 
 //Direcciones para moverse por el mapa:
 //Son las direcciones hacia las cuales se puede mover el jugador. Están limitadas desde el eje x para no moverse sobre la seccion de la pantalla dedicada a mostrar las mesadas
@@ -65,34 +65,47 @@ object abajo inherits DireccionJugador{
 
 class DireccionPersecusion{
     
-    method siguiente(enemigoPosition, victimaPosition)
+    method direccionSiguiente(enemigoPosition, victimaPosition)
+
+    method movimientoSiguiente(enemigoPosition, victimaPosition) {
+        if (self.noHayColisionables(enemigoPosition, victimaPosition)) {
+            return self.direccionSiguiente(enemigoPosition, victimaPosition)
+        }
+        else {
+            return enemigoPosition
+        }
+    }
+
+    method noHayColisionables(enemigoPosition, victimaPosition){
+        return not colisiones.hayColisionEn(self.direccionSiguiente(enemigoPosition, victimaPosition))
+    }
 }
 
 
 object izquierdaPersecusion inherits DireccionPersecusion{
 
-    override method siguiente(enemigoPosition, victimaPosition){
+    override method direccionSiguiente(enemigoPosition, victimaPosition){
         return game.at(victimaPosition.x().max(enemigoPosition.x() - 1), enemigoPosition.y())
     }
 }
 
 object derechaPersecusion inherits DireccionPersecusion{
     
-    override method siguiente(enemigoPosition, victimaPosition){
+    override method direccionSiguiente(enemigoPosition, victimaPosition){
         return game.at(victimaPosition.x().min(enemigoPosition.x() + 1), enemigoPosition.y())
     }
 }
 
 object arribaPersecusion inherits DireccionPersecusion{
     
-    override method siguiente(enemigoPosition, victimaPosition){
+    override method direccionSiguiente(enemigoPosition, victimaPosition){
         return game.at(enemigoPosition.x(), victimaPosition.y().min(enemigoPosition.y() + 1))
     }
 }
 
 object abajoPersecusion inherits DireccionPersecusion{
     
-    override method siguiente(enemigoPosition, victimaPosition){
+    override method direccionSiguiente(enemigoPosition, victimaPosition){
         return game.at(enemigoPosition.x(), victimaPosition.y().max(enemigoPosition.y() - 1))
     }
 }

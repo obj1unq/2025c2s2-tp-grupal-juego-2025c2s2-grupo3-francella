@@ -52,7 +52,8 @@ object rata{
     //La rata pierde vidas de a uno
         vidas -= puntosDeVida
         if (vidas <= 0) {
-            game.removeVisual(self) // esto no mata a la rata, solo la hace invisible, lo que quiere decir que el ontick sigue funcionando y la rata sigue atacando. para arreglar.
+            game.removeVisual(self) 
+            game.removeTickEvent("Persecusión de la rata")
         }
     }
     
@@ -82,16 +83,16 @@ object rata{
 
     method elegirArribaOAbajo() {
         if (self.laVictimaEstaAbajo()) {
-            position = abajoPersecusion.siguiente(self.position(), victima.position())
+            position = abajoPersecusion.movimientoSiguiente(self.position(), victima.position())
         }
-        else position = arribaPersecusion.siguiente(self.position(), victima.position())
+        else position = arribaPersecusion.movimientoSiguiente(self.position(), victima.position())
     }
 
     method elegirIzquierdaODerecha() {
         if (self.laVictimaEstaALaDerecha()) {
-            position = derechaPersecusion.siguiente(self.position(), victima.position())
+            position = derechaPersecusion.movimientoSiguiente(self.position(), victima.position())
         }
-        else position = izquierdaPersecusion.siguiente(self.position(), victima.position())
+        else position = izquierdaPersecusion.movimientoSiguiente(self.position(), victima.position())
     }
 
 
