@@ -121,7 +121,7 @@ object francella{
     }
 
     method perderSiNoTieneVidas() {
-      if (sistemaVidas.vidasLlenas() == 0) {
+      if (sistemaVidas.vidas() == 0) {
         self.gameOver()
       }
     }

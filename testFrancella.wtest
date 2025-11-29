@@ -2,75 +2,80 @@ import clientes.*
 import direcciones.*
 import francella.*
 import pizzeria.*
-import interfaz.*
-import tiposPizzas.*
+import comidas.*
+import interfazVisual.*
+import mapa.*
+import randomizer.*
+import timer.*
+import vidasYEnemigos.*
 import ingredientes.*
 
 //Los test de Francella. A la fecha de este comentario está sumamente desactualizado y carece de uso. En futuras versiones será revisionado y se le cambiaran los métodos y se agregarán más para un testeo correcto sin necesidad de abrir el juego en si.
-describe "Test con Francella" {
-    var ingredientePrueba
-    test "Test Movimiento: Francella no puede moverse hacia la tabla" {
-        francella.position(game.at(10,8))
-        francella.mover(izquierda)
-        assert.equals(game.at(10,8), francella.position())
+describe "Tests con Francella" {
+    const cliente1 = new Cliente()
+    test "Francella se puede mover" {
+        francella.position(game.at(1,1))
+        francella.mover(derecha)
+        assert.equals(game.at(2,1), francella.position())
     }
-    test "Test Agarrar Ingrediente: No hay ingrediente donde está Francella" {
-        assert.throwsException({ francella.agarrarIngrediente() })
+    test "Agarrar un ingrediente, pero no hay item que agarrar" {
+        assert.that(francella.itemEnMano().isEmpty())
+        francella.agarrar()
+        assert.that(francella.itemEnMano().isEmpty())
     }
-    test "Test Agarrar Ingrediente: Hay un ingrediente donde está Francella" {
-        ingredientePrueba = new Masa(position = game.at(10, 8))
+    test "Agarrar un ingrediente" {
+        const ingredientePrueba = new Queso(position = game.at(10, 8))
         francella.position(game.at(10, 8))
         game.addVisual(francella)
         game.addVisual(ingredientePrueba)
-        francella.agarrarIngrediente()
+        francella.agarrar()
         assert.notThat(francella.itemEnMano().isEmpty())
         assert.notThat(game.hasVisual(ingredientePrueba))
     }
-    
-    test "Test Armar Pizza: Francella no está frente a la mesada" {
-        francella.position(game.at(10, 8))
-        assert.throwsException({ francella.armarPizza() })
-
+    test "Recibir daño"{
+        assert.equals(3, sistemaVidas.vidas()) 
+        francella.recibirDanio(1)
+        assert.equals(2, sistemaVidas.vidas())
     }
-
+    test "Atacar"{
+        // Debería funcionar, pero no estoy logrando que enganche el ataque
+        francella.position(game.at(1,2))
+        francella.mover(abajo)
+        rata.position(game.at(1,1))
+        assert.equals(3, rata.vidas())
+        francella.atacar()
+        assert.equals(2, rata.vidas())
+    }
     test "Test Armar Pizza: Francella está frente a la mesada" {
-        ingredientePrueba = new Masa(position = game.at(10, 8))
-        francella.itemEnMano().add(ingredientePrueba)
-        francella.position(game.at(mesada.position().x(), mesada.position().y() - 1))
-        francella.armarPizza()
+        // Al no tener más excepciones para la mesada, se vuelve confuso
+        francella.itemEnMano().add(masa)
+        francella.position(game.at(mesadaParaMasa.position().x(), mesadaParaMasa.position().y() + 1))
+        francella.colocar()
+        francella.agarrar()
         assert.equals([pizza], francella.itemEnMano())
-    }
-
-    test "Test Entregar Pizza: Francella no está frente al cliente" {
-        francella.position(game.at(10, 8))
-        assert.throwsException({ francella.entregarPizza() })
     }
 
     test  "Test Entregar Pizza: Francella está frente al cliente pero con una pizza cruda" {
         francella.position(game.at(cliente1.position().x() - 1, cliente1.position().y()))
         francella.itemEnMano().add(pizza)
-        assert.throwsException({ francella.entregarPizza() })
+        assert.throwsException({ francella.agarrar() })
     }
     test "Test Entregar Pizza: Francella está frente al cliente (Sin importar si es lo que el cliente pidio o no)" {
         francella.position(game.at(cliente1.position().x() - 1, cliente1.position().y()))
         francella.itemEnMano().add(pizza)
         pizza.estaCocinada(true)
         assert.notThat(cliente1.esLoQuePedi(pizza))
-        assert.throwsException({francella.entregarPizza()})
+        assert.throwsException({francella.agarrar()})
     }
 
     test "Test Entregar Pizza: Francella está frente al cliente con la pizza pedida por este" {
+        // Por alguna razón, no está comparando bien los tipos de ingredientes
         francella.position(game.at(cliente1.position().x() - 1, cliente1.position().y()))
         francella.itemEnMano().add(pizza)
         pizza.estaCocinada(true)
         pizza.ingredientes().addAll(cliente1.tipoDePizzaPedido().ingredientesNecesarios())
         assert.that(cliente1.esLoQuePedi(pizza))
-        francella.entregarPizza()
+        francella.agarrar()
         assert.that(francella.itemEnMano().isEmpty())
-    }
-
-    test "Test Game Over" {
-        francella.gameOver()
-        assert.that(game.hasVisual(gameOver))
     }
 }
