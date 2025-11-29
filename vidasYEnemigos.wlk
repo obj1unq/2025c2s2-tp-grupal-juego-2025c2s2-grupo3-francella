@@ -7,7 +7,7 @@ import direcciones.*
 //Sistema de vidas rudimentario que está desacoplado de francella. En futuras versiones puede ser modelado para que interactue con francella u otros cambios.
 
 object sistemaVidas {
-    var vidasLlenas = self.vidasMaximas()
+    var vidas = self.vidasMaximas()
     //Francella empieza con la cantidad máxima de vidas
 
     method position() {
@@ -15,21 +15,21 @@ object sistemaVidas {
     }
 
     method image() {
-        return "corazones" + vidasLlenas.toString() + ".png"
+        return "corazones" + vidas.toString() + ".png"
     }
 
-    method vidasLlenas() {
-        return vidasLlenas
+    method vidas() {
+        return vidas
     }
 
     method restarVidas(cantidad) {
     //Resta vidas hasta llegar a 0
-        vidasLlenas -= self.vidasMaximas().min(cantidad)
+        vidas -= self.vidasMaximas().min(cantidad)
     }
 
     method restaurarVidas(cantidad) {
     //Restaura vidas hasta el máximo permitido
-        vidasLlenas = (vidasLlenas + cantidad).min(self.vidasMaximas())
+        vidas = (vidas + cantidad).min(self.vidasMaximas())
     }
 
     method vidasMaximas() {
@@ -62,6 +62,10 @@ object rata{
         if (game.onSameCell(francella.position(), self.position())) {
             victima.recibirDanio(2)
         }
+    }
+
+    method vidas(){
+        return vidas
     }
 
 
