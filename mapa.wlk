@@ -28,18 +28,15 @@ object colisiones {
     }
 }
 
-object freezer { 
-//Establece las celdas a lo referente al freezer, que le quitara vida a francella si está mucho tiempo en ellas.
+class SeccionDelMapa { 
+//Clase que representa una sección del mapa, la cual tiene celdas definidas que serán usadas por otros objetos para definir sus áreas de influencia.
 
-    const celdasDelFreezer = #{}
-    //Set de celdas que pertenecen al freezer
+    const celdas = #{}
 
-    const victima          = francella
-    //La victima del freezer es francella 
+    const victima = francella
 
-    method establecerNuevaCeldaDelFreezer(_position) {
-    //Agrega una nueva celda al set de celdas del freezer
-        celdasDelFreezer.add(_position)
+    method establecerNuevaCelda(_position) {
+        celdas.add(_position)
     }
 
     method estaVictimaEnCelda(celda) {
@@ -47,20 +44,34 @@ object freezer {
         return celda == victima.position()
     }
 
-    method estaVictimaEnElFreezer() {
-    //Chequea si la victima está en alguna de las celdas del freezer
-        return celdasDelFreezer.any({celda => self.estaVictimaEnCelda(celda)})
+    method estaVictimaEnLaSeccion() {
+    //Chequea si la victima está en alguna de las celdas de la sección
+        return celdas.any({celda => self.estaVictimaEnCelda(celda)})
     }
+
+}
+
+
+
+object freezer inherits SeccionDelMapa { 
+//Establece las celdas a lo referente al freezer, que le quitara vida a francella si está mucho tiempo en ellas.
+
 
     method congelarAlVictimaSiEsta() {
     //Cada cierto tiempo chequea si la victima está en el freezer, y si es así le quita vida
         game.onTick(2500, "congelador", {
-            if (self.estaVictimaEnElFreezer()) {
+            if (self.estaVictimaEnLaSeccion()) {
                 victima.recibirDanio(1)
             }
         })
     }
 }
+
+object almacen inherits SeccionDelMapa {
+    //Establece las celdas del almacen, para que la rata persiga a francella solo si esta está dentro de este mismo.
+
+}
+
 
 // Puertas -------------------------------------------------------------------
 object gestorPuertas {
@@ -279,7 +290,15 @@ object fr inherits Dibujo {
 //Representa una celda del freezer en el mapa
     
     override method dibujar(position) {
-        freezer.establecerNuevaCeldaDelFreezer(position)
+        freezer.establecerNuevaCelda(position)
+    }
+}
+
+object am inherits Dibujo { 
+//Representa una celda del almacen en el mapa
+    
+    override method dibujar(position) {
+        almacen.establecerNuevaCelda(position)
     }
 }
 
@@ -360,10 +379,10 @@ object mapa {
         [ __, __, __, __, __, iu, __, iu, __, iu, __, __, __, __, __, __ ],
         [ __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __ ],
         [ __, __, __, __, __, cc, pf, cc, cc, cc, pa, cc, cc, cc, pm, cc ],
-        [ __, __, __, __, __, fr, fr, fr, cc, __, __, __, cc, cc, __, cc ],
-        [ __, __, __, __, __, fr, fr, fr, cc, __, __, __, cc, iu, __, iu ],
-        [ __, __, __, __, __, fr, fr, fr, cc, __, __, __, cc, id, __, id ],
-        [ __, __, __, __, __, fr, fr, fr, cc, __, __, __, cc, cc, cc, cc ]
+        [ __, __, __, __, __, fr, fr, fr, cc, am, am, am, cc, cc, __, cc ],
+        [ __, __, __, __, __, fr, fr, fr, cc, am, am, am, cc, iu, __, iu ],
+        [ __, __, __, __, __, fr, fr, fr, cc, am, am, am, cc, id, __, id ],
+        [ __, __, __, __, __, fr, fr, fr, cc, am, am, am, cc, cc, cc, cc ]
     ].reverse()
 
     method dibujarMapa() {

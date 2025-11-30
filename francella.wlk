@@ -44,7 +44,7 @@ object francella{
     }
     
     method estoyFueraDePeligro() {
-      return not freezer.estaVictimaEnElFreezer()
+      return not freezer.estaVictimaEnLaSeccion()
     }
 
     // MOVIMIENTOS -----------------------------------------------------------------------------
