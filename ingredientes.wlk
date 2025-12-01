@@ -54,6 +54,7 @@ class Ingrediente {
 
     method nombre()
     //Cada ingrediente tiene su propio nombre
+    method recibirDanio(daño) {}
 }
 
 

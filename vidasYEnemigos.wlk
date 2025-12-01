@@ -1,6 +1,7 @@
 import ingredientes.*
 import francella.*
 import direcciones.*
+import mapa.*
 
 
 
@@ -41,7 +42,13 @@ object rata{
 
     method iniciarPersecusion(){ 
     //Prepara a la rata para atacar a francella
-        game.onTick(2000, "Persecusión de la rata", {self.moverseHaciaVictima() self.inflingirDanio()})
+        game.onTick(3000, "Persecusión de la rata", {self.perseguirAVictima() self.inflingirDanio()})
+    }
+
+    method perseguirAVictima() {
+        if (self.laVictimaEntroAlAlmacen()) {
+            self.moverseHaciaVictima()
+        }
     }
 
     method moverseHaciaVictima() {
@@ -69,6 +76,9 @@ object rata{
 
     // BOOLEANOS --------------------------------------------------------------------------------------------------------
 
+    method laVictimaEntroAlAlmacen() {
+        return almacen.estaVictimaEnLaSeccion()
+    }
 
     method laVictimaEstaALaDerecha() {
         return self.position().x() - victima.position().x() > victima.position().x() - self.position().x()
