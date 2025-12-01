@@ -33,18 +33,18 @@ describe "Tests con Francella" {
         assert.notThat(game.hasVisual(ingredientePrueba))
     }
     test "Recibir daño"{
-        assert.equals(3, sistemaVidas.vidas()) 
+        assert.equals(10, francella.vida()) 
         francella.recibirDanio(1)
-        assert.equals(2, sistemaVidas.vidas())
+        assert.equals(9, francella.vida())
     }
 
     test "Recibir Daño - Freezer" {
         francella.position(game.at(5,5))
         freezer.establecerNuevaCelda(francella.position())
-        assert.equals(3, sistemaVidas.vidas())
+        assert.equals(10, francella.vida())
         assert.that(freezer.estaVictimaEnLaSeccion())
         freezer.congelamiento()
-        assert.equals(2, sistemaVidas.vidas())
+        assert.equals(9, francella.vida())
     }
 
     test "Atacar"{
@@ -52,9 +52,9 @@ describe "Tests con Francella" {
         francella.mover(arriba)
         rata.position(game.at(1,4))
         game.addVisual(rata)
-        assert.equals(3, rata.vidas())
+        assert.equals(3, rata.vida())
         francella.atacar()
-        assert.equals(2, rata.vidas())
+        assert.equals(2, rata.vida())
     }
     test "Test Armar Pizza: Francella está frente a la mesada" {
         francella.itemEnMano().add(masa)
