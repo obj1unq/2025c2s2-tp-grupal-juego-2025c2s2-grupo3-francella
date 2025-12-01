@@ -65,4 +65,6 @@ class Cliente {
     //Accion por defecto para recordarle a francella lo que él pidió
         game.say(self, "Flaco te dije que quería una " + tipoDePizzaPedido.nombreDeLaPizza() + ", metele")
     }
+
+    method recibirDanio(daño) {}
 }

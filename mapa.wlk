@@ -135,6 +135,8 @@ class Puerta {
         })
     }
 
+    method recibirDanio(daño) {}
+
 }
 
 //Puertas disponibles -------------------------------------------------------

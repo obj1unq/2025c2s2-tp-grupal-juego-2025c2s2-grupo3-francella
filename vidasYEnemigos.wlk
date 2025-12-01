@@ -37,6 +37,8 @@ object sistemaVidas {
     //El sistema de vidas tiene 3 vidas máximas
         return 3
     }
+
+    method recibirDanio(daño) {}
 }
 
 //Enemigos del juego -----------------------

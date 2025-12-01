@@ -22,6 +22,8 @@ object tachoDeBasura {
   method recibirAgarrar() {
     game.say(chef, "No pienso meter la mano ahí")
   }
+
+  method recibirDanio(daño) {}
 }
 
 class PiezaDeCocina {
@@ -54,6 +56,8 @@ class PiezaDeCocina {
     self.serLevantado()
     chef.dejarItem()
   }
+
+  method recibirDanio(daño) {}
 
 }
 
