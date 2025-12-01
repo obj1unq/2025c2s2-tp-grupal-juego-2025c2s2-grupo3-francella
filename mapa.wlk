@@ -150,8 +150,7 @@ object puertaDelAlmacen inherits Puerta (position = game.at(5,3)) {
 
 object puertaDelFreezer inherits Puerta (position = game.at(15,0)) {
     override method condicionParaAbrir() {
-        return  mesadaParaPizza.tieneEncima(salsa) and 
-                mesadaParaPizza.tieneEncima(queso)
+        return mesadaParaPizza.tieneEncima(queso)
     }
 }
 
