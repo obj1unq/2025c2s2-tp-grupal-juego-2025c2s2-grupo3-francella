@@ -274,3 +274,15 @@ object mesadaParaMasa inherits Mesada(position = game.at(13,0)) {
     return self.contenido().hayIngredientesNecesariosEn(ingredientesEncima)
   }
 }
+
+object vacio { 
+//Objeto "vacio" utilizado para representar un objeto vacio, tanto para la interfaz del inventario como para otros posibles usos.
+    method image() {
+        return "blank.png"
+    }
+
+    method estaCocinada() { 
+    //Usado para el horno, indica que un objeto vacio no puede estar cocinado
+        return false
+    }
+}

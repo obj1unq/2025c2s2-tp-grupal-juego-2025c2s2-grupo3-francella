@@ -7,7 +7,7 @@ import interfazVisual.*
 import mapa.*
 import randomizer.*
 import timer.*
-import vidasYEnemigos.*
+import enemigos.*
 import ingredientes.*
 
 //Los test de Francella. A la fecha de este comentario está sumamente desactualizado y carece de uso. En futuras versiones será revisionado y se le cambiaran los métodos y se agregarán más para un testeo correcto sin necesidad de abrir el juego en si.

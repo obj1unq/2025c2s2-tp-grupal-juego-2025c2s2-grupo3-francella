@@ -1,5 +1,7 @@
 import ingredientes.*
 import audio.*
+import francella.*
+import pizzeria.*
 
 
 object pedido { 
@@ -13,18 +15,28 @@ object pedido {
     }
 
     method position() {
-        return game.at(2, 6)
+        return game.at(0, 6)
     }
 
-    method text() {
-		return ultimaPizzaPedida
+    method image() {
+		return "pedido" + ultimaPizzaPedida + ".png"
 	}
+}
 
-	method textColor() {
-		return "00000000"
-	}
 
-    // aca vamos a tener que usar imagenes pq no hay forma de manipular el tamaño del texto
+// Sistema de vidas:
+// Sistema de vidas rudimentario que está desacoplado de francella. En futuras versiones puede ser modelado para que interactue con francella u otros cambios.
+
+object visualizacionVidaJugador {
+    var jugador = francella
+
+    method position() {
+        return game.at(2,7)
+    }
+
+    method image() {
+        return "corazones" + jugador.vida().toString() + ".png"
+    }
 }
 
 
@@ -156,16 +168,16 @@ object levaduraInterfaz inherits IngredienteInterfaz {
 object interfazInventario { 
 //Interfaz del inventario, usada para mostrar que ingrediente tiene francella en mano. Se usa un objeto aparte para considerar el caso en que francella no tenga objeto en mano
 
-    var contenidoAMostrar = vacio  
+    var contenidoAMostrar = manoVacia  
     //Inicializa en blank, no mostrando ningún ingrediente en absoluto.
 
     method position() {
-        return game.at(1,7)
+        return game.at(3,0)
     }
 
     method image() {
     //Muestra la imagen del ingrediente que tiene francella en mano
-        return contenidoAMostrar.image() 
+        return contenidoAMostrar.nombre() + "Inventario.png"
     }
 
     method cambiarContenidoMostrado(contenidoNuevo) {   
@@ -175,19 +187,14 @@ object interfazInventario {
 
     method borrarContenidoMostrado() {  
     //Deja en blanco el inventario, usado para casos en que el ingrediente no se
-        contenidoAMostrar = vacio                         
+        contenidoAMostrar = manoVacia                         
     }
 }
 
-object vacio { 
+object manoVacia { 
 //Objeto "vacio" utilizado para representar un objeto vacio, tanto para la interfaz del inventario como para otros posibles usos.
-    method image() {
-        return "blank.png"
-    }
-
-    method estaCocinada() { 
-    //Usado para el horno, indica que un objeto vacio no puede estar cocinado
-        return false
+    method nombre() {
+        return "manoVacia"
     }
 }
 
