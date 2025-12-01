@@ -49,6 +49,8 @@ class Ingrediente {
 
     method tipoIngrediente() 
     //Cada ingrediente tiene su propio tipo para poder ser identificado.
+
+    method recibirDanio(daño) {}
 }
 
 
