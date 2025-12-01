@@ -26,6 +26,7 @@ program pepesPizzeria{
     factoryTomate.spawn (game.at(9,0))
     factoryJamon.spawn  (game.at(7,0))
     factoryCebolla.spawn(game.at(5,0))
+    factoryQueso.spawn (game.at(10,0))
 
     const cliente = new Cliente()
 
