@@ -59,11 +59,13 @@ object freezer inherits SeccionDelMapa {
 
     method congelarAlVictimaSiEsta() {
     //Cada cierto tiempo chequea si la victima está en el freezer, y si es así le quita vida
-        game.onTick(2500, "congelador", {
-            if (self.estaVictimaEnLaSeccion()) {
-                victima.recibirDanio(1)
-            }
-        })
+        game.onTick(2500, "congelador", {self.congelamiento()})
+    }
+
+    method congelamiento() {
+        if (self.estaVictimaEnLaSeccion()) {
+            victima.recibirDanio(1)
+        }
     }
 }
 
