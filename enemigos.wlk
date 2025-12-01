@@ -2,56 +2,23 @@ import ingredientes.*
 import francella.*
 import direcciones.*
 
-//Sistema de vidas-----------------------------------------------------------
 
-//Sistema de vidas rudimentario que está desacoplado de francella. En futuras versiones puede ser modelado para que interactue con francella u otros cambios.
-
-object sistemaVidas {
-    var vidas = self.vidasMaximas()
-    //Francella empieza con la cantidad máxima de vidas
-
-    method position() {
-        return game.at(10,7)
-    }
-
-    method image() {
-        return "corazones" + vidas.toString() + ".png"
-    }
-
-    method vidas() {
-        return vidas
-    }
-
-    method restarVidas(cantidad) {
-    //Resta vidas hasta llegar a 0
-        vidas -= self.vidasMaximas().min(cantidad)
-    }
-
-    method restaurarVidas(cantidad) {
-    //Restaura vidas hasta el máximo permitido
-        vidas = (vidas + cantidad).min(self.vidasMaximas())
-    }
-
-    method vidasMaximas() {
-    //El sistema de vidas tiene 3 vidas máximas
-        return 3
-    }
-}
 
 //Enemigos del juego -----------------------
 
-//Por el momento (y muy seguramente en la versión final) solo habrá una rata como enemigo en el almacen custiodiando el queso y la salsa. El como persigue a francella y el sistema de vidas quedará para más adelante.
+//Por el momento (y muy seguramente en la versión final) solo habrá una rata como enemigo en el almacen custiodiando el queso y la salsa. El como persigue a francella y el sistema de vida quedará para más adelante.
 object rata{
-    var vidas             = 3
+    var vida              = 3
     const victima         = francella
-    var property position = game.at(9,3)
+    var property position = game.at(10,1)
 
-    method image() = "ratamalvada.jpg"
+    method image() = "rataMalvada.png"
 
-    method recibirDanio(puntosDeVida){ 
-    //La rata pierde vidas de a uno
-        vidas -= puntosDeVida
-        if (vidas <= 0) {
+    method recibirDanio(danio){ 
+    //La rata pierde vida de a uno porque es el danio que hace pepe
+        vida = 0.max(vida - danio)
+        if (vida == 0) {
+            factoryQueso.spawn(self.position())
             game.removeVisual(self) 
             game.removeTickEvent("Persecusión de la rata")
         }
@@ -64,8 +31,8 @@ object rata{
         }
     }
 
-    method vidas(){
-        return vidas
+    method vida(){
+        return vida
     }
 
 

@@ -9,7 +9,7 @@ import mapa.*
 import pizzeria.*
 import randomizer.*
 import timer.*
-import vidasYEnemigos.*
+import enemigos.*
 
 
 program pepesPizzeria{
@@ -19,13 +19,12 @@ program pepesPizzeria{
     game.height(8)
     game.width(16)
     game.cellSize(200)
-    game.boardGround("fondoTest.png")
+    game.boardGround("fondo1000.png")
 
 // AÑADIDAS INSTANCIAS
     factorySalsa.spawn  (game.at(11,0))
-    factoryQueso.spawn  (game.at(10,0))
     factoryTomate.spawn (game.at(9,0))
-    factoryJamon.spawn  (game.at(6,0))
+    factoryJamon.spawn  (game.at(7,0))
     factoryCebolla.spawn(game.at(5,0))
 
     const cliente = new Cliente()
@@ -46,7 +45,7 @@ program pepesPizzeria{
     
 // INTERFAZ
     game.addVisual(interfazInventario)
-    game.addVisual(sistemaVidas)
+    game.addVisual(visualizacionVidaJugador)
 
 // MOVIMIENTO Y ACCIONES
     keyboard.right().onPressDo({francella.mover(derecha)})
@@ -65,6 +64,6 @@ program pepesPizzeria{
     musicaDeFondo.reproducir()
     freezer.congelarAlVictimaSiEsta()
     gestorPuertas.iniciarPuertas()
-    francella.restaurarVidasReposo()
+    //francella.restaurarVidaEnReposo()
     game.schedule(10000, {rata.iniciarPersecusion()})
 }

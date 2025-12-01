@@ -26,9 +26,8 @@ object pizza inherits Comida {
     var property estaCocinada = false 
     //Indica si la pizza ya fue cocinada
 
-    //Metodos game
-    method image() {
-        return "pizza.png"
+    method nombre() {
+        return "pizza"
     }
 
     //Metodos lookup
@@ -62,10 +61,11 @@ object masa inherits Comida {
     const recetaDeMasa = #{harina, agua, levadura} 
     //Set de ingredientes necesarios para armar la masa
 
-    //Metodos game
-    method image() {
-        return "bolloInventario.png"
+    method nombre() {
+        return "masa"
     }
+
+    //Metodos game
 
     method position(_position) {}
 
@@ -91,7 +91,7 @@ object masa inherits Comida {
 
 //El objeto tipos de pizzas será usado para que los clientes sepan cuales tipos de pizzas existen y elegir uno de ellos
 object tiposDePizzas {
-    const disponibles = #{pizzaMuzzarella, pizzaNapolitana, pizzaCebolla}
+    const disponibles = #{pizzaMuzzarella, pizzaNapolitana, pizzaFugazzaConQueso}
 
     method disponibles() {
         return disponibles
@@ -99,7 +99,7 @@ object tiposDePizzas {
 }
 
 class Pizzas {
-    const ingredientesNecesarios = #{masa, salsa, queso}
+    const ingredientesNecesarios = #{masa, queso}
 
     method ingredientesNecesarios() {
         return ingredientesNecesarios
@@ -116,27 +116,31 @@ se trabajará con la clase de los ingredientes usados.*/
 
 object pizzaMuzzarella inherits Pizzas {
 
+    override method ingredientesNecesarios() {
+        return super() + #{salsa}
+    }
+
     override method nombreDeLaPizza() {
-        return super() + "de Muzzarella"
+        return super() + "de muzzarella"
     }
 }
 
 object pizzaNapolitana inherits Pizzas {
 
     override method ingredientesNecesarios() {
-        return super() + #{tomate, jamon}
+        return super() + #{salsa, tomate, jamon}
     }
     override method nombreDeLaPizza() {
-        return super() + "Napolitana"
+        return super() + "napolitana"
     }
 }
 
-object pizzaCebolla inherits Pizzas {
+object pizzaFugazzaConQueso inherits Pizzas {
 
     override method ingredientesNecesarios() {
         return super() + #{cebolla}
     }
     override method nombreDeLaPizza() {
-        return super() + "de Cebolla"
+        return "Fugazza con queso"
     }
 }

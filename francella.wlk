@@ -7,7 +7,7 @@ import ingredientes.*
 import interfazVisual.*
 import mapa.*
 import pizzeria.*
-import vidasYEnemigos.*
+import enemigos.*
 
 
 object francella{
@@ -15,10 +15,12 @@ object francella{
     var property itemEnMano = []
     var ultimaDireccion     = abajo
     var estadoActual        = relajado
+    var vida                = 10
 
-    method image(){
+    method image() {
         return "pepito" + estadoActual.nombre() + ultimaDireccion.nombre() + ".gif"
     }
+
 
     // BOOLEANOS -------------------------------------------------------------------------------
 
@@ -115,23 +117,35 @@ object francella{
     //SISTEMA DE VIDAS -----------------------------------------------------------------------
 
 
-    method recibirDanio(cantidad) {
-      sistemaVidas.restarVidas(cantidad)
-      self.perderSiNoTieneVidas()
+    method vidaMaxima() {
+        return 10
     }
 
-    method perderSiNoTieneVidas() {
-      if (sistemaVidas.vidas() == 0) {
+    method vida() {
+        return vida
+    }
+
+    method recibirDanio(danio) {
+      vida = 0.max(vida - danio)
+      self.perderSiNoTieneVida()
+    }
+
+    method perderSiNoTieneVida() {
+      if (vida == 0) {
         self.gameOver()
       }
     }
 
-    method restaurarVidasReposo() {
+    method restaurarVidaEnReposo() {
       game.onTick(5000, "restaurarVidas", {
         if (self.estoyFueraDePeligro()) {
-          sistemaVidas.restaurarVidas(1)
+          self.restaurarVida()
         }
       })
+    }
+
+    method restaurarVida() {
+      vida = (self.vidaMaxima()).min(vida + 1)
     }
 
 

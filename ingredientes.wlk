@@ -41,7 +41,9 @@ class Ingrediente {
         chef.dejarItem()
     }
 
-    method image() 
+    method image() {
+        return self.nombre() + ".png"
+    }
     //Cada ingrediente tiene su propia imagen
 
     method visualizacionEnInterfaz() 
@@ -49,6 +51,9 @@ class Ingrediente {
 
     method tipoIngrediente() 
     //Cada ingrediente tiene su propio tipo para poder ser identificado.
+
+    method nombre()
+    //Cada ingrediente tiene su propio nombre
 }
 
 
@@ -59,121 +64,109 @@ class Ingrediente {
 
 class Salsa inherits Ingrediente{
 
-    override method image() {
-        return "salsa.png"
-    }
     override method tipoIngrediente(){
         return salsa
     }
     override method visualizacionEnInterfaz() {
         return salsaInterfaz
     }
+    override method nombre() {
+        return "salsa"
+    }
 }
 
 
 class Queso inherits Ingrediente{
 
-    override method image() {
-        return "queso.png"
-    }
     override method tipoIngrediente(){
         return queso
     }
     override method visualizacionEnInterfaz() {
         return quesoInterfaz
     }
-}
-
-// QUÉ PASA CON ESTA CLASE? ES UN INGREDIENTE O ES UNA COMIDA???
- /* class Masa inherits Ingrediente{
-
-    override method image() {
-        return "masa.jpg"
-    }
-    override method tipoIngrediente(){
-        return masa
-    }
-    override method visualizacionEnInterfaz() {
-        return masaInterfaz
+    override method nombre() {
+        return "queso"
     }
 }
-*/
 
 
 class Tomate inherits Ingrediente{
 
-    override method image() {
-        return "tomate.png"
-    }
     override method tipoIngrediente(){
         return tomate
     }
     override method visualizacionEnInterfaz() {
         return tomateInterfaz
     }
+    override method nombre() {
+        return "tomate"
+    }
 }
 
 
 class Jamon inherits Ingrediente{
 
-    override method image() {
-        return "jamon.png"
-    }
     override method tipoIngrediente(){
         return jamon
     }
     override method visualizacionEnInterfaz() {
         return jamonInterfaz
     }
+    override method nombre() {
+        return "jamon"
+    }
 }
 
 
 class Cebolla inherits Ingrediente{
 
-    override method image() {
-        return "cebolla.png"
-    }
     override method tipoIngrediente(){
         return cebolla
     }
     override method visualizacionEnInterfaz() {
         return cebollaInterfaz
     }
+    override method nombre() {
+        return "cebolla"
+    }
 }
 
 class Harina inherits Ingrediente{
-    override method image() {
-        return "harinaInventario.png"
-    }
+
     override method tipoIngrediente(){
         return harina
     }
     override method visualizacionEnInterfaz() {
         return harinaInterfaz
     }
+    override method nombre() {
+        return "harina"
+    }
 }
 
 class Agua inherits Ingrediente{
-    override method image() {
-        return "aguaInventario.png"
-    }
+
     override method tipoIngrediente(){
         return agua
     }
     override method visualizacionEnInterfaz() {
         return aguaInterfaz
     }
+    override method nombre() {
+        return "agua"
+    }
 }
 
 class Levadura inherits Ingrediente{
-    override method image() {
-        return "levaduraInventario.png"
-    }
+
     override method tipoIngrediente(){
         return levadura
     }
     override method visualizacionEnInterfaz() {
         return levaduraInterfaz
+    }
+    override method nombre() {
+        return "levadura"
     }
 }
 
